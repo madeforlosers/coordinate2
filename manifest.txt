@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: coordinate.main.Runner
+Class-Path: coordinate/main/*.class coordinate/*.class input.coo
