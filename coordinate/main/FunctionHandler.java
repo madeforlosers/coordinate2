@@ -29,7 +29,7 @@ public class FunctionHandler {
     try {
 
       Class classobj = Functions.class;
-     
+
       Method[] methods = classobj.getMethods();
       for (Method m : Arrays.copyOfRange(methods, 0, methods.length)) {
         if (m.getName().equals(name)) {
