@@ -6,7 +6,9 @@ class Help {
         boolean inString = false;
         char[] chars = code.toCharArray();
         char stringChar = 0;
+
         for (int i = 0; i < chars.length; i++) {
+
             char chr = chars[i];
             if (chr == '"') {
                 if (!inString) {
@@ -31,14 +33,15 @@ class Help {
         }
         return result;
     }
-    public static String[] splitCom(String s,char item){
+
+    public static String[] splitCom(String s, char item) {
         char[] result = s.toCharArray();
         int a = 0;
-        for(int i = 0; i < s.length(); i++){
-            a+=("{[()]}".indexOf(result[i]) + 4) % 7 - 3;
-           result[i] = result[i] == item && a == 0 ? '\n' : result[i];
+        for (int i = 0; i < s.length(); i++) {
+            a += ("{[()]}".indexOf(result[i]) + 4) % 7 - 3;
+            result[i] = result[i] == item && a == 0 ? '\n' : result[i];
         }
-       // System.out.println(result);
+
         return new String(result).split("\n");
     }
 }

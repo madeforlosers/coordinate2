@@ -19,7 +19,8 @@ public class Nums {
         }
         return Integer.parseInt(item);
     }
-    public static int parseInt(Object item){
+
+    public static int parseInt(Object item) {
         return (int) item;
     }
 }

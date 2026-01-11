@@ -6,8 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.function.Function;
 import coordinate.Error;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,17 +54,14 @@ class Runner {
         String code = "";
         try {
             code = Files.readString(Path.of("input.coo"));
-            // System.out.println(Help.stripInlineComments(code));
-            // System.out.println(Nums.parseInt(5));
         } catch (IOException e) {
             System.out.println(e);
             System.exit(0);
         }
-       
-        String[] codeSp = Help.stripInlineComments(code).split("\n"); // Collect the results into a new List
+
+        String[] codeSp = Help.stripInlineComments(code).split("\n");
         for (i = 0; i < codeSp.length; i++) {
             runCommands(codeSp[i].trim());
         }
-        // System.out.println(memory.tape.get(2));
     }
 }
