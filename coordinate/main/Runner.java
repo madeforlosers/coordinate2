@@ -15,9 +15,10 @@ class Runner {
     public static Memory memory = new Memory();
     static int[] functionC = {};
     static Object[] funcargs = {};
-    static int i = 0;
+    public static int i = 0;
     static int[] summation = { 0, 0, 0 };
     static boolean summationRunning = false;
+    public static String[] codeSp;
 
     public static Object runFunc(String input) {
         String getFunc = input.split("\\(")[0];
@@ -59,7 +60,7 @@ class Runner {
             System.exit(0);
         }
 
-        String[] codeSp = Help.stripInlineComments(code).split("\n");
+        codeSp = Help.stripInlineComments(code).split("\n");
         for (i = 0; i < codeSp.length; i++) {
             runCommands(codeSp[i].trim());
         }

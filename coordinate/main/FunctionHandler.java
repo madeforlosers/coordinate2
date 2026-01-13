@@ -9,15 +9,19 @@ public class FunctionHandler {
     try {
 
       Class classobj = coordinate.main.Functions.class;
+      if (name.equals("aslist")) { // this is stupid!!!!!
+        Method method = classobj.getMethod("aslist", Object[].class);
+        return method.invoke(classobj, (Object) args);
+      } else {
+        Method[] methods = classobj.getMethods();
+        for (Method m : Arrays.copyOfRange(methods, 0, methods.length)) {
+          if (m.getName().equals(name)) {
 
-      Method[] methods = classobj.getMethods();
-      for (Method m : Arrays.copyOfRange(methods, 0, methods.length)) {
-        if (m.getName().equals(name)) {
-          return m.invoke(coordinate.main.Functions.class, args);
+            return m.invoke(coordinate.main.Functions.class, args);
+          }
+
         }
-
       }
-
     } catch (Throwable e) {
       e.printStackTrace();
     }

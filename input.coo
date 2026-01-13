@@ -1,1 +1,5 @@
-puts("hi")
+set(0,0)
+loopwhile(less(get(0),10))
+set(0,add(get(0),1))
+puts(get(0))
+endloop()

@@ -1,5 +1,7 @@
 package coordinate.main;
 
+import java.util.ArrayList;
+
 class Help {
     public static String stripInlineComments(String code) {
         String result = "";

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Memory {
-    public List<Object> tape = null;
+    public ArrayList<Object> tape = null;
 
     public Memory() {
         this.tape = new ArrayList<Object>();
