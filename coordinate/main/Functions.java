@@ -22,13 +22,13 @@ public class Functions {
     }
 
     public static double increment(int index) {
-        Runner.memory.set(index, 1 + (double) Runner.memory.get(index));
-        return ((double) Runner.memory.get(index)) - 1;
+        Runner.memory.set(index, 1.0 +Help.doub(Runner.memory.get(index)));
+        return Help.doub(Runner.memory.get((int) index)) - 1.0;
     }
 
     public static double decrement(int index) {
-        Runner.memory.set((int) index, (double) Runner.memory.get((int) index) - 1);
-        return (double) Runner.memory.get((int) index) - 1;
+        Runner.memory.set(index, Help.doub(Runner.memory.get(index)) - 1.0);
+        return Help.doub(Runner.memory.get((int) index)) + 1.0;
     }
 
     public static boolean more(double number1, double number2) {
@@ -133,7 +133,7 @@ public class Functions {
         if (number instanceof String) {
             return Integer.parseInt(String.valueOf(number));
         }
-        return (int) number;
+        return ((Number) number).intValue();
     }
 
     public static double log(double number, double base) {
@@ -288,6 +288,14 @@ public class Functions {
             System.out.println((int) Math.floor(Double.valueOf(String.valueOf(item))));
         } else {
             System.out.println(item);
+        }
+
+    }
+    public static void putsin(Object item) {
+        if (item instanceof Double && ((double) item) == Math.floor((double) item)) {
+            System.out.print((int) Math.floor(Double.valueOf(String.valueOf(item))));
+        } else {
+            System.out.print(item);
         }
 
     }
