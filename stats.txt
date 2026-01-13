@@ -1,2 +1,2 @@
-Success: 28
+Success: 30
 Fail: 12

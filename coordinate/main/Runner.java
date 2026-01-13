@@ -38,15 +38,20 @@ class Runner {
     }
 
     public static Object runCommands(String input) {
+        try {
+            if (input.matches("^\"[^\"]+\"$")) {
+                return input.replaceAll("\"", "");
+            }
+            if (input.matches("^\\w+\\(.*\\)+$")) {
+                return runFunc(input);
+            }
+            if (input.matches("^[0-9]+")) {
+                return Integer.parseInt(input);
+            }
 
-        if (input.matches("^\"[^\"]+\"$")) {
-            return input.replaceAll("\"", "");
-        }
-        if (input.matches("^\\w+\\(.*\\)+$")) {
-            return runFunc(input);
-        }
-        if (input.matches("^[0-9]+")) {
-            return Integer.parseInt(input);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(0);
         }
         return input;
     }

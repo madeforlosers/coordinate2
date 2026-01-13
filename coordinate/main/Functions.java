@@ -148,7 +148,7 @@ public class Functions {
         if (number instanceof String) {
             return Double.parseDouble(String.valueOf(number));
         }
-        return (double) number;
+        return Help.doub(number);
     }
 
     public static double round(double number) {
