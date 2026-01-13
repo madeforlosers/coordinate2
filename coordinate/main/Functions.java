@@ -57,9 +57,9 @@ public class Functions {
                 (number1 instanceof java.util.ArrayList) && (number2 instanceof java.util.ArrayList)) {
             return number1.equals(number2);
         }
-
-        // list func here
-        return number1 == number2;
+        double num1 = ((Number) number1).doubleValue(); // goddddddddddd
+        double num2 = ((Number) number2).doubleValue();
+        return num1 == num2;
     }
 
     public static String ask(String question) {
