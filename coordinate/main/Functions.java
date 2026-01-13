@@ -22,7 +22,7 @@ public class Functions {
     }
 
     public static double increment(int index) {
-        Runner.memory.set(index, 1.0 +Help.doub(Runner.memory.get(index)));
+        Runner.memory.set(index, 1.0 + Help.doub(Runner.memory.get(index)));
         return Help.doub(Runner.memory.get((int) index)) - 1.0;
     }
 
@@ -291,6 +291,7 @@ public class Functions {
         }
 
     }
+
     public static void putsin(Object item) {
         if (item instanceof Double && ((double) item) == Math.floor((double) item)) {
             System.out.print((int) Math.floor(Double.valueOf(String.valueOf(item))));

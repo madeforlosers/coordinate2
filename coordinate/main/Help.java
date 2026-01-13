@@ -3,9 +3,10 @@ package coordinate.main;
 import java.util.ArrayList;
 
 class Help {
-    public static double doub(Object obj){
-        return ((Number)obj).doubleValue();
+    public static double doub(Object obj) {
+        return ((Number) obj).doubleValue();
     }
+
     public static String stripInlineComments(String code) {
         String result = "";
         boolean inString = false;
