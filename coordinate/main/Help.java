@@ -1,6 +1,5 @@
 package coordinate.main;
 
-import java.util.ArrayList;
 
 class Help {
     public static double doub(Object obj) {

@@ -1,7 +1,6 @@
 package coordinate.main;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Memory {
     public ArrayList<Object> tape = null;

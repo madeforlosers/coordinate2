@@ -3,12 +3,12 @@ package coordinate.main;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.Math;
-import java.util.Collections;
-import java.util.Arrays;
-import java.util.stream.Collectors;
-import java.util.List;
-import java.util.stream.Stream;
-import java.util.stream.IntStream;
+
+/* god: my child will modularize all of their code and
+*  keep filesizes down to a minimum.
+*  
+*  satan:
+*/ 
 
 public class Functions {
     public static Object push(Object item) {
@@ -16,50 +16,121 @@ public class Functions {
         return item;
     }
 
-    public static Object set(int index, Object item) {
+    public static Object set(Integer index, Object item) {
         Runner.memory.set((int) index, item);
         return item;
     }
 
-    public static double increment(int index) {
+    public static double increment(Integer index) {
         Runner.memory.set(index, 1.0 + Help.doub(Runner.memory.get(index)));
         return Help.doub(Runner.memory.get((int) index)) - 1.0;
     }
 
-    public static double decrement(int index) {
+    public static double decrement(Integer index) {
         Runner.memory.set(index, Help.doub(Runner.memory.get(index)) - 1.0);
         return Help.doub(Runner.memory.get((int) index)) + 1.0;
     }
 
-    public static boolean more(double number1, double number2) {
+    public static boolean more(Double number1, Double number2) {
         // list func here
         return number1 > number2;
     }
 
-    public static boolean less(double number1, double number2) {
+    public static boolean more(Integer number1, Double number2) {
+        // list func here
+        return number1 > number2;
+    }
+
+    public static boolean more(Double number1, Integer number2) {
+        // list func here
+        return number1 > number2;
+    }
+
+    public static boolean more(Integer number1, Integer number2) {
+        // list func here
+        return number1 > number2;
+    }
+
+    public static boolean less(Double number1, Double number2) {
         // list func here
         return number1 < number2;
     }
 
-    public static boolean moreis(double number1, double number2) {
+    public static boolean less(Integer number1, Double number2) {
+        // list func here
+        return number1 < number2;
+    }
+
+    public static boolean less(Double number1, Integer number2) {
+        // list func here
+        return number1 < number2;
+    }
+
+    public static boolean less(Integer number1, Integer number2) {
+        // list func here
+        return number1 < number2;
+    }
+
+    public static boolean moreis(Double number1, Double number2) {
         // list func here
         return number1 >= number2;
     }
 
-    public static boolean lessis(double number1, double number2) {
+    public static boolean moreis(Integer number1, Double number2) {
+        // list func here
+        return number1 >= number2;
+    }
+
+    public static boolean moreis(Double number1, Integer number2) {
+        // list func here
+        return number1 >= number2;
+    }
+
+    public static boolean moreis(Integer number1, Integer number2) {
+        // list func here
+        return number1 >= number2;
+    }
+
+    public static boolean lessis(Double number1, Double number2) {
+        // list func here
+        return number1 >= number2;
+    }
+
+    public static boolean lessis(Integer number1, Double number2) {
+        // list func here
+        return number1 >= number2;
+    }
+
+    public static boolean lessis(Double number1, Integer number2) {
+        // list func here
+        return number1 >= number2;
+    }
+
+    public static boolean lessis(Integer number1, Integer number2) {
         // list func here
         return number1 >= number2;
     }
 
     // hasnumber
-    public static boolean is(Object number1, Object number2) {
-        if ((number1 instanceof String && number2 instanceof String) ||
-                (number1 instanceof java.util.ArrayList) && (number2 instanceof java.util.ArrayList)) {
-            return number1.equals(number2);
-        }
-        double num1 = ((Number) number1).doubleValue(); // goddddddddddd
-        double num2 = ((Number) number2).doubleValue();
-        return num1 == num2;
+
+    public static boolean is(Double number1, Double number2) {
+        return number1 == number2;
+    }
+
+    public static boolean is(Double number1, Integer number2) {
+        return number1 == (double) number2;
+    }
+
+    public static boolean is(Integer number1, Double number2) {
+        return (double) number1 == number2;
+    }
+
+    public static boolean is(Integer number1, Integer number2) {
+        return number1 == number2;
+    }
+
+    public static boolean is(String number1, String number2) {
+        return number1.equals(number2);
     }
 
     public static String ask(String question) {
@@ -70,37 +141,97 @@ public class Functions {
         return answer;
     }
 
-    public static double subtract(double number1, double number2) {
+    public static double subtract(Double number1, Double number2) {
         // list func here
         return number1 - number2;
     }
 
-    public static double add(double number1, double number2) {
+    public static double subtract(Double number1, Integer number2) {
+        // list func here
+        return number1 - number2;
+    }
+
+    public static double subtract(Integer number1, Double number2) {
+        // list func here
+        return number1 - number2;
+    }
+
+    public static int subtract(Integer number1, Integer number2) {
+        // list func here
+        return number1 - number2;
+    }
+
+    public static double add(Double number1, Double number2) {
         // list func here
         return number1 + number2;
     }
 
-    public static double multiply(double number1, double number2) {
+    public static int add(Integer number1, Integer number2) {
+        // list func here
+        return number1 + number2;
+    }
+
+    public static double add(Double number1, Integer number2) {
+        // list func here
+        return number1 + number2;
+    }
+
+    public static double add(Integer number1, Double number2) {
+        // list func here
+        return number1 + number2;
+    }
+
+    public static double multiply(Double number1, Double number2) {
         // list func here
         return number1 * number2;
     }
 
-    public static double divide(double number1, double number2) {
+    public static double multiply(Integer number1, Double number2) {
+        // list func here
+        return number1 * number2;
+    }
+
+    public static double multiply(Double number1, Integer number2) {
+        // list func here
+        return number1 * number2;
+    }
+
+    public static int multiply(Integer number1, Integer number2) {
+        // list func here
+        return number1 * number2;
+    }
+
+    public static double divide(Double number1, Double number2) {
         // list func here
         return number1 / number2;
     }
 
-    public static int and(int number1, int number2) {
+    public static double divide(Double number1, Integer number2) {
+        // list func here
+        return number1 / number2.doubleValue();
+    }
+
+    public static double divide(Integer number1, Double number2) {
+        // list func here
+        return number1.doubleValue() / number2;
+    }
+
+    public static double divide(Integer number1, Integer number2) {
+        // list func here
+        return number1.doubleValue() / number2.doubleValue();
+    }
+
+    public static int and(Integer number1, Integer number2) {
         // list func here
         return number1 & number2;
     }
 
-    public static double or(int number1, int number2) {
+    public static int or(Integer number1, Integer number2) {
         // list func here
         return number1 | number2;
     }
 
-    public static double xor(int number1, int number2) {
+    public static int xor(Integer number1, Integer number2) {
         // list func here
         return number1 ^ number2;
     }
@@ -110,67 +241,164 @@ public class Functions {
         return !bool;
     }
 
-    public static double modulo(double number1, double number2) {
+    public static boolean not(Integer bool) {
+        // list func here
+        return !(bool != 0);
+    }
+
+    public static boolean not(Double bool) {
+        // list func here
+        return !(bool != 0);
+    }
+
+    public static int modulo(Double number1, Double number2) {
+        // list func here
+        return number1.intValue() % number2.intValue();
+    }
+
+    public static int modulo(Integer number1, Double number2) {
+        // list func here
+        return number1 % number2.intValue();
+    }
+
+    public static int modulo(Double number1, Integer number2) {
+        // list func here
+        return number1.intValue() % number2;
+    }
+
+    public static int modulo(Integer number1, Integer number2) {
         // list func here
         return number1 % number2;
     }
 
-    public static double exp(double number1, double number2) {
+    public static double exp(Double number1, Double number2) {
         // list func here
         return Math.pow(number1, number2);
     }
 
-    public static double root(double number1, double number2) {
+    public static double exp(Integer number1, Double number2) {
+        // list func here
+        return Math.pow(number1, number2);
+    }
+
+    public static double exp(Double number1, Integer number2) {
+        // list func here
+        return Math.pow(number1, number2);
+    }
+
+    public static double exp(Integer number1, Integer number2) {
+        // list func here
+        return Math.pow(number1, number2);
+    }
+
+    public static double root(Double number1, Double number2) {
         // list func here
         return Math.pow(number1, 1.0 / number2);
     }
 
-    public static Object get(int index) {
+    public static double root(Integer number1, Double number2) {
+        // list func here
+        return Math.pow(number1, 1.0 / number2);
+    }
+
+    public static double root(Double number1, Integer number2) {
+        // list func here
+        return Math.pow(number1, 1.0 / number2.doubleValue());
+    }
+
+    public static Object get(Integer index) {
         return Runner.memory.get(index);
     }
 
-    public static int toint(Object number) {
-        if (number instanceof String) {
-            return Integer.parseInt(String.valueOf(number));
-        }
-        return ((Number) number).intValue();
+    public static Object get(Double index) {
+        return Runner.memory.get(index.intValue());
     }
 
-    public static double log(double number, double base) {
+    public static int toint(String number) {
+        return Integer.valueOf(number);
+    }
+
+    public static int toint(Double number) {
+        return number.intValue();
+    }
+
+    public static int toint(Integer number) {
+        return number.intValue();
+    }
+
+    public static double log(Double number, Double base) {
         return Math.log(base) / Math.log(number);
     }
 
-    public static double abs(double number) {
+    public static double log(Integer number, Double base) {
+        return Math.log(base) / Math.log(number.doubleValue());
+    }
+
+    public static double log(Double number, Integer base) {
+        return Math.log(base.doubleValue()) / Math.log(number);
+    }
+
+    public static double log(Integer number, Integer base) {
+        return Math.log(base.doubleValue()) / Math.log(number.doubleValue());
+    }
+
+    public static double abs(Double number) {
         return Math.abs(number);
     }
 
-    public static double todouble(Object number) {
-        if (number instanceof String) {
-            return Double.parseDouble(String.valueOf(number));
-        }
-        return Help.doub(number);
+    public static double abs(Integer number) {
+        return Math.abs(number);
     }
 
-    public static double round(double number) {
+    public static double todouble(Integer number) {
+        return number.doubleValue();
+    }
+
+    public static double todouble(String number) {
+        return Double.parseDouble(number);
+    }
+
+    public static double todouble(Double number) {
+        return number.doubleValue();
+    }
+
+    public static double round(Double number) {
         return (double) Math.round(number);
     }
 
-    public static double fix(double number, int digits) {
+    public static double round(Integer number) {
+        return number.doubleValue();
+    }
+
+    public static double fix(Double number, Integer digits) {
         double scale = Math.pow(10, digits);
         return Math.round(number * scale) / scale;
     }
 
-    public static int ceil(double number) {
+    public static double fix(Double number, Double digits) {
+        double scale = Math.pow(10, digits);
+        return Math.round(number * scale) / scale;
+    }
+
+    public static int ceil(Double number) {
         return (int) Math.ceil(number);
     }
 
-    public static double fpart(double number) {
+    public static int ceil(Integer number) {
+        return number.intValue();
+    }
+
+    public static double fpart(Double number) {
         return number - Math.floor(number);
+    }
+
+    public static double fpart(Integer number) {
+        return 0.0;
     }
 
     public static Number min(ArrayList<Number> arguments) {
         Number item = Double.POSITIVE_INFINITY;
-        for (int i = 0; i < arguments.size(); i++) {
+        for (Integer i = 0; i < arguments.size(); i++) {
             if (item.doubleValue() > Double.valueOf(String.valueOf(arguments.get(i)))) {
                 item = arguments.get(i);
             }
@@ -180,7 +408,7 @@ public class Functions {
 
     public static Number max(ArrayList<Number> arguments) {
         Number item = Double.NEGATIVE_INFINITY;
-        for (int i = 0; i < arguments.size(); i++) {
+        for (Integer i = 0; i < arguments.size(); i++) {
             if (item.doubleValue() < Double.valueOf(String.valueOf(arguments.get(i)))) {
                 item = arguments.get(i);
             }
@@ -188,11 +416,15 @@ public class Functions {
         return item;
     }
 
-    public static Object single(ArrayList<Object> list, int index) {
+    public static Object single(ArrayList<Object> list, Integer index) {
         return list.get(index);
     }
 
-    public static ArrayList<Object> piece(int start, int end) {
+    public static Object single(ArrayList<Object> list, Double index) {
+        return list.get(index.intValue());
+    }
+
+    public static ArrayList<Object> piece(Integer start, Integer end) {
         return new ArrayList<>(Runner.memory.tape.subList(start, end + 1));
     }
 
@@ -208,7 +440,7 @@ public class Functions {
     public static void check(boolean item) {
         if (!item) {
             int skip = 0;
-            for (int h = Runner.i + 1; h < Runner.codeSp.length; h++) {
+            for (Integer h = Runner.i + 1; h < Runner.codeSp.length; h++) {
                 if (Runner.codeSp[h].split("\\(")[0].equals("check")) {
                     skip++;
                 }
@@ -230,7 +462,7 @@ public class Functions {
     public static void loopwhile(boolean condition) {
         if (!condition) {
             int skip = 0;
-            for (int h = Runner.i; h < Runner.codeSp.length; h++) {
+            for (Integer h = Runner.i; h < Runner.codeSp.length; h++) {
                 if (Runner.codeSp[h].split("\\(")[0].equals("loopwhile")) {
                     skip++;
                 }
@@ -248,7 +480,7 @@ public class Functions {
     public static void endloop(Object obj) {
 
         int skip = 0;
-        for (int h = Runner.i; h >= 0; h--) {
+        for (Integer h = Runner.i; h >= 0; h--) {
             if (Runner.codeSp[h].split("\\(")[0].equals("endloop")) {
                 skip++;
             }
@@ -265,7 +497,7 @@ public class Functions {
 
     public static void otherwise(Object obj) {
         int skip = 0;
-        for (int h = Runner.i; h < Runner.codeSp.length; h++) {
+        for (Integer h = Runner.i; h < Runner.codeSp.length; h++) {
             if (Runner.codeSp[h].split("\\(")[0].equals("check")) {
                 skip++;
             }
@@ -283,21 +515,35 @@ public class Functions {
         // nothing
     }
 
-    public static void puts(Object item) {
-        if (item instanceof Double && ((double) item) == Math.floor((double) item)) {
-            System.out.println((int) Math.floor(Double.valueOf(String.valueOf(item))));
-        } else {
-            System.out.println(item);
-        }
-
+    public static void puts(String item) {
+        System.out.println(item);
     }
 
-    public static void putsin(Object item) {
-        if (item instanceof Double && ((double) item) == Math.floor((double) item)) {
-            System.out.print((int) Math.floor(Double.valueOf(String.valueOf(item))));
-        } else {
-            System.out.print(item);
-        }
+    public static void puts(Integer item) {
+        System.out.println(item);
+    }
 
+    public static void puts(Boolean item) {
+        System.out.println(item);
+    }
+
+    public static void puts(Double item) {
+        System.out.println(item);
+    }
+
+    public static void putsin(String item) {
+        System.out.print(item);
+    }
+
+    public static void putsin(Integer item) {
+        System.out.print(item);
+    }
+
+    public static void putsin(Boolean item) {
+        System.out.print(item);
+    }
+
+    public static void putsin(Double item) {
+        System.out.print(item);
     }
 }

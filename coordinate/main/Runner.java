@@ -1,13 +1,10 @@
 package coordinate.main;
 
 import java.io.IOException;
-import java.io.ObjectInputFilter;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.function.Function;
 import coordinate.Error;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
 class Runner {
@@ -31,8 +28,6 @@ class Runner {
                 .filter(i -> !i.equals(null) && !i.equals(","))
                 .map(i -> runCommands(i))
                 .collect(Collectors.toList()).toArray(new Object[0]);
-        // error catch to make sure all arguments are fufilled.
-        // wont work here as far as i know lol
 
         return FunctionHandler.runFunc(getFunc, getArg);
     }
