@@ -15,7 +15,7 @@ public class Memory {
         return this.tape.get(index);
     }
 
-    public Object set(Object index, Object item) {
+    public Object set(int index, Object item) {
         if ((int) index >= this.tape.size()) {
             while ((int) index >= this.tape.size()) {
                 this.tape.add(null);

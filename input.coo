@@ -1,1 +1,3 @@
-puts(min(aslist(5,2)))
+set(5,0)
+increment(5)
+puts(increment(5))

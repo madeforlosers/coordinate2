@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import coordinate.Error;
 import java.util.Arrays;
 import java.util.stream.Collectors;
-
+import java.math.BigDecimal;
 class Runner {
     static String curFunc = "";
     public static Memory memory = new Memory();
@@ -41,7 +41,7 @@ class Runner {
                 return runFunc(input);
             }
             if (input.matches("^[0-9]+")) {
-                return Integer.parseInt(input);
+                return new BigDecimal(input);
             }
 
         } catch (Exception e) {
