@@ -1,6 +1,11 @@
 package coordinate.main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 import java.lang.Math;
 import java.math.BigDecimal;
@@ -12,13 +17,15 @@ import coordinate.Error;
 *  satan:
 */
 
+
+
 public class Functions {
     public static Object push(Object item) {
         Runner.memory.push(item);
         return item;
     }
 
-    public static Object set(BigInteger index, String item) {
+    public static String set(BigInteger index, String item) {
         Runner.memory.set(index.intValue(), item);
         return item;
     }
@@ -26,9 +33,13 @@ public class Functions {
         Runner.memory.set(index.intValue(), item);
         return item;
     }
+    public static BigInteger set(BigInteger index, BigInteger item) {
+        Runner.memory.set(index.intValue(), item);
+        return item;
+    }
 
     public static BigDecimal increment(BigInteger index) {
-        if (!(Runner.memory.get(index.intValue()) instanceof java.math.BigDecimal)) {
+        if (!(Runner.memory.get(index.intValue()) instanceof java.lang.Number)) {
             Error.throwError(2);
         }
         Runner.memory.set(index.intValue(),
@@ -37,7 +48,7 @@ public class Functions {
     }
 
     public static BigDecimal decrement(BigInteger index) {
-        if (!(Runner.memory.get(index.intValue()) instanceof java.math.BigDecimal)) {
+        if (!(Runner.memory.get(index.intValue()) instanceof java.lang.Number)) {
             Error.throwError(2);
         }
         Runner.memory.set(index.intValue(),
@@ -321,23 +332,23 @@ public class Functions {
     }
 
     public static Object get(BigInteger index) {
-        return Runner.memory.get(index);
+        return Runner.memory.get(index.intValue());
     }
 
     public static Object get(BigDecimal index) {
         return Runner.memory.get(index.intValue());
     }
 
-    public static int toint(String number) {
-        return BigInteger.valueOf(number);
+    public static BigInteger toint(String number) {
+        return new BigInteger(number);
     }
 
-    public static int toint(BigDecimal number) {
-        return number.intValue();
+    public static BigInteger toint(BigDecimal number) {
+        return number.toBigInteger();
     }
 
-    public static int toint(BigInteger number) {
-        return number.intValue();
+    public static BigInteger toint(BigInteger number) {
+        return number;
     }
 
     public static double log(BigDecimal number, BigDecimal base) {
@@ -364,16 +375,16 @@ public class Functions {
         return Math.abs(number);
     }
 
-    public static double todouble(BigInteger number) {
-        return number.doubleValue();
+    public static BigDecimal todec(BigInteger number) {
+        return new BigDecimal(number);
     }
 
-    public static double todouble(String number) {
-        return BigDecimal.parseBigDecimal(number);
+    public static BigDecimal todec(String number) {
+        return new BigDecimal(number);
     }
 
-    public static double todouble(BigDecimal number) {
-        return number.doubleValue();
+    public static BigDecimal todec(BigDecimal number) {
+        return number;
     }
 
     public static double round(BigDecimal number) {
@@ -409,37 +420,40 @@ public class Functions {
     public static double fpart(BigInteger number) {
         return 0.0;
     }
-
-    public static Number min(ArrayList<Number> arguments) {
-        Number item = BigDecimal.POSITIVE_INFINITY;
-        for (BigInteger i = 0; i < arguments.size(); i++) {
-            if (item.doubleValue() > BigDecimal.valueOf(String.valueOf(arguments.get(i)))) {
-                item = arguments.get(i);
-            }
+public static Number min(ArrayList<?> arguments) {  
+        if(arguments.get(0).getClass().getName().equals("java.math.BigInteger")){
+            Optional<BigInteger> f = ((ArrayList<BigInteger>) arguments).stream().min(BigInteger::compareTo);
+            return f.get();
+        }else{
+            Optional<BigDecimal> f = ((ArrayList<BigDecimal>) arguments).stream().min(BigDecimal::compareTo);
+            return f.get();
         }
-        return item;
+        
+        
     }
-
-    public static Number max(ArrayList<Number> arguments) {
-        Number item = BigDecimal.NEGATIVE_INFINITY;
-        for (BigInteger i = 0; i < arguments.size(); i++) {
-            if (item.doubleValue() < BigDecimal.valueOf(String.valueOf(arguments.get(i)))) {
-                item = arguments.get(i);
-            }
+    public static Number max(ArrayList<?> arguments) {  
+        if(arguments.get(0).getClass().getName().equals("java.math.BigInteger")){
+            Optional<BigInteger> f = ((ArrayList<BigInteger>) arguments).stream().max(BigInteger::compareTo);
+            return f.get();
+        }else{
+            Optional<BigDecimal> f = ((ArrayList<BigDecimal>) arguments).stream().max(BigDecimal::compareTo);
+            return f.get();
         }
-        return item;
+        
+        
     }
 
-    public static Object single(ArrayList<Object> list, BigInteger index) {
-        return list.get(index);
+
+    public static Object single(ArrayList<?> list, BigInteger index) {
+        return list.get(index.intValue());
     }
 
-    public static Object single(ArrayList<Object> list, BigDecimal index) {
+    public static Object single(ArrayList<?> list, BigDecimal index) {
         return list.get(index.intValue());
     }
 
     public static ArrayList<Object> piece(BigInteger start, BigInteger end) {
-        return new ArrayList<>(Runner.memory.tape.subList(start, end + 1));
+        return new ArrayList<>(Runner.memory.tape.subList(start.intValue(), end.intValue()+1));
     }
 
     public static ArrayList<Object> aslist(Object[] arguments) {
@@ -454,7 +468,7 @@ public class Functions {
     public static void check(boolean item) {
         if (!item) {
             int skip = 0;
-            for (BigInteger h = Runner.i + 1; h < Runner.codeSp.length; h++) {
+            for (int h = Runner.i + 1; h < Runner.codeSp.length; h++) {
                 if (Runner.codeSp[h].split("\\(")[0].equals("check")) {
                     skip++;
                 }
@@ -476,7 +490,7 @@ public class Functions {
     public static void loopwhile(boolean condition) {
         if (!condition) {
             int skip = 0;
-            for (BigInteger h = Runner.i; h < Runner.codeSp.length; h++) {
+            for (int h = Runner.i; h < Runner.codeSp.length; h++) {
                 if (Runner.codeSp[h].split("\\(")[0].equals("loopwhile")) {
                     skip++;
                 }
@@ -494,7 +508,7 @@ public class Functions {
     public static void endloop(Object obj) {
 
         int skip = 0;
-        for (BigInteger h = Runner.i; h >= 0; h--) {
+        for (int h = Runner.i; h >= 0; h--) {
             if (Runner.codeSp[h].split("\\(")[0].equals("endloop")) {
                 skip++;
             }
@@ -511,7 +525,7 @@ public class Functions {
 
     public static void otherwise(Object obj) {
         int skip = 0;
-        for (BigInteger h = Runner.i; h < Runner.codeSp.length; h++) {
+        for (int h = Runner.i; h < Runner.codeSp.length; h++) {
             if (Runner.codeSp[h].split("\\(")[0].equals("check")) {
                 skip++;
             }
@@ -536,6 +550,9 @@ public class Functions {
     public static void puts(Boolean item) {
         System.out.println(item);
     }
+    public static void puts(BigInteger item) {
+        System.out.println(item);
+    }
 
     public static void puts(BigDecimal item) {
         System.out.println(item);
@@ -553,3 +570,5 @@ public class Functions {
         System.out.print(item);
     }
 }
+
+// 59 problems

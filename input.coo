@@ -1,3 +1,1 @@
-set(5,0)
-increment(5)
-puts(increment(5))
+puts(min(aslist(5,4,3,2,1)))
