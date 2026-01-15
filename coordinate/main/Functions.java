@@ -3,7 +3,7 @@ package coordinate.main;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.Math;
-
+import java.math.BigDecimal;
 /* god: my child will modularize all of their code and
 *  keep filesizes down to a minimum.
 *  
@@ -16,8 +16,8 @@ public class Functions {
         return item;
     }
 
-    public static Object set(Integer index, Object item) {
-        Runner.memory.set((int) index, item);
+    public static Object set(BigDecimal index, Object item) {
+        Runner.memory.set(index.intValue(), item);
         return item;
     }
 

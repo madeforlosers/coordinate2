@@ -20,7 +20,7 @@ this means that Coordinate2 code working in one commit will most likely not work
 | type conversion |  |  |  | X |
 | more type support | X |  |  |  |
 | better modulation | X |  |  |  |
-| custom number system not relying on Java | X |  |  |  |
+| switch to BigDecimal instead of doubles  | X |  |  |  |
 | switchover to overloaded methods |  | X |  |  |
 
 ## ABOUT
