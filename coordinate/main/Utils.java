@@ -1,41 +1,7 @@
 package coordinate.main;
-
-import java.math.BigInteger;
-
 public class Utils {
 
-    // From Nums.java
-    public static int parseInt(int item) {
-        return parseInt(String.valueOf(item));
-    }
-
-    public static BigInteger parseInt(BigInteger item) {
-        return item;
-    }
-
-    public static int parseInt(String item) {
-        try {
-            return Integer.parseInt(item);
-        } catch (NumberFormatException e) {
-            coordinate.main.Error.throwError(4);
-        }
-        return 0; // womp
-    }
-
-    public static int parseInt(Object item) {
-        if (item instanceof Integer) {
-            return (Integer) item;
-        } else if (item instanceof BigInteger) {
-            try {
-                return ((BigInteger) item).intValueExact();
-            } catch (ArithmeticException e) {
-                coordinate.main.Error.throwError(4);
-            }
-        }
-        coordinate.main.Error.throwError(4);
-        return 0;
-    }
-
+    
     public static String stripInlineComments(String code) {
         String result = "";
         boolean inString = false;

@@ -2,20 +2,28 @@ package coordinate.main;
 
 import java.util.ArrayList;
 import java.util.Optional;
+
+import coordinate.org.nevec.rjm.*;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
-import org.nevec.rjm.*;
-/* god: my child will modularize all of their code and
-*  keep filesizes down to a minimum.
-*  
-*  satan:
-*/
-
 public class Functions {
-    public static Object push(Object item) {
+    public static Object push(BigInteger item) {
+        Runner.memory.tape.push(item);
+        return item;
+    }
+    public static Object push(BigDecimal item) {
+        Runner.memory.tape.push(item);
+        return item;
+    }
+    public static Object push(String item) {
+        Runner.memory.tape.push(item);
+        return item;
+    }
+    public static Object push(ArrayList<?> item) {
         Runner.memory.tape.push(item);
         return item;
     }
@@ -24,7 +32,7 @@ public class Functions {
         try {
             Runner.memory.tape.set(index.intValueExact(), item);
         } catch (ArithmeticException e) {
-            Error.throwError(0);
+            Error.throwError(2);
         }
         return item;
     }
@@ -33,7 +41,7 @@ public class Functions {
         try {
             Runner.memory.tape.set(index.intValueExact(), item);
         } catch (ArithmeticException e) {
-            Error.throwError(0);
+            Error.throwError(2);
         }
         return item;
     }
@@ -42,7 +50,7 @@ public class Functions {
         try {
             Runner.memory.tape.set(index.intValueExact(), item);
         } catch (ArithmeticException e) {
-            Error.throwError(0);
+            Error.throwError(2);
         }
         return item;
     }
@@ -58,7 +66,7 @@ public class Functions {
             Runner.memory.tape.set(index.intValueExact(), newValue);
             return current;
         } catch (ArithmeticException e) {
-            Error.throwError(0);
+            Error.throwError(2);
         }
         return null;
     }
@@ -74,7 +82,7 @@ public class Functions {
             Runner.memory.tape.set(index.intValueExact(), newValue);
             return current;
         } catch (ArithmeticException e) {
-            Error.throwError(0);
+            Error.throwError(2);
         }
         return null;
     }
@@ -226,6 +234,9 @@ public class Functions {
         // list func here
         return new BigDecimal(number1).add(number2);
     }
+    public static String add(String one, String two){
+        return one + two;
+    }
 
     public static BigDecimal multiply(BigDecimal number1, BigDecimal number2) {
         // list func here
@@ -252,22 +263,31 @@ public class Functions {
         if (number2.compareTo(BigDecimal.ZERO) == 0) {
             Error.throwError(3); // Division by zero
         }
-        return number1.divide(number2, 100, RoundingMode.HALF_UP);
+        return number1.divide(number2, 100, RoundingMode.HALF_UP).stripTrailingZeros();
     }
 
     public static BigDecimal divide(BigDecimal number1, BigInteger number2) {
         // list func here
-        return number1.divide(new BigDecimal(number2), 100, RoundingMode.HALF_UP);
+        if (number2.compareTo(BigInteger.ZERO) == 0) {
+            Error.throwError(3); // Division by zero
+        }
+        return number1.divide(new BigDecimal(number2), 100, RoundingMode.HALF_UP).stripTrailingZeros();
     }
 
     public static BigDecimal divide(BigInteger number1, BigDecimal number2) {
         // list func here
-        return new BigDecimal(number1).divide(number2, 100, RoundingMode.HALF_UP);
+        if (number2.compareTo(BigDecimal.ZERO) == 0) {
+            Error.throwError(3); // Division by zero
+        }
+        return new BigDecimal(number1).divide(number2, 100, RoundingMode.HALF_UP).stripTrailingZeros();
     }
 
     public static BigDecimal divide(BigInteger number1, BigInteger number2) {
         // list func here
-        return new BigDecimal(number1).divide(new BigDecimal(number2), 100, RoundingMode.HALF_UP);
+        if (number2.compareTo(BigInteger.ZERO) == 0) {
+            Error.throwError(3); // Division by zero
+        }
+        return new BigDecimal(number1).divide(new BigDecimal(number2), 100, RoundingMode.HALF_UP).stripTrailingZeros();
     }
 
     public static BigInteger and(BigInteger number1, BigInteger number2) {
@@ -302,23 +322,32 @@ public class Functions {
 
     public static BigDecimal modulo(BigDecimal number1, BigDecimal number2) {
         // list func here
+        if (number2.compareTo(BigDecimal.ZERO) == 0) {
+            Error.throwError(3); // Division by zero
+        }
         return number1.remainder(number2);
     }
 
     public static BigDecimal modulo(BigInteger number1, BigDecimal number2) {
         // list func here
+        if (number2.compareTo(BigDecimal.ZERO) == 0) {
+            Error.throwError(3); // Division by zero
+        }
         return new BigDecimal(number1).remainder(number2);
     }
 
     public static BigDecimal modulo(BigDecimal number1, BigInteger number2) {
         // list func here
+        if (number2.compareTo(BigInteger.ZERO) == 0) {
+            Error.throwError(3); // Division by zero
+        }
         return number1.remainder(new BigDecimal(number2));
     }
 
     public static BigInteger modulo(BigInteger number1, BigInteger number2) {
         // list func here
         if (number2.compareTo(BigInteger.ZERO) == 0) {
-            Error.throwError(5); // Division by zero
+            Error.throwError(3); // Division by zero
         }
         return number1.remainder(number2);
     }
@@ -344,31 +373,43 @@ public class Functions {
     }
 
     public static BigDecimal root(BigDecimal number1, BigDecimal number2) {
+        if (number2.compareTo(BigDecimal.ZERO) == 0) {
+            Error.throwError(3); // Division by zero
+        }
         // list func here
-        return BigDecimalMath.pow(number1, BigDecimal.ONE.divide(number2, 100, RoundingMode.HALF_UP));
+        return BigDecimalMath.pow(number1, BigDecimal.ONE.divide(number2, 100, RoundingMode.HALF_UP)).stripTrailingZeros();
     }
 
     public static BigDecimal root(BigInteger number1, BigDecimal number2) {
         // list func here
-        return BigDecimalMath.pow(new BigDecimal(number1), BigDecimal.ONE.divide(number2, 100, RoundingMode.HALF_UP));
+        if (number2.compareTo(BigDecimal.ZERO) == 0) {
+            Error.throwError(3); // Division by zero
+        }
+        return BigDecimalMath.pow(new BigDecimal(number1), BigDecimal.ONE.divide(number2, 100, RoundingMode.HALF_UP)).stripTrailingZeros();
     }
 
     public static BigDecimal root(BigDecimal number1, BigInteger number2) {
         // list func here
-        return BigDecimalMath.pow(number1, BigDecimal.ONE.divide(new BigDecimal(number2), 100, RoundingMode.HALF_UP));
+        if (number2.compareTo(BigInteger.ZERO) == 0) {
+            Error.throwError(3); // Division by zero
+        }
+        return BigDecimalMath.pow(number1, BigDecimal.ONE.divide(new BigDecimal(number2), 100, RoundingMode.HALF_UP)).stripTrailingZeros();
     }
 
     public static BigDecimal root(BigInteger number1, BigInteger number2) {
         // list func here
+        if (number2.compareTo(BigInteger.ZERO) == 0) {
+            Error.throwError(3); // Division by zero
+        }
         return BigDecimalMath.pow(new BigDecimal(number1),
-                BigDecimal.ONE.divide(new BigDecimal(number2), 100, RoundingMode.HALF_UP));
+                BigDecimal.ONE.divide(new BigDecimal(number2), 100, RoundingMode.HALF_UP)).stripTrailingZeros();
     }
 
     public static Object get(BigInteger index) {
         try {
             return Runner.memory.tape.get(index.intValueExact());
         } catch (ArithmeticException e) {
-            Error.throwError(0);
+            Error.throwError(2);
         }
         return null;
     }
@@ -377,14 +418,43 @@ public class Functions {
         try {
             return Runner.memory.tape.get(index.intValueExact());
         } catch (ArithmeticException e) {
-            Error.throwError(0);
+            Error.throwError(2);
         }
         return null;
     }
 
-    public static BigInteger toint(String number) {
-        return new BigInteger(number);
+    public static BigInteger toint(boolean number) {
+        try{
+        return BigInteger.valueOf(number?1L:0L);
+        }catch(NumberFormatException e){
+            Error.throwError(2);
+            return new BigInteger("67");
+        }
     }
+    public static BigInteger toint(String number) {
+        try{
+        return new BigInteger(number);
+        }catch(NumberFormatException e){
+            Error.throwError(2);
+            return new BigInteger("67");
+        }
+    }
+    public static String tostr(BigDecimal number){
+        return number.toString();
+    }
+    public static String tostr(BigInteger number){
+        return number.toString();
+    }
+    public static String tostr(boolean number){
+        return number?"true":"false";
+    }
+    public static String tostr(String number){
+        return number;
+    }
+    public static String tostr(ArrayList<?> numbers){
+        return numbers.toString();
+    }
+
 
     public static BigInteger toint(BigDecimal number) {
         return number.toBigInteger();
@@ -395,19 +465,19 @@ public class Functions {
     }
 
     public static BigDecimal log(BigDecimal number, BigDecimal base) {
-        return BigDecimalMath.log(base).divide(BigDecimalMath.log(number), 100, RoundingMode.HALF_UP);
+        return BigDecimalMath.log(base).divide(BigDecimalMath.log(number), 100, RoundingMode.HALF_UP).stripTrailingZeros();
     }
 
     public static BigDecimal log(BigInteger number, BigDecimal base) {
-        return BigDecimalMath.log(base).divide(BigDecimalMath.log(new BigDecimal(number)));
+        return BigDecimalMath.log(base).divide(BigDecimalMath.log(new BigDecimal(number)), 100, RoundingMode.HALF_UP).stripTrailingZeros();
     }
 
     public static BigDecimal log(BigDecimal number, BigInteger base) {
-        return BigDecimalMath.log(new BigDecimal(base)).divide(BigDecimalMath.log(number));
+        return BigDecimalMath.log(new BigDecimal(base)).divide(BigDecimalMath.log(number), 100, RoundingMode.HALF_UP).stripTrailingZeros();
     }
 
     public static BigDecimal log(BigInteger number, BigInteger base) {
-        return BigDecimalMath.log(new BigDecimal(base)).divide(BigDecimalMath.log(new BigDecimal(number)));
+        return BigDecimalMath.log(new BigDecimal(base)).divide(BigDecimalMath.log(new BigDecimal(number)), 100, RoundingMode.HALF_UP).stripTrailingZeros();
     }
 
     public static BigDecimal abs(BigDecimal number) {
@@ -423,7 +493,20 @@ public class Functions {
     }
 
     public static BigDecimal todec(String number) {
+       try{
         return new BigDecimal(number);
+        }catch(NumberFormatException e){
+            Error.throwError(2);
+            return new BigDecimal("67");
+        }
+    }
+    public static BigDecimal todec(boolean number) {
+       try{
+        return new BigDecimal(number?1:0);
+        }catch(NumberFormatException e){
+            Error.throwError(2);
+            return new BigDecimal("67");
+        }
     }
 
     public static BigDecimal todec(BigDecimal number) {
@@ -460,7 +543,7 @@ public class Functions {
 
     public static Number min(ArrayList<?> arguments) {
         if (arguments == null || arguments.isEmpty()) {
-            Error.throwError(3); // Assuming error code for invalid input
+            Error.throwError(2); // assuming error code for invalid input
         }
         Object first = arguments.get(0);
         if (first instanceof BigInteger) {
@@ -470,7 +553,7 @@ public class Functions {
                     .min(BigInteger::compareTo);
                 return f.orElse(null);
             } catch (ClassCastException e) {
-                Error.throwError(4); // Type mismatch
+                Error.throwError(2); // Type mismatch
             }
         } else if (first instanceof BigDecimal) {
             try {
@@ -479,7 +562,7 @@ public class Functions {
                     .min(BigDecimal::compareTo);
                 return f.orElse(null);
             } catch (ClassCastException e) {
-                Error.throwError(4);
+                Error.throwError(2);
             }
         }
         return null;
@@ -487,7 +570,7 @@ public class Functions {
 
     public static Number max(ArrayList<?> arguments) {
         if (arguments == null || arguments.isEmpty()) {
-            Error.throwError(3); // Assuming error code for invalid input
+            Error.throwError(2); // assuming error code for invalid input
         }
         Object first = arguments.get(0);
         if (first instanceof BigInteger) {
@@ -497,7 +580,7 @@ public class Functions {
                     .max(BigInteger::compareTo);
                 return f.orElse(null);
             } catch (ClassCastException e) {
-                Error.throwError(4); // Type mismatch
+                Error.throwError(2); // Type mismatch
             }
         } else if (first instanceof BigDecimal) {
             try {
@@ -506,7 +589,7 @@ public class Functions {
                     .max(BigDecimal::compareTo);
                 return f.orElse(null);
             } catch (ClassCastException e) {
-                Error.throwError(4);
+                Error.throwError(2);
             }
         }
         return null;
@@ -657,5 +740,8 @@ public class Functions {
 
     public static void putsin(BigDecimal item) {
         System.out.print(item);
+    }
+    public static void puts(ArrayList<?> item){
+        System.out.println(item.toString());
     }
 }

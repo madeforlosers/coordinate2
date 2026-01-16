@@ -1,5 +1,6 @@
 package coordinate.main;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class FunctionHandler {
@@ -19,8 +20,13 @@ public class FunctionHandler {
         Method method = classobj.getDeclaredMethod(name, parameterTypes);
         return method.invoke(coordinate.main.Functions.class, args);
       }
-    } catch (Throwable e) {
-      e.printStackTrace();
+    } catch (NoSuchMethodException e) {
+      Error.throwError(2);
+      //e.printStackTrace();
+    }catch(IllegalAccessException e){
+      Error.throwError(6);
+    }catch(InvocationTargetException e){
+      Error.throwError(6);
     }
     return -1;
 

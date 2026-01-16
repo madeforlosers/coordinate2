@@ -1,4 +1,4 @@
-package org.nevec.rjm ;
+package coordinate.org.nevec.rjm ;
 
 import java.security.* ;
 import java.util.* ;

@@ -1,6 +1,12 @@
 # Coordinate2
 
-## STATE OF LANGUAGE
+# NOTICE
+
+If you see me doing ANYTHING wrong in my code (bad practices, memory leaks, overall stupidity), PLEASE TELL ME!!!! I AM STILL LEARNING JAVA!!!! I'M BEGGING!!!
+
+
+
+# STATE OF LANGUAGE
 
 The state of the language as a whole is deemed **MAJORLY INCOMPLETE**
 
@@ -16,14 +22,18 @@ this means that Coordinate2 code working in one commit will most likely not work
 | lists |  | X |  |  |
 | list manipulation |  | X |  |  |
 | comparisons |  |  |  | X |
+| summations | X | | | |
+| function functionality | X | | | |
+| fix error catching overall | | X | | |
 | flow control |  |  | X |  |
 | type conversion |  | | |X |
 | more type support | X |  |  |  |
 | better modulation | | | X |  |
 | switch to BigDecimal instead of doubles  | | | | X |
-| switchover to overloaded methods |  | | X | |
+| switchover to overloaded methods |  | | |  X |
+| syntax error catching before program runs | X | | | |
 
-## ABOUT
+# ABOUT
 
 
 This is a language branched off of [coordinate](https://github.com/madeforlosers/coordinate), marked as the "better" version.
@@ -31,8 +41,6 @@ This is a language branched off of [coordinate](https://github.com/madeforlosers
 Originally, I wrote coordinate in Node.js. I got so pissed off by Node.js that I decided to code coordinate in an entirely different language I only have experience for in my coding classes. I would like to thank Google, W3Schools, StackOverflow, and GeeksForGeeks as contributers. NO AI!!!
 
 This also means that the original coordinate repository (when i get this finished) will be DEPRECATED!! THIS is the better version! Trust me!
-
-for now, ALL code has to be ran from `input.coo`. SORRY!!
 
 # TO COMPILE
 

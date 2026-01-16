@@ -2,7 +2,7 @@
 * Construction of the list of partitions or compositions of positive integers .
 */
 
-package org.nevec.rjm ;
+package coordinate.org.nevec.rjm ;
 
 import java.io.* ;
 import java.util.* ;
