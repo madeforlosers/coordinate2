@@ -108,50 +108,50 @@ public class Functions {
 
     public static boolean moreis(BigDecimal number1, BigInteger number2) {
         // list func here
-        return number1 >= number2;
+        return number1.compareTo(new BigDecimal(number2)) >= 0;
     }
 
     public static boolean moreis(BigInteger number1, BigInteger number2) {
         // list func here
-        return number1 >= number2;
+        return number1.compareTo(number2) >= 0;
     }
 
     public static boolean lessis(BigDecimal number1, BigDecimal number2) {
         // list func here
-        return number1 >= number2;
+        return number1.compareTo(number2) < 1;
     }
 
     public static boolean lessis(BigInteger number1, BigDecimal number2) {
         // list func here
-        return number1 >= number2;
+        return new BigDecimal(number1).compareTo(number2) < 1;
     }
 
     public static boolean lessis(BigDecimal number1, BigInteger number2) {
         // list func here
-        return number1 >= number2;
+        return number1.compareTo(new BigDecimal(number2)) < 1;
     }
 
     public static boolean lessis(BigInteger number1, BigInteger number2) {
         // list func here
-        return number1 >= number2;
+        return number1.compareTo(number2) < 1;
     }
 
     // hasnumber
 
     public static boolean is(BigDecimal number1, BigDecimal number2) {
-        return number1 == number2;
+        return number1.compareTo(number2) == 0;
     }
 
     public static boolean is(BigDecimal number1, BigInteger number2) {
-        return number1 == (double) number2;
+        return number1.compareTo(new BigDecimal(number2)) == 0;
     }
 
     public static boolean is(BigInteger number1, BigDecimal number2) {
-        return (double) number1 == number2;
+        return new BigDecimal(number1).compareTo(number2) == 0;
     }
 
     public static boolean is(BigInteger number1, BigInteger number2) {
-        return number1 == number2;
+        return number1.compareTo(number2) == 0;
     }
 
     public static boolean is(String number1, String number2) {
@@ -166,24 +166,24 @@ public class Functions {
         return answer;
     }
 
-    public static double subtract(BigDecimal number1, BigDecimal number2) {
+    public static BigDecimal subtract(BigDecimal number1, BigDecimal number2) {
         // list func here
-        return number1 - number2;
+        return number1.subtract(number2);
     }
 
-    public static double subtract(BigDecimal number1, BigInteger number2) {
+    public static BigDecimal subtract(BigDecimal number1, BigInteger number2) {
         // list func here
-        return number1 - number2;
+        return number1.subtract(new BigDecimal(number2));
     }
 
-    public static double subtract(BigInteger number1, BigDecimal number2) {
+    public static BigDecimal subtract(BigInteger number1, BigDecimal number2) {
         // list func here
-        return number1 - number2;
+        return new BigDecimal(number1).subtract(number2);
     }
 
-    public static int subtract(BigInteger number1, BigInteger number2) {
+    public static BigInteger subtract(BigInteger number1, BigInteger number2) {
         // list func here
-        return number1 - number2;
+        return number1.subtract(number2);
     }
 
     public static double add(BigDecimal number1, BigDecimal number2) {
