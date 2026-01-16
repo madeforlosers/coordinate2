@@ -318,7 +318,7 @@ public class Functions {
         return number1.xor(number2);
     }
 
-    public static boolean not(boolean bool) {
+    public static boolean not(Boolean bool) {
         // list func here
         return !bool;
     }
@@ -649,7 +649,7 @@ public class Functions {
         return doubleList;
     }
 
-    public static void check(boolean item) {
+    public static void check(Boolean item) {
         if (!item) {
             int skip = 0;
             for (int h = Runner.i + 1; h < Runner.codeSp.length; h++) {
@@ -671,7 +671,7 @@ public class Functions {
         }
     }
 
-    public static void loopwhile(boolean condition) {
+    public static void loopwhile(Boolean condition) { // fix
         if (!condition) {
             int skip = 0;
             for (int h = Runner.i; h < Runner.codeSp.length; h++) {
@@ -689,7 +689,7 @@ public class Functions {
         }
     }
 
-    public static void endloop(Object obj) {
+    public static void endloop() {
 
         int skip = 0;
         for (int h = Runner.i; h >= 0; h--) {
@@ -707,7 +707,7 @@ public class Functions {
         }
     }
 
-    public static void otherwise(Object obj) {
+    public static void otherwise() {
         int skip = 0;
         for (int h = Runner.i; h < Runner.codeSp.length; h++) {
             if (Runner.codeSp[h].split("\\(")[0].equals("check")) {
@@ -723,7 +723,7 @@ public class Functions {
         }
     }
 
-    public static void endch(Object obj) {
+    public static void endch() {
         // nothing
     }
 
