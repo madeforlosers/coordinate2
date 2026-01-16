@@ -1,1 +1,1 @@
-puts(min(aslist(5,4,3,2,1)))
+puts(fix(fpart(divide(1,3)),10))

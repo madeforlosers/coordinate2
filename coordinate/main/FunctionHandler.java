@@ -1,13 +1,11 @@
 package coordinate.main;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
 
 public class FunctionHandler {
 
   public static Object runFunc(String name, Object[] args) {
     try {
-
       Class<?> classobj = coordinate.main.Functions.class;
       if (name.equals("aslist")) { // this is stupid!!!!!
         Method method = classobj.getMethod("aslist", Object[].class);
@@ -28,13 +26,13 @@ public class FunctionHandler {
 
   }
 
-  public static boolean testFunc(String name) { // modernize ths!
+  public static boolean testFunc(String name) { // modernize this!
     try {
 
       Class<?> classobj = Functions.class;
 
       Method[] methods = classobj.getMethods();
-      for (Method m : Arrays.copyOfRange(methods, 0, methods.length)) {
+      for (Method m : methods) {
         if (m.getName().equals(name)) {
           return true;
         }

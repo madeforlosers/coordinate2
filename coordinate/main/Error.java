@@ -1,5 +1,4 @@
-package coordinate;
-
+package coordinate.main;
 public class Error {
     public static void throwError(int errornum) {
         String[] errors = {
@@ -14,6 +13,7 @@ public class Error {
                 "Unknown command", // 8
         };
         System.out.println("ERROR: " + errornum + ":" + errors[errornum]);
+        Runner.memory.input.close();
         System.exit(0);
         return;
     }
