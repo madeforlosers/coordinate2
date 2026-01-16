@@ -11,9 +11,11 @@ package coordinate.main;
 public class Memory {
     public final Tape tape;
     public final InputHandler input;
+    public final Summation summation;
 
     public Memory() {
         this.tape = new Tape();
         this.input = new InputHandler();
+        this.summation = new Summation();
     }
 }

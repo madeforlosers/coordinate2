@@ -34,11 +34,13 @@ public class FunctionHandler {
       }
     } catch (NoSuchMethodException e) {
       Error.throwError(2);
-      //e.printStackTrace();
-    }catch(IllegalAccessException e){
+      e.printStackTrace();
+    } catch (IllegalAccessException e) {
       Error.throwError(6);
-    }catch(InvocationTargetException e){
+      e.printStackTrace();
+    } catch (InvocationTargetException e) {
       Error.throwError(6);
+      e.printStackTrace();
     }
     return -1;
 

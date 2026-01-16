@@ -50,3 +50,7 @@ TEST 13: puts(add("hello ","world!")) ; SUCCESS
 expectation: hello world!
 test return: hello world!
 
+TEST 14: summation("putsin(sumvar(0))",0,3,tobool(0)) ; SUCCESS
+expectation: 012
+test return: 012
+

@@ -22,20 +22,22 @@ import java.math.RoundingMode;
  *      comment code more
 */
 
-
 public class Functions {
     public static Object push(BigInteger item) {
         Runner.memory.tape.push(item);
         return item;
     }
+
     public static Object push(BigDecimal item) {
         Runner.memory.tape.push(item);
         return item;
     }
+
     public static Object push(String item) {
         Runner.memory.tape.push(item);
         return item;
     }
+
     public static Object push(ArrayList<?> item) {
         Runner.memory.tape.push(item);
         return item;
@@ -247,7 +249,8 @@ public class Functions {
         // list func here
         return new BigDecimal(number1).add(number2);
     }
-    public static String add(String one, String two){
+
+    public static String add(String one, String two) {
         return one + two;
     }
 
@@ -390,7 +393,8 @@ public class Functions {
             Error.throwError(3); // Division by zero
         }
         // list func here
-        return BigDecimalMath.pow(number1, BigDecimal.ONE.divide(number2, 100, RoundingMode.HALF_UP)).stripTrailingZeros();
+        return BigDecimalMath.pow(number1, BigDecimal.ONE.divide(number2, 100, RoundingMode.HALF_UP))
+                .stripTrailingZeros();
     }
 
     public static BigDecimal root(BigInteger number1, BigDecimal number2) {
@@ -398,7 +402,8 @@ public class Functions {
         if (number2.compareTo(BigDecimal.ZERO) == 0) {
             Error.throwError(3); // Division by zero
         }
-        return BigDecimalMath.pow(new BigDecimal(number1), BigDecimal.ONE.divide(number2, 100, RoundingMode.HALF_UP)).stripTrailingZeros();
+        return BigDecimalMath.pow(new BigDecimal(number1), BigDecimal.ONE.divide(number2, 100, RoundingMode.HALF_UP))
+                .stripTrailingZeros();
     }
 
     public static BigDecimal root(BigDecimal number1, BigInteger number2) {
@@ -406,7 +411,8 @@ public class Functions {
         if (number2.compareTo(BigInteger.ZERO) == 0) {
             Error.throwError(3); // Division by zero
         }
-        return BigDecimalMath.pow(number1, BigDecimal.ONE.divide(new BigDecimal(number2), 100, RoundingMode.HALF_UP)).stripTrailingZeros();
+        return BigDecimalMath.pow(number1, BigDecimal.ONE.divide(new BigDecimal(number2), 100, RoundingMode.HALF_UP))
+                .stripTrailingZeros();
     }
 
     public static BigDecimal root(BigInteger number1, BigInteger number2) {
@@ -437,37 +443,42 @@ public class Functions {
     }
 
     public static BigInteger toint(boolean number) {
-        try{
-        return BigInteger.valueOf(number?1L:0L);
-        }catch(NumberFormatException e){
+        try {
+            return BigInteger.valueOf(number ? 1L : 0L);
+        } catch (NumberFormatException e) {
             Error.throwError(2);
             return new BigInteger("67");
         }
-    }
-    public static BigInteger toint(String number) {
-        try{
-        return new BigInteger(number);
-        }catch(NumberFormatException e){
-            Error.throwError(2);
-            return new BigInteger("67");
-        }
-    }
-    public static String tostr(BigDecimal number){
-        return number.toString();
-    }
-    public static String tostr(BigInteger number){
-        return number.toString();
-    }
-    public static String tostr(boolean number){
-        return number?"true":"false";
-    }
-    public static String tostr(String number){
-        return number;
-    }
-    public static String tostr(ArrayList<?> numbers){
-        return numbers.toString();
     }
 
+    public static BigInteger toint(String number) {
+        try {
+            return new BigInteger(number);
+        } catch (NumberFormatException e) {
+            Error.throwError(2);
+            return new BigInteger("67");
+        }
+    }
+
+    public static String tostr(BigDecimal number) {
+        return number.toString();
+    }
+
+    public static String tostr(BigInteger number) {
+        return number.toString();
+    }
+
+    public static String tostr(boolean number) {
+        return number ? "true" : "false";
+    }
+
+    public static String tostr(String number) {
+        return number;
+    }
+
+    public static String tostr(ArrayList<?> numbers) {
+        return numbers.toString();
+    }
 
     public static BigInteger toint(BigDecimal number) {
         return number.toBigInteger();
@@ -478,19 +489,23 @@ public class Functions {
     }
 
     public static BigDecimal log(BigDecimal number, BigDecimal base) {
-        return BigDecimalMath.log(base).divide(BigDecimalMath.log(number), 100, RoundingMode.HALF_UP).stripTrailingZeros();
+        return BigDecimalMath.log(base).divide(BigDecimalMath.log(number), 100, RoundingMode.HALF_UP)
+                .stripTrailingZeros();
     }
 
     public static BigDecimal log(BigInteger number, BigDecimal base) {
-        return BigDecimalMath.log(base).divide(BigDecimalMath.log(new BigDecimal(number)), 100, RoundingMode.HALF_UP).stripTrailingZeros();
+        return BigDecimalMath.log(base).divide(BigDecimalMath.log(new BigDecimal(number)), 100, RoundingMode.HALF_UP)
+                .stripTrailingZeros();
     }
 
     public static BigDecimal log(BigDecimal number, BigInteger base) {
-        return BigDecimalMath.log(new BigDecimal(base)).divide(BigDecimalMath.log(number), 100, RoundingMode.HALF_UP).stripTrailingZeros();
+        return BigDecimalMath.log(new BigDecimal(base)).divide(BigDecimalMath.log(number), 100, RoundingMode.HALF_UP)
+                .stripTrailingZeros();
     }
 
     public static BigDecimal log(BigInteger number, BigInteger base) {
-        return BigDecimalMath.log(new BigDecimal(base)).divide(BigDecimalMath.log(new BigDecimal(number)), 100, RoundingMode.HALF_UP).stripTrailingZeros();
+        return BigDecimalMath.log(new BigDecimal(base))
+                .divide(BigDecimalMath.log(new BigDecimal(number)), 100, RoundingMode.HALF_UP).stripTrailingZeros();
     }
 
     public static BigDecimal abs(BigDecimal number) {
@@ -506,17 +521,18 @@ public class Functions {
     }
 
     public static BigDecimal todec(String number) {
-       try{
-        return new BigDecimal(number);
-        }catch(NumberFormatException e){
+        try {
+            return new BigDecimal(number);
+        } catch (NumberFormatException e) {
             Error.throwError(2);
             return new BigDecimal("67");
         }
     }
+
     public static BigDecimal todec(boolean number) {
-       try{
-        return new BigDecimal(number?1:0);
-        }catch(NumberFormatException e){
+        try {
+            return new BigDecimal(number ? 1 : 0);
+        } catch (NumberFormatException e) {
             Error.throwError(2);
             return new BigDecimal("67");
         }
@@ -562,8 +578,8 @@ public class Functions {
         if (first instanceof BigInteger) {
             try {
                 Optional<BigInteger> f = arguments.stream()
-                    .map(obj -> (BigInteger) obj)
-                    .min(BigInteger::compareTo);
+                        .map(obj -> (BigInteger) obj)
+                        .min(BigInteger::compareTo);
                 return f.orElse(null);
             } catch (ClassCastException e) {
                 Error.throwError(2); // Type mismatch
@@ -571,8 +587,8 @@ public class Functions {
         } else if (first instanceof BigDecimal) {
             try {
                 Optional<BigDecimal> f = arguments.stream()
-                    .map(obj -> (BigDecimal) obj)
-                    .min(BigDecimal::compareTo);
+                        .map(obj -> (BigDecimal) obj)
+                        .min(BigDecimal::compareTo);
                 return f.orElse(null);
             } catch (ClassCastException e) {
                 Error.throwError(2);
@@ -589,8 +605,8 @@ public class Functions {
         if (first instanceof BigInteger) {
             try {
                 Optional<BigInteger> f = arguments.stream()
-                    .map(obj -> (BigInteger) obj)
-                    .max(BigInteger::compareTo);
+                        .map(obj -> (BigInteger) obj)
+                        .max(BigInteger::compareTo);
                 return f.orElse(null);
             } catch (ClassCastException e) {
                 Error.throwError(2); // Type mismatch
@@ -598,8 +614,8 @@ public class Functions {
         } else if (first instanceof BigDecimal) {
             try {
                 Optional<BigDecimal> f = arguments.stream()
-                    .map(obj -> (BigDecimal) obj)
-                    .max(BigDecimal::compareTo);
+                        .map(obj -> (BigDecimal) obj)
+                        .max(BigDecimal::compareTo);
                 return f.orElse(null);
             } catch (ClassCastException e) {
                 Error.throwError(2);
@@ -727,6 +743,78 @@ public class Functions {
         // nothing
     }
 
+    public static Boolean tobool(BigDecimal num) {
+        return num.compareTo(BigDecimal.ONE) == 0;
+    }
+
+    public static Boolean tobool(BigInteger num) {
+        return num.compareTo(BigInteger.ONE) == 0;
+    }
+
+    public static BigDecimal summation(String code, BigInteger start, BigInteger end, Boolean accumulate) {
+        Runner.memory.summation.clear();
+
+        if (Runner.memory.summation.running) {
+            Error.throwError(5);
+        }
+        Runner.memory.summation.running = true;
+
+        Runner.memory.summation.setItem(1, end);
+        BigDecimal accumulator = BigDecimal.ZERO;
+        for (Runner.memory.summation.setItem(0,
+                start); Runner.memory.summation.getItem(0)
+                        .compareTo(Runner.memory.summation.getItem(1)) == -1; Runner.memory.summation.setItem(0,
+                                Runner.memory.summation.getItem(0).add(BigInteger.ONE))) {
+            try {
+                if (accumulate) {
+                    accumulator = accumulator.add(new BigDecimal(String.valueOf(Runner.runCommands(code))));
+                } else {
+                    Runner.runCommands(code);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Error.throwError(6);
+            }
+        }
+        Runner.memory.summation.running = false;
+        return accumulator;
+    }
+
+    public static BigDecimal summation(String code, BigInteger start, BigInteger end) {
+        Runner.memory.summation.clear();
+
+        if (Runner.memory.summation.running) {
+            Error.throwError(5);
+        }
+        Runner.memory.summation.running = true;
+
+        Runner.memory.summation.setItem(1, end);
+        BigDecimal accumulator = BigDecimal.ZERO;
+        for (Runner.memory.summation.setItem(0,
+                start); Runner.memory.summation.getItem(0)
+                        .compareTo(Runner.memory.summation.getItem(1)) == -1; Runner.memory.summation.setItem(0,
+                                Runner.memory.summation.getItem(0).add(BigInteger.ONE))) {
+            try {
+
+                accumulator = accumulator.add(new BigDecimal(String.valueOf(Runner.runCommands(code))));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Error.throwError(6);
+            }
+        }
+        Runner.memory.summation.running = false;
+        return accumulator;
+    }
+
+    public static BigInteger sumvar(BigInteger item) {
+        if (!Runner.memory.summation.running) {
+            Error.throwError(6);
+        }
+        return Runner.memory.summation.getItem(item.intValue());
+    }
+
     public static void puts(String item) {
         System.out.println(item);
     }
@@ -751,10 +839,15 @@ public class Functions {
         System.out.print(item);
     }
 
+    public static void putsin(BigInteger item) {
+        System.out.print(item);
+    }
+
     public static void putsin(BigDecimal item) {
         System.out.print(item);
     }
-    public static void puts(ArrayList<?> item){
+
+    public static void puts(ArrayList<?> item) {
         System.out.println(item.toString());
     }
 }

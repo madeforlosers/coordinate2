@@ -1,5 +1,1 @@
-set(0,0)
-loopwhile(less(get(0),10))
-puts(get(0))
-increment(0)
-endloop()
+summation("putsin(sumvar(0))",0,3,tobool(0))
