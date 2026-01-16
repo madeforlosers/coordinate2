@@ -3,6 +3,18 @@ package coordinate.main;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+/*  
+ *  COORDINATE LANGUAGE
+ *  by madeforlosers 2026
+ *  
+ *  FunctionHandler.java
+ *      Runs functions from Functions.java based on
+ *      function name string and argument types
+ * 
+ *  TODO:
+ *      comment code more
+*/
+
 public class FunctionHandler {
 
   public static Object runFunc(String name, Object[] args) {

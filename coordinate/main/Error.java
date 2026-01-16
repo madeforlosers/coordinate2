@@ -1,6 +1,20 @@
 package coordinate.main;
+
+/*  
+ *  COORDINATE LANGUAGE
+ *  by madeforlosers 2026
+ *  
+ *  Error.java
+ *      Error handler
+ * 
+ *  TODO:
+ *      comment code more
+*/
+
 public class Error {
+
     public static void throwError(int errornum) {
+
         String[] errors = {
                 "Out-of-bounds tape access", // 0
                 "Too little arguments given", // 1
@@ -12,9 +26,12 @@ public class Error {
                 "Item is undefined, maybe invalid char in string?", // 7
                 "Unknown command", // 8
         };
+
         System.out.println("ERROR: " + errornum + ":" + errors[errornum]);
         Runner.memory.input.close();
         System.exit(0);
+
         return;
+
     }
 }

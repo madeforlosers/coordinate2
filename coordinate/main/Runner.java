@@ -7,6 +7,14 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.math.BigInteger;
 
+/*  
+ *  COORDINATE LANGUAGE
+ *  by madeforlosers 2026
+ *  
+ *  Runner.java
+ *      Main Running code for Coordinate
+*/
+
 class Runner {
     // global state for the interpreter
     public static Memory memory = new Memory();

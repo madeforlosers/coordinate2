@@ -1,0 +1,52 @@
+TEST 1: puts("hello") ; SUCCESS
+expectation: hello
+test return: hello
+
+TEST 2: puts(divide(1,2)) ; SUCCESS
+expectation: 0.5
+test return: 0.5
+
+TEST 3: puts(aslist(5,6)) ; SUCCESS
+expectation: [5, 6]
+test return: [5, 6]
+
+TEST 4: puts(fix(divide(1,3),10)) ; SUCCESS
+expectation: 0.3333333333
+test return: 0.3333333333
+
+TEST 5: puts(piece(add(subtract(push(10),push(10)),push(0)),push(3))) ; SUCCESS
+expectation: [10, 10, 0, 3]
+test return: [10, 10, 0, 3]
+
+TEST 6: divide(5,0) ; SUCCESS
+expectation: ERROR: 3:Divide by 0
+test return: ERROR: 3:Divide by 0
+
+TEST 7: puts(add(exp(10,10),1)) ; SUCCESS
+expectation: 10000000001
+test return: 10000000001
+
+TEST 8: puts(is(5,"hi")) ; SUCCESS
+expectation: ERROR: 2:Argument type is invalid
+test return: ERROR: 2:Argument type is invalid
+
+TEST 9: puts(is(5,5)) ; SUCCESS
+expectation: true
+test return: true
+
+TEST 10: puts(is(5,6)) ; SUCCESS
+expectation: false
+test return: false
+
+TEST 11: puts(get(push(0))) ; SUCCESS
+expectation: 0
+test return: 0
+
+TEST 12: puts(get(set(5,5))) ; SUCCESS
+expectation: 5
+test return: 5
+
+TEST 13: puts(add("hello ","world!")) ; SUCCESS
+expectation: hello world!
+test return: hello world!
+

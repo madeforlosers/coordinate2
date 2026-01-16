@@ -2,6 +2,17 @@ package coordinate.main;
 
 import java.util.ArrayList;
 
+/*  
+ *  COORDINATE LANGUAGE
+ *  by madeforlosers 2026
+ *  
+ *  Tape.java
+ *      Main tape memory
+ * 
+ *  TODO:
+ *      comment code more
+*/
+
 public class Tape {
     private final ArrayList<Object> data;
 

@@ -10,6 +10,19 @@ import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
+/*  
+ *  COORDINATE LANGUAGE
+ *  by madeforlosers 2026
+ *  
+ *  Functions.java
+ *      All of the coordinate functions
+ * 
+ *  TODO:
+ *      error catch
+ *      comment code more
+*/
+
+
 public class Functions {
     public static Object push(BigInteger item) {
         Runner.memory.tape.push(item);

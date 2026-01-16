@@ -1,3 +1,3 @@
-Manifest-Version: 1.0
+Manifest-Version: 1.1
 Main-Class: coordinate.main.Runner
 Class-Path: coordinate/main/*.class coordinate/*.class org/nevec/rjm/*.class input.coo

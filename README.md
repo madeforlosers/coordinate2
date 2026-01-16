@@ -31,7 +31,7 @@ this means that Coordinate2 code working in one commit will most likely not work
 | better modulation | | | X |  |
 | switch to BigDecimal instead of doubles  | | | | X |
 | switchover to overloaded methods |  | | |  X |
-| syntax error catching before program runs | X | | | |
+| syntax error catching before program runs | | X | | |
 
 # ABOUT
 

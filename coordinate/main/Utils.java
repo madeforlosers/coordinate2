@@ -1,7 +1,18 @@
 package coordinate.main;
+
+/*  
+ *  COORDINATE LANGUAGE
+ *  by madeforlosers 2026
+ *  
+ *  Utils.java
+ *      Basic utils to help
+ * 
+ *  TODO:
+ *      comment code more
+*/
+
 public class Utils {
 
-    
     public static String stripInlineComments(String code) {
         String result = "";
         boolean inString = false;

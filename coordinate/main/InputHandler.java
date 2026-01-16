@@ -2,6 +2,17 @@ package coordinate.main;
 
 import java.util.Scanner;
 
+/*  
+ *  COORDINATE LANGUAGE
+ *  by madeforlosers 2026
+ *  
+ *  InputHandler.java
+ *      Handles inputs and stuff.
+ * 
+ *  TODO:
+ *      add more functionality
+*/
+
 public class InputHandler {
     private final Scanner input;
 
