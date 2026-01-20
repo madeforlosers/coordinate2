@@ -442,7 +442,7 @@ public class Functions {
         return null;
     }
 
-    public static BigInteger toint(boolean number) {
+    public static BigInteger toint(Boolean number) {
         try {
             return BigInteger.valueOf(number ? 1L : 0L);
         } catch (NumberFormatException e) {
@@ -751,36 +751,6 @@ public class Functions {
         return num.compareTo(BigInteger.ONE) == 0;
     }
 
-    public static BigDecimal summation(String code, BigInteger start, BigInteger end, Boolean accumulate) {
-        Runner.memory.summation.clear();
-
-        if (Runner.memory.summation.running) {
-            Error.throwError(5);
-        }
-        Runner.memory.summation.running = true;
-
-        Runner.memory.summation.setItem(1, end);
-        BigDecimal accumulator = BigDecimal.ZERO;
-        for (Runner.memory.summation.setItem(0,
-                start); Runner.memory.summation.getItem(0)
-                        .compareTo(Runner.memory.summation.getItem(1)) == -1; Runner.memory.summation.setItem(0,
-                                Runner.memory.summation.getItem(0).add(BigInteger.ONE))) {
-            try {
-                if (accumulate) {
-                    accumulator = accumulator.add(new BigDecimal(String.valueOf(Runner.runCommands(code))));
-                } else {
-                    Runner.runCommands(code);
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                Error.throwError(6);
-            }
-        }
-        Runner.memory.summation.running = false;
-        return accumulator;
-    }
-
     public static BigDecimal summation(String code, BigInteger start, BigInteger end) {
         Runner.memory.summation.clear();
 
@@ -796,16 +766,93 @@ public class Functions {
                         .compareTo(Runner.memory.summation.getItem(1)) == -1; Runner.memory.summation.setItem(0,
                                 Runner.memory.summation.getItem(0).add(BigInteger.ONE))) {
             try {
-
                 accumulator = accumulator.add(new BigDecimal(String.valueOf(Runner.runCommands(code))));
 
             } catch (Exception e) {
-                e.printStackTrace();
                 Error.throwError(6);
             }
         }
         Runner.memory.summation.running = false;
         return accumulator;
+    }
+    public static BigDecimal summation(String code, BigInteger start, BigDecimal end) {
+        return summation(code,start,end.toBigInteger());
+    }
+    public static BigDecimal summation(String code, BigDecimal start, BigDecimal end) {
+        return summation(code,start.toBigInteger(),end.toBigInteger());
+    }
+    public static BigDecimal summation(String code, BigDecimal start, BigInteger end) {
+        return summation(code,start.toBigInteger(),end);
+    }
+
+    public static void loop(String code, BigInteger start, BigInteger end) {
+        Runner.memory.summation.clear();
+
+        if (Runner.memory.summation.running) {
+            Error.throwError(5);
+        }
+        Runner.memory.summation.running = true;
+
+        Runner.memory.summation.setItem(1, end);
+        
+        for (Runner.memory.summation.setItem(0,
+                start); Runner.memory.summation.getItem(0)
+                        .compareTo(Runner.memory.summation.getItem(1)) == -1; Runner.memory.summation.setItem(0,
+                                Runner.memory.summation.getItem(0).add(BigInteger.ONE))) {
+            try {
+
+                Runner.runCommands(code);
+
+            } catch (Exception e) {
+                Error.throwError(6);
+            }
+        }
+        Runner.memory.summation.running = false;
+        return;
+    }
+    public static void loop(String code, BigInteger start, BigDecimal end) {
+        loop(code,start,end.toBigInteger());
+    }
+    public static void loop(String code, BigDecimal start, BigDecimal end) {
+        loop(code,start.toBigInteger(),end.toBigInteger());
+    }
+    public static void loop(String code, BigDecimal start, BigInteger end) {
+        loop(code,start.toBigInteger(),end);
+    }
+
+    public static ArrayList<BigDecimal> funclist(String code, BigInteger start, BigInteger end) {
+        Runner.memory.summation.clear();
+
+        if (Runner.memory.summation.running) {
+            Error.throwError(5);
+        }
+        Runner.memory.summation.running = true;
+
+        Runner.memory.summation.setItem(1, end);
+        ArrayList<BigDecimal> list = new ArrayList<BigDecimal>();
+        for (Runner.memory.summation.setItem(0,
+                start); Runner.memory.summation.getItem(0)
+                        .compareTo(Runner.memory.summation.getItem(1)) == -1; Runner.memory.summation.setItem(0,
+                                Runner.memory.summation.getItem(0).add(BigInteger.ONE))) {
+            try {
+
+                list.add(new BigDecimal(String.valueOf(Runner.runCommands(code))));
+
+            } catch (Exception e) {
+                Error.throwError(6);
+            }
+        }
+        Runner.memory.summation.running = false;
+        return list;
+    }
+    public static ArrayList<BigDecimal> funclist(String code, BigInteger start, BigDecimal end) {
+        return funclist(code,start,end.toBigInteger());
+    }
+    public static ArrayList<BigDecimal> funclist(String code, BigDecimal start, BigDecimal end) {
+        return funclist(code,start.toBigInteger(),end.toBigInteger());
+    }
+    public static ArrayList<BigDecimal> funclist(String code, BigDecimal start, BigInteger end) {
+        return funclist(code,start.toBigInteger(),end);
     }
 
     public static BigInteger sumvar(BigInteger item) {

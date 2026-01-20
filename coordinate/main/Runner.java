@@ -23,7 +23,9 @@ class Runner {
 
 
     // unused at the moment, i gotta add the functionality soon
-    // static String curFunc = "";
+    public static String curFunc = "";
+    public static String fullLine = "";
+    public static String curCom = "";
     // static int[] functionC = {};
     // static Object[] funcargs = {};
     // static int[] summation = { 0, 0, 0 };
@@ -32,12 +34,9 @@ class Runner {
 
     // run funcs
     public static Object runFunc(String input) {
+        curFunc = input;
         String getFunc = input.split("\\(")[0];
-
-        // make sure its actually a function
-        if (!FunctionHandler.testFunc(getFunc)) {
-            Error.throwError(8);
-        }
+       
         // get args
         String fah = input.split("^\\w+\\(")[1];
 
@@ -46,21 +45,27 @@ class Runner {
                 .filter(arg -> !arg.equals("") && !arg.equals(","))
                 .map(Runner::runCommands)
                 .collect(Collectors.toList()).toArray(new Object[0]);
-
+        
+         if (!FunctionHandler.testFunc(getFunc,getArg)) {
+            Error.throwError(8);
+        }
         // run initial function
         return FunctionHandler.runFunc(getFunc, getArg);
     }
 
     public static Object runCommands(String input) {
+        curCom = input;
         try {
             if (input.matches("^\"[^\"]+\"$")) { // string
                 return input.replaceAll("\"", "");
-            }
+            }else 
             if (input.matches("^\\w+\\(.*\\)$")) { // function
                 return runFunc(input);
-            }
+            }else 
             if (input.matches("^[0-9]+$")) { // number
                 return new BigInteger(input);
+            }else{
+                Error.throwError(6);
             }
         } catch (Exception e) {
             System.err.println("erm " + input);
@@ -84,6 +89,7 @@ class Runner {
         codeSp = Utils.stripInlineComments(code).split("\n"); // remove comments and split by newline
         try {
             for (i = 0; i < codeSp.length; i++) {
+                fullLine = codeSp[i].trim();
                 runCommands(codeSp[i].trim()); // run all the commands!!
             }
         } finally {

@@ -28,6 +28,9 @@ public class Error {
         };
 
         System.out.println("ERROR: " + errornum + ":" + errors[errornum]);
+        System.out.println("AT: "+Runner.curFunc);
+        System.out.println("full line: "+Runner.fullLine);
+        System.out.println("at command: "+Runner.curCom);
         Runner.memory.input.close();
         System.exit(0);
 

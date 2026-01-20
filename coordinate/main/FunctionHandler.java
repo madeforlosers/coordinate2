@@ -33,36 +33,32 @@ public class FunctionHandler {
         return method.invoke(coordinate.main.Functions.class, args);
       }
     } catch (NoSuchMethodException e) {
-      Error.throwError(2);
-      e.printStackTrace();
+      Error.throwError(8);
+  
     } catch (IllegalAccessException e) {
       Error.throwError(6);
-      e.printStackTrace();
     } catch (InvocationTargetException e) {
       Error.throwError(6);
-      e.printStackTrace();
     }
     return -1;
 
   }
 
-  public static boolean testFunc(String name) { // modernize this!
-    try {
-
-      Class<?> classobj = Functions.class;
-
-      Method[] methods = classobj.getMethods();
-      for (Method m : methods) {
-        if (m.getName().equals(name)) {
-          return true;
-        }
-
-      }
-
-    } catch (Throwable e) {
-      e.printStackTrace();
+  public static boolean testFunc(String name, Object[] args) { // modernize this!
+    if(name.equals("aslist")){
+      return true;
     }
-    return false;
+    try {
+      Class<?>[] parameterTypes = new Class<?>[args.length];
+        int inc = 0;
+        for (Object t : args) {
+          parameterTypes[inc++] = t.getClass();
+        }
+            coordinate.main.Functions.class.getMethod(name, parameterTypes);
+            return true;
+        } catch (NoSuchMethodException e) {
+            return false;
+        }
 
   }
 }

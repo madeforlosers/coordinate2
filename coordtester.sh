@@ -1,11 +1,10 @@
 # coordtester by madeforlosers 2026
 # tests one-line coordinate2 code to make sure the interpreter works
 # 
-# version 1.0
+# version 2.0
 #
 # TODO: 
 #   - add support for custom result and test folder names
-#   - add support for multi-line code
 #
 # --------------------------------------------------------------------
 #
@@ -19,72 +18,113 @@
 #
 # run.coo:
 #   temporary file used to run the test code
+#  
+# exp.txt:
+#   temporary, for specific test, the expected result when ran
+#
+# res.txt:
+#   temporary, for specific test, the actual result when ran
+#
 #
 # --------------------------------------------------------------------
 
 
 # clear result page
-echo -n "" > z.test/result.txt
+echo "- COORDINATE2 COORDTESTER v2.0" > z.test/result.txt
+echo "- made by madeforlosers 2026" >> z.test/result.txt
+echo "- result page for the tests!!" >> z.test/result.txt
+
 
 # create temporary file run.coo to run test code
 touch z.test/run.coo
+touch z.test/exp.txt
+touch z.test/res.txt
 
 # compile file using ./runjar.sh, put out to /dev/null
 # do this so it doesn't have to compile for every test (very slow)
 ./runjar.sh -silent input.coo > /dev/null
 
-# counter, only used to skip the first 4 lines in tests.txt
-let "counter=0"
+# flags to let loop know what to log
+let "expc=0"
+let "done=0"
 
-# increment through lines of tests.txt
+# counter for output
+let "counter=1"
+
+# increment through lines of testsML.txt
 while IFS= read -r line; do
-
-  # if counter > 3
-  if [ $counter -gt 3 ]; then
-
-    # get code in line to be tested
-    code=$(echo $line | cut -d ";" -f 1)
-
-    # get expected result of said code
-    exp=$(echo $line | cut -d ";" -f 2)
-
-    # change run.coo to code (so the jar can run it)
-    echo $code > z.test/run.coo
-
-    # run test code, get the result
-    res=$(java -jar Runner.jar z.test/run.coo)
-
-    # account for comment lines
-    cfix=$(( $counter - 3 ))
-
-    # write to result.txt
-    echo -n "TEST $cfix: $code ; " >> z.test/result.txt
-
-    if [[ "$res" == "$exp" ]]; then
-
-        echo "TEST $cfix SUCCESS"
-        echo "SUCCESS" >> z.test/result.txt
-
-    else
-
-        echo "TEST $cfix FAIL"
-        echo "FAIL" >> z.test/result.txt
-
+    # $line is the text of the current line we're on in testsML.txt
+    
+    # if it's on this, the input has ended and is ready to be tested
+    if [[ "${line:0:5}" == ";-end" ]]; then
+        let "done=1"
     fi
 
-    echo "expectation: $exp" >> z.test/result.txt
-    echo "test return: $res" >> z.test/result.txt
+    # if it's not done, 
+    if [ $done -eq 0 ]; then
 
-    # newline
-    echo "" >> z.test/result.txt
+        # if it's on this, that means the code part of input is done
+        # and it should switch to logging the expected result
+        if [[ "${line:0:5}" == ";-res" ]]; then
+            let "expc=1"
+        fi
+        
+        # make sure we ignore all comment lines
+        if [[ "${line:0:1}" != ";" ]]; then
+            # make sure we're logging the right thing
+            if [ $expc -eq 0 ]; then
+                # append line of code to run file
+                echo $line >> z.test/run.coo
+            else
+                # append line of expected result to result file for comparison
+                echo $line >> z.test/exp.txt
+            fi
+        fi
+    else
+        # run coordinate2 program, log its result
+        java -jar Runner.jar z.test/run.coo > z.test/res.txt
 
-  fi
+        # strip unneeded lines
+        printf "%s\n" "$(< z.test/res.txt)" > z.test/res.txt
+        printf "%s\n" "$(< z.test/exp.txt)" > z.test/exp.txt
 
-  # increment
-  let "counter+=1"
+        # let user know what test we're on
+        echo -n "TEST $counter ; " >> z.test/result.txt
+
+        # compare the 2 files
+        if cmp -s "z.test/res.txt" "z.test/exp.txt"; then
+
+            echo "TEST $counter SUCCESS"
+            echo "SUCCESS" >> z.test/result.txt
+
+        else
+
+            echo "TEST $counter FAIL"
+            echo "FAIL" >> z.test/result.txt
+
+        fi
+
+        # update result page
+        echo "expectation:" >> z.test/result.txt
+        cat z.test/exp.txt >> z.test/result.txt
+        echo "test return:" >> z.test/result.txt
+        cat z.test/res.txt >> z.test/result.txt
+        echo "" >> z.test/result.txt
+
+        # revert everything and increment counter
+        let "expc=0"
+        let "done=0"
+        > z.test/exp.txt
+        > z.test/res.txt
+        > z.test/run.coo
+        let "counter+=1"
+    fi
+    
 done < "z.test/tests.txt"
 
-# delete temporary file
+# remove temp files
 rm z.test/run.coo
+rm z.test/res.txt
+rm z.test/exp.txt
 
 echo "TESTS DONE! check z.test/result.txt to see results"

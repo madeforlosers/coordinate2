@@ -1,56 +1,143 @@
-TEST 1: puts("hello") ; SUCCESS
-expectation: hello
-test return: hello
+- COORDINATE2 COORDTESTER v2.0
+- made by madeforlosers 2026
+- result page for the tests!!
+TEST 1 ; SUCCESS
+expectation:
+hello
+test return:
+hello
 
-TEST 2: puts(divide(1,2)) ; SUCCESS
-expectation: 0.5
-test return: 0.5
+TEST 2 ; SUCCESS
+expectation:
+0.5
+test return:
+0.5
 
-TEST 3: puts(aslist(5,6)) ; SUCCESS
-expectation: [5, 6]
-test return: [5, 6]
+TEST 3 ; SUCCESS
+expectation:
+[5, 6]
+test return:
+[5, 6]
 
-TEST 4: puts(fix(divide(1,3),10)) ; SUCCESS
-expectation: 0.3333333333
-test return: 0.3333333333
+TEST 4 ; SUCCESS
+expectation:
+0.3333333333
+test return:
+0.3333333333
 
-TEST 5: puts(piece(add(subtract(push(10),push(10)),push(0)),push(3))) ; SUCCESS
-expectation: [10, 10, 0, 3]
-test return: [10, 10, 0, 3]
+TEST 5 ; SUCCESS
+expectation:
+[10, 10, 0, 3]
+test return:
+[10, 10, 0, 3]
 
-TEST 6: divide(5,0) ; SUCCESS
-expectation: ERROR: 3:Divide by 0
-test return: ERROR: 3:Divide by 0
+TEST 6 ; SUCCESS
+expectation:
+ERROR: 3:Divide by 0
+AT: divide(5,0)
+full line: divide(5,0)
+at command: 0
+test return:
+ERROR: 3:Divide by 0
+AT: divide(5,0)
+full line: divide(5,0)
+at command: 0
 
-TEST 7: puts(add(exp(10,10),1)) ; SUCCESS
-expectation: 10000000001
-test return: 10000000001
+TEST 7 ; SUCCESS
+expectation:
+10000000001
+test return:
+10000000001
 
-TEST 8: puts(is(5,"hi")) ; SUCCESS
-expectation: ERROR: 2:Argument type is invalid
-test return: ERROR: 2:Argument type is invalid
+TEST 8 ; FAIL
+expectation:
+ERROR: 2:Argument type is invalid
+AT: is(5,"hi")
+full line: puts(is(5,"hi"))
+at command: "hi"
+test return:
+ERROR: 8:Unknown command
+AT: is(5,"hi")
+full line: puts(is(5,"hi"))
+at command: "hi"
 
-TEST 9: puts(is(5,5)) ; SUCCESS
-expectation: true
-test return: true
+TEST 9 ; SUCCESS
+expectation:
+true
+test return:
+true
 
-TEST 10: puts(is(5,6)) ; SUCCESS
-expectation: false
-test return: false
+TEST 10 ; SUCCESS
+expectation:
+false
+test return:
+false
 
-TEST 11: puts(get(push(0))) ; SUCCESS
-expectation: 0
-test return: 0
+TEST 11 ; SUCCESS
+expectation:
+0
+test return:
+0
 
-TEST 12: puts(get(set(5,5))) ; SUCCESS
-expectation: 5
-test return: 5
+TEST 12 ; SUCCESS
+expectation:
+5
+test return:
+5
 
-TEST 13: puts(add("hello ","world!")) ; SUCCESS
-expectation: hello world!
-test return: hello world!
+TEST 13 ; SUCCESS
+expectation:
+hello world!
+test return:
+hello world!
 
-TEST 14: summation("putsin(sumvar(0))",0,3,tobool(0)) ; SUCCESS
-expectation: 012
-test return: 012
+TEST 14 ; SUCCESS
+expectation:
+012
+test return:
+012
+
+TEST 15 ; SUCCESS
+expectation:
+works
+test return:
+works
+
+TEST 16 ; SUCCESS
+expectation:
+2
+4
+6
+8
+10
+test return:
+2
+4
+6
+8
+10
+
+TEST 17 ; SUCCESS
+expectation:
+2
+3
+5
+7
+11
+13
+17
+19
+23
+29
+test return:
+2
+3
+5
+7
+11
+13
+17
+19
+23
+29
 
