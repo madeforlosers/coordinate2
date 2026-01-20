@@ -34,7 +34,7 @@ public class FunctionHandler {
       }
     } catch (NoSuchMethodException e) {
       Error.throwError(8);
-  
+
     } catch (IllegalAccessException e) {
       Error.throwError(6);
     } catch (InvocationTargetException e) {
@@ -45,20 +45,27 @@ public class FunctionHandler {
   }
 
   public static boolean testFunc(String name, Object[] args) { // modernize this!
-    if(name.equals("aslist")){
+    if (name.equals("aslist")) { // bypass
       return true;
     }
     try {
       Class<?>[] parameterTypes = new Class<?>[args.length];
-        int inc = 0;
-        for (Object t : args) {
-          parameterTypes[inc++] = t.getClass();
+      int inc = 0;
+      for (Object t : args) {
+        parameterTypes[inc++] = t.getClass();
+      }
+      coordinate.main.Functions.class.getMethod(name, parameterTypes);
+      return true;
+    } catch (NoSuchMethodException e) {
+      Method[] methods = coordinate.main.Functions.class.getMethods();
+      for (Method m : methods) {
+        if (m.getName().equals(name)) {
+          Error.throwError(2); // this means the function exists, its just wrong args
+          return false;
         }
-            coordinate.main.Functions.class.getMethod(name, parameterTypes);
-            return true;
-        } catch (NoSuchMethodException e) {
-            return false;
-        }
+      }
+      return false; // this means the function doesnt exist
+    }
 
   }
 }

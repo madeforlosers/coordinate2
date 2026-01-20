@@ -49,14 +49,14 @@ expectation:
 test return:
 10000000001
 
-TEST 8 ; FAIL
+TEST 8 ; SUCCESS
 expectation:
 ERROR: 2:Argument type is invalid
 AT: is(5,"hi")
 full line: puts(is(5,"hi"))
 at command: "hi"
 test return:
-ERROR: 8:Unknown command
+ERROR: 2:Argument type is invalid
 AT: is(5,"hi")
 full line: puts(is(5,"hi"))
 at command: "hi"
