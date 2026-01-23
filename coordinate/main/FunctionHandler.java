@@ -2,6 +2,7 @@ package coordinate.main;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 /*  
  *  COORDINATE LANGUAGE
@@ -23,6 +24,21 @@ public class FunctionHandler {
       if (name.equals("aslist")) { // this is stupid!!!!!
         Method method = classobj.getMethod("aslist", Object[].class);
         return method.invoke(classobj, (Object) args);
+      } else if (name.equals("callfunc")) {
+        Method method = classobj.getMethod("callfunc", Long.class, Object.class, Object.class, Object.class,
+            Object.class);
+        Object[] h = Arrays.copyOf(args, 5);
+        int inc = 0;
+        for (Object g : h) {
+          if (inc >= args.length) {
+            h[inc] = new Object();
+          }
+          inc++;
+        }
+        return method.invoke(classobj, h);
+      } else if (name.equals("send")) {
+        Method method = classobj.getMethod("send", Object.class);
+        return method.invoke(classobj, args);
       } else {
         Class<?>[] parameterTypes = new Class<?>[args.length];
         int inc = 0;
@@ -47,7 +63,7 @@ public class FunctionHandler {
   }
 
   public static boolean testFunc(String name, Object[] args) { // modernize this!
-    if (name.equals("aslist")) { // bypass
+    if (name.equals("aslist") || name.equals("callfunc") || name.equals("send")) { // bypass
       return true;
     }
     try {
@@ -58,7 +74,7 @@ public class FunctionHandler {
       }
       coordinate.main.Functions.class.getMethod(name, parameterTypes);
       return true;
-    } catch (NoSuchMethodException e) {
+    } catch (Exception e) {
       Method[] methods = coordinate.main.Functions.class.getMethods();
       for (Method m : methods) {
         if (m.getName().equals(name)) {

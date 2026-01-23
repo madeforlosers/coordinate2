@@ -23,7 +23,7 @@ this means that Coordinate2 code working in one commit will most likely not work
 | list manipulation |  | X |  |  |
 | comparisons |  |  |  | X |
 | summations | | | | X |
-| function functionality | X | | | |
+| function functionality | | | X | |
 | fix error catching overall | | X | | |
 | flow control |  |  | X |  |
 | type conversion |  | | |X |
