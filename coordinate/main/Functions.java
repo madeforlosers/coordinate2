@@ -1,12 +1,12 @@
 package coordinate.main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 import coordinate.org.nevec.rjm.*;
 
-import java.math.Double;
-import java.math.Integer;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
@@ -23,7 +23,7 @@ import java.math.RoundingMode;
 */
 
 public class Functions {
-    public static Object push(Integer item) {
+    public static Object push(Long item) {
         Runner.memory.tape.push(item);
         return item;
     }
@@ -43,7 +43,7 @@ public class Functions {
         return item;
     }
 
-    public static String set(Integer index, String item) {
+    public static String set(Long index, String item) {
         try {
             Runner.memory.tape.set(index.intValue(), item);
         } catch (ArithmeticException e) {
@@ -52,7 +52,7 @@ public class Functions {
         return item;
     }
 
-    public static Object set(Integer index, Double item) {
+    public static Object set(Long index, Double item) {
         try {
             Runner.memory.tape.set(index.intValue(), item);
         } catch (ArithmeticException e) {
@@ -61,7 +61,7 @@ public class Functions {
         return item;
     }
 
-    public static Integer set(Integer index, Integer item) {
+    public static Long set(Long index, Long item) {
         try {
             Runner.memory.tape.set(index.intValue(), item);
         } catch (ArithmeticException e) {
@@ -70,13 +70,13 @@ public class Functions {
         return item;
     }
 
-    public static Double increment(Integer index) {
+    public static Double increment(Long index) {
         try {
             Object value = Runner.memory.tape.get(index.intValue());
             if (value == null || !(value instanceof Number)) {
                 Error.throwError(2);
             }
-            Double current = new Double(value.toString());
+            Double current = Double.valueOf(value.toString());
             Double newValue = current + 1;
             Runner.memory.tape.set(index.intValue(), newValue);
             return current;
@@ -86,13 +86,13 @@ public class Functions {
         return null;
     }
 
-    public static Double decrement(Integer index) {
+    public static Double decrement(Long index) {
         try {
             Object value = Runner.memory.tape.get(index.intValue());
             if (value == null || !(value instanceof Number)) {
                 Error.throwError(2);
             }
-            Double current = new Double(value.toString());
+            Double current = Double.valueOf(value.toString());
             Double newValue = current - 1;
             Runner.memory.tape.set(index.intValue(), newValue);
             return current;
@@ -107,17 +107,17 @@ public class Functions {
         return number1.compareTo(number2) == 1;
     }
 
-    public static boolean more(Integer number1, Double number2) {
+    public static boolean more(Long number1, Double number2) {
         // list func here
-        return new Double(number1).compareTo(number2) == 1;
+        return Double.valueOf(number1.doubleValue()).compareTo(number2) == 1;
     }
 
-    public static boolean more(Double number1, Integer number2) {
+    public static boolean more(Double number1, Long number2) {
         // list func here
-        return number1.compareTo(new Double(number2)) == 1;
+        return number1.compareTo(number2.doubleValue()) == 1;
     }
 
-    public static boolean more(Integer number1, Integer number2) {
+    public static boolean more(Long number1, Long number2) {
         // list func here
         return number1.compareTo(number2) == 1;
     }
@@ -127,17 +127,17 @@ public class Functions {
         return number1.compareTo(number2) == -1;
     }
 
-    public static boolean less(Integer number1, Double number2) {
+    public static boolean less(Long number1, Double number2) {
         // list func here
-        return new Double(number1).compareTo(number2) == -1;
+        return Double.valueOf(number1.doubleValue()).compareTo(number2) == -1;
     }
 
-    public static boolean less(Double number1, Integer number2) {
+    public static boolean less(Double number1, Long number2) {
         // list func here
-        return number1.compareTo(new Double(number2)) == -1;
+        return number1.compareTo(number2.doubleValue()) == -1;
     }
 
-    public static boolean less(Integer number1, Integer number2) {
+    public static boolean less(Long number1, Long number2) {
         // list func here
         return number1.compareTo(number2) == -1;
     }
@@ -147,17 +147,17 @@ public class Functions {
         return number1.compareTo(number2) >= 0;
     }
 
-    public static boolean moreis(Integer number1, Double number2) {
+    public static boolean moreis(Long number1, Double number2) {
         // list func here
-        return new Double(number1).compareTo(number2) >= 0;
+        return Double.valueOf(number1.doubleValue()).compareTo(number2) >= 0;
     }
 
-    public static boolean moreis(Double number1, Integer number2) {
+    public static boolean moreis(Double number1, Long number2) {
         // list func here
-        return number1.compareTo(new Double(number2)) >= 0;
+        return number1.compareTo(number2.doubleValue()) >= 0;
     }
 
-    public static boolean moreis(Integer number1, Integer number2) {
+    public static boolean moreis(Long number1, Long number2) {
         // list func here
         return number1.compareTo(number2) >= 0;
     }
@@ -167,17 +167,17 @@ public class Functions {
         return number1.compareTo(number2) < 1;
     }
 
-    public static boolean lessis(Integer number1, Double number2) {
+    public static boolean lessis(Long number1, Double number2) {
         // list func here
-        return new Double(number1).compareTo(number2) < 1;
+        return Double.valueOf(number1.doubleValue()).compareTo(number2) < 1;
     }
 
-    public static boolean lessis(Double number1, Integer number2) {
+    public static boolean lessis(Double number1, Long number2) {
         // list func here
-        return number1.compareTo(new Double(number2)) < 1;
+        return number1.compareTo(Double.valueOf(number2.doubleValue())) < 1;
     }
 
-    public static boolean lessis(Integer number1, Integer number2) {
+    public static boolean lessis(Long number1, Long number2) {
         // list func here
         return number1.compareTo(number2) < 1;
     }
@@ -188,15 +188,15 @@ public class Functions {
         return number1.compareTo(number2) == 0;
     }
 
-    public static boolean is(Double number1, Integer number2) {
-        return number1.compareTo(new Double(number2)) == 0;
+    public static boolean is(Double number1, Long number2) {
+        return number1.compareTo(Double.valueOf(number2.doubleValue())) == 0;
     }
 
-    public static boolean is(Integer number1, Double number2) {
-        return new Double(number1).compareTo(number2) == 0;
+    public static boolean is(Long number1, Double number2) {
+        return Double.valueOf(number1.doubleValue()).compareTo(number2) == 0;
     }
 
-    public static boolean is(Integer number1, Integer number2) {
+    public static boolean is(Long number1, Long number2) {
         return number1.compareTo(number2) == 0;
     }
 
@@ -215,17 +215,17 @@ public class Functions {
         return number1 - number2;
     }
 
-    public static Double subtract(Double number1, Integer number2) {
+    public static Double subtract(Double number1, Long number2) {
         // list func here
         return number1 - number2;
     }
 
-    public static Double subtract(Integer number1, Double number2) {
+    public static Double subtract(Long number1, Double number2) {
         // list func here
         return number1 - number2;
     }
 
-    public static Integer subtract(Integer number1, Integer number2) {
+    public static Long subtract(Long number1, Long number2) {
         // list func here
         return number1 - number2;
     }
@@ -235,17 +235,17 @@ public class Functions {
         return number1 + number2;
     }
 
-    public static Integer add(Integer number1, Integer number2) {
+    public static Long add(Long number1, Long number2) {
         // list func here
         return number1 + number2;
     }
 
-    public static Double add(Double number1, Integer number2) {
+    public static Double add(Double number1, Long number2) {
         // list func here
         return number1 + number2;
     }
 
-    public static Double add(Integer number1, Double number2) {
+    public static Double add(Long number1, Double number2) {
         // list func here
         return number1 + number2;
     }
@@ -259,54 +259,66 @@ public class Functions {
         return number1 * number2;
     }
 
-    public static Double multiply(Integer number1, Double number2) {
+    public static Double multiply(Long number1, Double number2) {
         // list func here
         return number1 * number2;
     }
 
-    public static Double multiply(Double number1, Integer number2) {
+    public static Double multiply(Double number1, Long number2) {
         // list func here
         return number1 * number2;
     }
 
-    public static Integer multiply(Integer number1, Integer number2) {
+    public static Long multiply(Long number1, Long number2) {
         // list func here
         return number1 * number2;
     }
 
     public static Double divide(Double number1, Double number2) {
-        // list func here
-       return number1 / number2;
-    }
-
-    public static Double divide(Double number1, Integer number2) {
+        if (number2 == 0) {
+            Error.throwError(3);
+        }
         // list func here
         return number1 / number2;
     }
 
-    public static Double divide(Integer number1, Double number2) {
+    public static Double divide(Double number1, Long number2) {
+        if (number2 == 0) {
+            Error.throwError(3);
+        }
         // list func here
-       return number1 / number2;
+        return number1 / number2;
     }
 
-    public static Double divide(Integer number1, Integer number2) {
+    public static Double divide(Long number1, Double number2) {
+        if (number2 == 0) {
+            Error.throwError(3);
+        }
         // list func here
-        return new Double(number1) / new Double(number2);
+        return number1 / number2;
     }
 
-    public static Integer and(Integer number1, Integer number2) {
+    public static Double divide(Long number1, Long number2) {
+        if (number2 == 0) {
+            Error.throwError(3);
+        }
         // list func here
-        return number1.and(number2);
+        return number1.doubleValue() / number2.doubleValue();
     }
 
-    public static Integer or(Integer number1, Integer number2) {
+    public static Long and(Long number1, Long number2) {
         // list func here
-        return number1.or(number2);
+        return number1 & number2;
     }
 
-    public static Integer xor(Integer number1, Integer number2) {
+    public static Long or(Long number1, Long number2) {
         // list func here
-        return number1.xor(number2);
+        return number1 | number2;
+    }
+
+    public static Long xor(Long number1, Long number2) {
+        // list func here
+        return number1 ^ number2;
     }
 
     public static boolean not(Boolean bool) {
@@ -314,110 +326,78 @@ public class Functions {
         return !bool;
     }
 
-    public static boolean not(Integer bool) {
+    public static boolean not(Long bool) {
         // list func here
-        return !(bool.compareTo(Integer.ZERO) != 0);
+        return bool.intValue() != 0;
     }
 
     public static boolean not(Double bool) {
         // list func here
-        return !(bool.compareTo(Double.ZERO) != 0);
+        return bool.doubleValue() != 0;
     }
 
     public static Double modulo(Double number1, Double number2) {
         // list func here
-        if (number2.compareTo(Double.ZERO) == 0) {
+        if (number2 == 0) {
             Error.throwError(3); // Division by zero
         }
-        return number1.remainder(number2);
+        return number1 % number2;
     }
 
-    public static Double modulo(Integer number1, Double number2) {
-        // list func here
-        if (number2.compareTo(Double.ZERO) == 0) {
-            Error.throwError(3); // Division by zero
-        }
-        return new Double(number1).remainder(number2);
+    public static Double modulo(Long number1, Double number2) {
+        return modulo(number1.doubleValue(), number2);
     }
 
-    public static Double modulo(Double number1, Integer number2) {
-        // list func here
-        if (number2.compareTo(Integer.ZERO) == 0) {
-            Error.throwError(3); // Division by zero
-        }
-        return number1.remainder(new Double(number2));
+    public static Double modulo(Double number1, Long number2) {
+        return modulo(number1, number2.doubleValue());
     }
 
-    public static Integer modulo(Integer number1, Integer number2) {
-        // list func here
-        if (number2.compareTo(Integer.ZERO) == 0) {
+    public static Long modulo(Long number1, Long number2) {
+        if (number2 == 0) {
             Error.throwError(3); // Division by zero
         }
-        return number1.remainder(number2);
+        return number1 % number2;
     }
 
     public static Double exp(Double number1, Double number2) {
         // list func here
-        return DoubleMath.pow(number1.setScale(100), number2.setScale(100)).stripTrailingZeros();
+        return Math.pow(number1, number2);
     }
 
-    public static Double exp(Integer number1, Double number2) {
+    public static Double exp(Long number1, Double number2) {
         // list func here
-        return DoubleMath.pow(new Double(number1).setScale(100), number2.setScale(100)).stripTrailingZeros();
+        return Math.pow(number1, number2);
     }
 
-    public static Double exp(Double number1, Integer number2) {
+    public static Double exp(Double number1, Long number2) {
         // list func here
-        return DoubleMath.pow(number1.setScale(100), new Double(number2).setScale(100)).stripTrailingZeros();
+        return Math.pow(number1, number2);
     }
 
-    public static Double exp(Integer number1, Integer number2) {
+    public static Double exp(Long number1, Long number2) {
         // list func here
-        try{
-        return DoubleMath.pow(new Double(number1).setScale(100), new Double(number2).setScale(100)).stripTrailingZeros();
-        }catch(Exception e){
-            e.printStackTrace();
-            return new Double(5);
-        }
+        return Math.pow(number1, number2);
     }
 
     public static Double root(Double number1, Double number2) {
-        if (number2.compareTo(Double.ZERO) == 0) {
+        if (number2.doubleValue() == 0) {
             Error.throwError(3); // Division by zero
         }
         // list func here
-        return DoubleMath.pow(number1.setScale(100), Double.ONE.setScale(100).divide(number2, 100, RoundingMode.HALF_UP))
-                .stripTrailingZeros();
+        return Math.pow(number1, 1 / number2);
     }
 
-    public static Double root(Integer number1, Double number2) {
-        // list func here
-        if (number2.compareTo(Double.ZERO) == 0) {
-            Error.throwError(3); // Division by zero
-        }
-        return DoubleMath.pow(new Double(number1).setScale(100), Double.ONE.setScale(100).divide(number2.setScale(100), 100, RoundingMode.HALF_UP))
-                .stripTrailingZeros();
+    public static Double root(Long number1, Double number2) {
+        return root(number1.doubleValue(), number2.doubleValue());
+    }
+    public static Double root(Double number1, Long number2) {
+        return root(number1.doubleValue(), number2.doubleValue());
+    }
+    public static Double root(Long number1, Long number2) {
+        return root(number1.doubleValue(), number2.doubleValue());
     }
 
-    public static Double root(Double number1, Integer number2) {
-        // list func here
-        if (number2.compareTo(Integer.ZERO) == 0) {
-            Error.throwError(3); // Division by zero
-        }
-        return DoubleMath.pow(number1.setScale(100), Double.ONE.setScale(100).divide(new Double(number2).setScale(100), 100, RoundingMode.HALF_UP))
-                .stripTrailingZeros();
-    }
-
-    public static Double root(Integer number1, Integer number2) {
-        // list func here
-        if (number2.compareTo(Integer.ZERO) == 0) {
-            Error.throwError(3); // Division by zero
-        }
-        return DoubleMath.pow(new Double(number1).setScale(100),
-                Double.ONE.setScale(100).divide(new Double(number2).setScale(100), 100, RoundingMode.HALF_UP)).stripTrailingZeros();
-    }
-
-    public static Object get(Integer index) {
+    public static Object get(Long index) {
         try {
             return Runner.memory.tape.get(index.intValue());
         } catch (ArithmeticException e) {
@@ -435,30 +415,29 @@ public class Functions {
         return null;
     }
 
-    public static Integer toint(Boolean number) {
+    public static Long toint(Boolean number) {
         try {
-            return Integer.valueOf(number ? 1L : 0L);
+            return number ? 1L : 0L;
         } catch (NumberFormatException e) {
             Error.throwError(2);
-            return new Integer("67");
+            return 67L;
         }
     }
 
-    public static Integer toint(String number) {
+    public static Long toint(String number) {
         try {
-            return new Integer(number);
+            return Long.valueOf(number);
         } catch (NumberFormatException e) {
             Error.throwError(2);
-            return new Integer("67");
+            return 67L;
         }
     }
-    
 
     public static String tostr(Double number) {
         return number.toString();
     }
 
-    public static String tostr(Integer number) {
+    public static String tostr(Long number) {
         return number.toString();
     }
 
@@ -474,64 +453,61 @@ public class Functions {
         return numbers.toString();
     }
 
-    public static Integer toint(Double number) {
-        return number.toInteger();
-    }
-    public static Double floor(Double number) {
-        return number.setScale(0,RoundingMode.FLOOR);
+    public static Long toint(Double number) {
+        return number.longValue();
     }
 
-    public static Integer toint(Integer number) {
-        return number;
+    public static Double floor(Double number) {
+        return Math.floor(number);
+    }
+
+    public static Long toint(Long number) {
+        return number.longValue();
     }
 
     public static Double log(Double number, Double base) {
-        return DoubleMath.log(base).divide(DoubleMath.log(number), 100, RoundingMode.HALF_UP)
-                .stripTrailingZeros();
+        return Math.log(base) / Math.log(number);
     }
 
-    public static Double log(Integer number, Double base) {
-        return DoubleMath.log(base).divide(DoubleMath.log(new Double(number)), 100, RoundingMode.HALF_UP)
-                .stripTrailingZeros();
+    public static Double log(Long number, Double base) {
+        return log(number.doubleValue(), base);
     }
 
-    public static Double log(Double number, Integer base) {
-        return DoubleMath.log(new Double(base)).divide(DoubleMath.log(number), 100, RoundingMode.HALF_UP)
-                .stripTrailingZeros();
+    public static Double log(Double number, Long base) {
+        return log(number, base.doubleValue());
     }
 
-    public static Double log(Integer number, Integer base) {
-        return DoubleMath.log(new Double(base))
-                .divide(DoubleMath.log(new Double(number)), 100, RoundingMode.HALF_UP).stripTrailingZeros();
+    public static Double log(Long number, Long base) {
+        return log(number.doubleValue(), base.doubleValue());
     }
 
     public static Double abs(Double number) {
-        return number.abs();
+        return Math.abs(number);
     }
 
-    public static Integer abs(Integer number) {
-        return number.abs();
+    public static Long abs(Long number) {
+        return Math.abs(number);
     }
 
-    public static Double todec(Integer number) {
-        return new Double(number);
+    public static Double todec(Long number) {
+        return number.doubleValue();
     }
 
     public static Double todec(String number) {
         try {
-            return new Double(number);
+            return Double.valueOf(number);
         } catch (NumberFormatException e) {
             Error.throwError(2);
-            return new Double("67");
+            return 67d;
         }
     }
 
     public static Double todec(boolean number) {
         try {
-            return new Double(number ? 1 : 0);
+            return number ? 1.0 : 0.0;
         } catch (NumberFormatException e) {
             Error.throwError(2);
-            return new Double("67");
+            return 67.0;
         }
     }
 
@@ -540,46 +516,52 @@ public class Functions {
     }
 
     public static Double round(Double number) {
-        return number.round(MathContext.UNLIMITED);
+        return (double) Math.round(number);
     }
 
-    public static Integer round(Integer number) {
+    public static Long round(Long number) {
         return number;
     }
 
-    public static Double fix(Double number, Integer digits) {
-        return number.setScale(digits.intValue(), RoundingMode.DOWN);
+    public static Double fix(Double number, Long digits) {
+        double scale = Math.pow(10, digits);
+        return (double) Math.floor(number * scale) / scale;
     }
 
-    public static Integer ceil(Double number) {
-        return number.setScale(0, RoundingMode.CEILING).toIntegerExact();
+    public static Double ceil(Double number) {
+        return Math.ceil(number);
     }
 
-    public static Integer ceil(Integer number) {
+    public static Long ceil(Long number) {
         return number;
     }
 
     public static Double fpart(Double number) {
-        return number.subtract(number.setScale(0, RoundingMode.FLOOR));
+        return number - Math.floor(number);
     }
 
-    public static Double fpart(Integer number) {
-        return Double.ZERO;
+    public static Double fpart(Long number) {
+        return 0d;
     }
 
-    public static Double sum(ArrayList<Double> list){
-        return list.stream().reduce(Double.ZERO, Double::add);
+    public static Double sum(ArrayList<Double> list) {
+        double sum = 0;
+        for (double i : list) {
+            sum += i;
+        }
+        return sum;
     }
+
     public static Number min(ArrayList<?> arguments) {
         if (arguments == null || arguments.isEmpty()) {
             Error.throwError(2); // assuming error code for invalid input
         }
         Object first = arguments.get(0);
-        if (first instanceof Integer) {
+        if (first instanceof Long) {
             try {
-                Optional<Integer> f = arguments.stream()
-                        .map(obj -> (Integer) obj)
-                        .min(Integer::compareTo);
+                Optional<Long> f = arguments.stream()
+                        .map(obj -> (Long) obj)
+                        .min(Long::compareTo);
                 return f.orElse(null);
             } catch (ClassCastException e) {
                 Error.throwError(2); // Type mismatch
@@ -602,11 +584,11 @@ public class Functions {
             Error.throwError(2); // assuming error code for invalid input
         }
         Object first = arguments.get(0);
-        if (first instanceof Integer) {
+        if (first instanceof Long) {
             try {
-                Optional<Integer> f = arguments.stream()
-                        .map(obj -> (Integer) obj)
-                        .max(Integer::compareTo);
+                Optional<Long> f = arguments.stream()
+                        .map(obj -> (Long) obj)
+                        .max(Long::compareTo);
                 return f.orElse(null);
             } catch (ClassCastException e) {
                 Error.throwError(2); // Type mismatch
@@ -624,7 +606,7 @@ public class Functions {
         return null;
     }
 
-    public static Object single(ArrayList<?> list, Integer index) {
+    public static Object single(ArrayList<?> list, Long index) {
         try {
             return list.get(index.intValue());
         } catch (ArithmeticException | IndexOutOfBoundsException e) {
@@ -642,7 +624,7 @@ public class Functions {
         return null;
     }
 
-    public static ArrayList<Object> piece(Integer start, Integer end) {
+    public static ArrayList<Object> piece(Long start, Long end) {
         try {
             int s = start.intValue();
             int e = end.intValue();
@@ -655,15 +637,18 @@ public class Functions {
         }
         return null;
     }
-    public static ArrayList<Object> piece(Double start, Integer end){
-        return piece(start.toIntegerExact(),end);
+
+    public static ArrayList<Object> piece(Double start, Long end) {
+        return piece(start.longValue(), end.longValue());
     }
-    public static ArrayList<Object> piece(Double start, Double end){
-        return piece(start.toIntegerExact(),end.toIntegerExact());
+
+    public static ArrayList<Object> piece(Double start, Double end) {
+        return piece(start.longValue(), end.longValue());
     }
-     public static ArrayList<Object> piece(Integer start, Double end){
-        return piece(start,end.toIntegerExact());
-     }
+
+    public static ArrayList<Object> piece(Long start, Double end) {
+        return piece(start, end.longValue());
+    }
 
     public static ArrayList<Object> aslist(Object[] arguments) {
         ArrayList<Object> doubleList = new ArrayList<>();
@@ -753,14 +738,14 @@ public class Functions {
     }
 
     public static Boolean tobool(Double num) {
-        return num.compareTo(Double.ONE) == 0;
+        return num != 0d;
     }
 
-    public static Boolean tobool(Integer num) {
-        return num.compareTo(Integer.ONE) == 0;
+    public static Boolean tobool(Long num) {
+        return num != 0;
     }
 
-    public static Double summation(String code, Integer start, Integer end) {
+    public static Double summation(String code, Long start, Long end) {
         Runner.memory.summation.clear();
 
         if (Runner.memory.summation.running) {
@@ -768,14 +753,14 @@ public class Functions {
         }
         Runner.memory.summation.running = true;
 
-        Runner.memory.summation.setItem(1, end);
-        Double accumulator = Double.ZERO;
+        Runner.memory.summation.setItem(1, end.intValue());
+        Double accumulator = 0d;
         for (Runner.memory.summation.setItem(0,
-                start); Runner.memory.summation.getItem(0)
-                        .compareTo(Runner.memory.summation.getItem(1)) == -1; Runner.memory.summation.setItem(0,
-                                Runner.memory.summation.getItem(0).add(Integer.ONE))) {
+                start.intValue()); Runner.memory.summation.getItem(0) < Runner.memory.summation.getItem(1); Runner.memory.summation
+                        .setItem(0,
+                                Runner.memory.summation.getItem(0) + 1)) {
             try {
-                accumulator = accumulator.add(new Double(String.valueOf(Runner.runCommands(code))));
+                accumulator = accumulator += Double.valueOf(String.valueOf(Runner.runCommands(code)));
 
             } catch (Exception e) {
                 Error.throwError(6);
@@ -784,17 +769,20 @@ public class Functions {
         Runner.memory.summation.running = false;
         return accumulator;
     }
-    public static Double summation(String code, Integer start, Double end) {
-        return summation(code,start,end.toInteger());
-    }
-    public static Double summation(String code, Double start, Double end) {
-        return summation(code,start.toInteger(),end.toInteger());
-    }
-    public static Double summation(String code, Double start, Integer end) {
-        return summation(code,start.toInteger(),end);
+
+    public static Double summation(String code, Long start, Double end) {
+        return summation(code, start, end.longValue());
     }
 
-    public static void loop(String code, Integer start, Integer end) {
+    public static Double summation(String code, Double start, Double end) {
+        return summation(code, start.longValue(), end.longValue());
+    }
+
+    public static Double summation(String code, Double start, Long end) {
+        return summation(code, start.longValue(), end);
+    }
+
+    public static void loop(String code, Long start, Long end) {
         Runner.memory.summation.clear();
 
         if (Runner.memory.summation.running) {
@@ -802,12 +790,12 @@ public class Functions {
         }
         Runner.memory.summation.running = true;
 
-        Runner.memory.summation.setItem(1, end);
-        
+        Runner.memory.summation.setItem(1, end.intValue());
+
         for (Runner.memory.summation.setItem(0,
-                start); Runner.memory.summation.getItem(0)
-                        .compareTo(Runner.memory.summation.getItem(1)) == -1; Runner.memory.summation.setItem(0,
-                                Runner.memory.summation.getItem(0).add(Integer.ONE))) {
+                start.intValue()); Runner.memory.summation.getItem(0) < Runner.memory.summation.getItem(1); Runner.memory.summation
+                        .setItem(0,
+                                Runner.memory.summation.getItem(0) + 1)) {
             try {
 
                 Runner.runCommands(code);
@@ -819,17 +807,20 @@ public class Functions {
         Runner.memory.summation.running = false;
         return;
     }
-    public static void loop(String code, Integer start, Double end) {
-        loop(code,start,end.toInteger());
-    }
-    public static void loop(String code, Double start, Double end) {
-        loop(code,start.toInteger(),end.toInteger());
-    }
-    public static void loop(String code, Double start, Integer end) {
-        loop(code,start.toInteger(),end);
+
+    public static void loop(String code, Long start, Double end) {
+        loop(code, start, end.longValue());
     }
 
-    public static ArrayList<Double> funclist(String code, Integer start, Integer end) {
+    public static void loop(String code, Double start, Double end) {
+        loop(code, start.longValue(), end.longValue());
+    }
+
+    public static void loop(String code, Double start, Long end) {
+        loop(code, start.longValue(), end);
+    }
+
+    public static ArrayList<Double> funclist(String code, Long start, Long end) {
         Runner.memory.summation.clear();
 
         if (Runner.memory.summation.running) {
@@ -837,12 +828,12 @@ public class Functions {
         }
         Runner.memory.summation.running = true;
 
-        Runner.memory.summation.setItem(1, end);
+        Runner.memory.summation.setItem(1, end.intValue());
         ArrayList<Double> list = new ArrayList<Double>();
         for (Runner.memory.summation.setItem(0,
-                start); Runner.memory.summation.getItem(0)
-                        .compareTo(Runner.memory.summation.getItem(1)) == -1; Runner.memory.summation.setItem(0,
-                                Runner.memory.summation.getItem(0).add(Integer.ONE))) {
+                start.intValue()); Runner.memory.summation.getItem(0) < Runner.memory.summation.getItem(1); Runner.memory.summation
+                        .setItem(0,
+                                Runner.memory.summation.getItem(0) + 1)) {
             try {
 
                 list.add(new Double(String.valueOf(Runner.runCommands(code))));
@@ -854,21 +845,24 @@ public class Functions {
         Runner.memory.summation.running = false;
         return list;
     }
-    public static ArrayList<Double> funclist(String code, Integer start, Double end) {
-        return funclist(code,start,end.toInteger());
-    }
-    public static ArrayList<Double> funclist(String code, Double start, Double end) {
-        return funclist(code,start.toInteger(),end.toInteger());
-    }
-    public static ArrayList<Double> funclist(String code, Double start, Integer end) {
-        return funclist(code,start.toInteger(),end);
+
+    public static ArrayList<Double> funclist(String code, Long start, Double end) {
+        return funclist(code, start, end.longValue());
     }
 
-    public static Integer sumvar(Integer item) {
+    public static ArrayList<Double> funclist(String code, Double start, Double end) {
+        return funclist(code, start.longValue(), end.longValue());
+    }
+
+    public static ArrayList<Double> funclist(String code, Double start, Long end) {
+        return funclist(code, start.longValue(), end);
+    }
+
+    public static Long sumvar(Long item) {
         if (!Runner.memory.summation.running) {
             Error.throwError(6);
         }
-        return Runner.memory.summation.getItem(item.intValue());
+        return (long) Runner.memory.summation.getItem(item.intValue());
     }
 
     public static void puts(String item) {
@@ -879,17 +873,17 @@ public class Functions {
         System.out.println(item);
     }
 
-    public static void puts(Integer item) {
+    public static void puts(Long item) {
         System.out.println(item);
     }
 
     public static void puts(Double item) {
-        if(0 ==item.compareTo(item.setScale(0,RoundingMode.FLOOR))){
-            System.out.println(item.toInteger());
-        }else{
+        if (item - Math.floor(item) == 0 && !item.toString().contains("E")) {
+            System.out.println(item.intValue());
+        } else {
             System.out.println(item);
         }
-        
+
     }
 
     public static void putsin(String item) {
@@ -900,7 +894,7 @@ public class Functions {
         System.out.print(item);
     }
 
-    public static void putsin(Integer item) {
+    public static void putsin(Long item) {
         System.out.print(item);
     }
 
@@ -909,6 +903,48 @@ public class Functions {
     }
 
     public static void puts(ArrayList<?> item) {
-        System.out.println(item.toString());
+        System.out.println(item.toString().replaceAll("\\.0(?![0-9])",""));
+    }
+    public static String cut(String item, Long start){
+        return item.substring(start.intValue());
+    }
+    public static String cut(String item, Long start, Long end){
+        return item.substring(start.intValue(),end.intValue());
+    }
+    public static Long find(String item, String find){
+        return (long) item.indexOf(find);
+    }
+    public static String pad(String item, String chr, Long tolength){
+        return chr.repeat(tolength.intValue() - item.length()) + item;
+    }
+    public static String replace(String item, String what, String with){
+        return item.replace(what,with);
+    }
+    public static String insertafter(String item, String find, String insert){
+        return item.replace(find,find+insert);
+    }
+    public static ArrayList<String> split(String item, String spl){
+        return new ArrayList<String>(Arrays.asList(item.split(Pattern.quote(spl))));
+    }
+    public static String glue(ArrayList<String> item){
+        return String.join("",item);
+    }
+    public static String glue(ArrayList<String> item, String delimiter){
+        return String.join(delimiter,item);
+    }
+    public static ArrayList<String> chararray(String item){
+        return split(item,"");
+    }
+    public static String empty(){
+        return "";
+    }
+    public static String charat(String item, Long index){
+        return String.valueOf(item.charAt(index.intValue()));
+    }
+    public static Long length(String item){
+        return (long) item.length();
+    }
+    public static double random(){
+        return Math.random();
     }
 }

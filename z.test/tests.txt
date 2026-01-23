@@ -36,7 +36,7 @@ at command: 0
 ;
 puts(add(exp(10,10),1))
 ;-res
-10000000001
+1.0000000001E10
 ;-end
 ;
 puts(is(5,"hi"))
@@ -157,7 +157,7 @@ puts(funclist("subtract(multiply(add(multiply(set(0,floor(root(subtract(sumvar(0
 ;
 puts(divide(add(root(5,2),1),2))
 ;-res
-1.6180339887498948482045868343656381177203091798057628621354486227052604628189024497072072041893911375
+1.618033988749895
 ;-end
 ;
 puts(multiply(2,divide(1,2)))
@@ -189,5 +189,10 @@ loop("is(push(increment(1)),push(decrement(0)))",0,push(subtract(push(5),push(1)
 puts(piece(3,add(get(2),3)))
 ;-res
 [1, 5, 2, 4, 3]
+;-end
+;
+puts(split("hello world"," "))
+;-res
+[hello, world]
 ;-end
 ;

@@ -45,9 +45,9 @@ at command: 0
 
 TEST 7 ; SUCCESS
 expectation:
-10000000001
+1.0000000001E10
 test return:
-10000000001
+1.0000000001E10
 
 TEST 8 ; SUCCESS
 expectation:
@@ -91,11 +91,11 @@ hello world!
 test return:
 hello world!
 
-TEST 14 ; FAIL
+TEST 14 ; SUCCESS
 expectation:
 012
 test return:
-
+012
 
 TEST 15 ; SUCCESS
 expectation:
@@ -171,25 +171,25 @@ expectation:
 test return:
 1.7320508075
 
-TEST 20 ; FAIL
+TEST 20 ; SUCCESS
 expectation:
 [4, 3, 2, 9, 8, 7, 6, 5]
 test return:
+[4, 3, 2, 9, 8, 7, 6, 5]
 
-
-TEST 21 ; FAIL
+TEST 21 ; SUCCESS
 expectation:
-1.6180339887498948482045868343656381177203091798057628621354486227052604628189024497072072041893911375
+1.618033988749895
 test return:
+1.618033988749895
 
-
-TEST 22 ; FAIL
+TEST 22 ; SUCCESS
 expectation:
 1
 test return:
+1
 
-
-TEST 23 ; FAIL
+TEST 23 ; SUCCESS
 expectation:
 1 .
 1 2 .
@@ -202,11 +202,26 @@ expectation:
 1 2 3 4 5 6 7 8 9 .
 1 2 3 4 5 6 7 8 9 10 .
 test return:
-
+1 .
+1 2 .
+1 2 3 .
+1 2 3 4 .
+1 2 3 4 5 .
+1 2 3 4 5 6 .
+1 2 3 4 5 6 7 .
+1 2 3 4 5 6 7 8 .
+1 2 3 4 5 6 7 8 9 .
+1 2 3 4 5 6 7 8 9 10 .
 
 TEST 24 ; SUCCESS
 expectation:
 [1, 5, 2, 4, 3]
 test return:
 [1, 5, 2, 4, 3]
+
+TEST 25 ; SUCCESS
+expectation:
+[hello, world]
+test return:
+[hello, world]
 

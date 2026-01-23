@@ -63,7 +63,7 @@ class Runner {
                 return runFunc(input);
             }else 
             if (input.matches("^[0-9]+$")) { // number
-                return new BigInteger(input);
+                return Long.valueOf(input);
             }else{
                 Error.throwError(6);
             }

@@ -14,22 +14,21 @@ this means that Coordinate2 code working in one commit will most likely not work
 
 | feature | not started | incomplete, non/semi-functional | incomplete, functional | done maybe |
 |---|---|---|---|---|
-| math |  | x | | |
+| math |  | | | X |
 | output |  |  |  | X |
 | input |  |  | X |  |
 | strings |  |  | | X |
-| string manipulation | X |  |  |  |
+| string manipulation | |  | X |  |
 | lists |  | X |  |  |
 | list manipulation |  | X |  |  |
 | comparisons |  |  |  | X |
-| summations | X | | | |
+| summations | | | | X |
 | function functionality | X | | | |
 | fix error catching overall | | X | | |
 | flow control |  |  | X |  |
 | type conversion |  | | |X |
 | more type support | X |  |  |  |
 | better modulation | | | X |  |
-| switch to BigDecimal instead of doubles  | | | | X |
 | switchover to overloaded methods |  | | |  X |
 | syntax error catching before program runs | | X | | |
 
