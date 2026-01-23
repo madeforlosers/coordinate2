@@ -39,7 +39,9 @@ public class FunctionHandler {
       } else if (name.equals("send")) {
         Method method = classobj.getMethod("send", Object.class);
         return method.invoke(classobj, args);
-      } else {
+      } else if (name.equals("empty")) {
+        return Functions.empty();
+      }else{
         Class<?>[] parameterTypes = new Class<?>[args.length];
         int inc = 0;
         for (Object t : args) {
@@ -63,7 +65,7 @@ public class FunctionHandler {
   }
 
   public static boolean testFunc(String name, Object[] args) { // modernize this!
-    if (name.equals("aslist") || name.equals("callfunc") || name.equals("send")) { // bypass
+    if (name.equals("aslist") || name.equals("callfunc") || name.equals("send") || name.equals("empty")) { // bypass
       return true;
     }
     try {

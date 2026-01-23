@@ -521,6 +521,13 @@ public class Functions {
         }
         return g;
     }
+    public static String reverse(String in){
+        String out = "";
+        for(String g : in.split("")){
+            out =  g+out;
+        }
+        return out;
+    }
 
     public static String tostr(Double number) {
         return number.toString().toString().replaceAll("\\.0(?![0-9])", "");
@@ -914,7 +921,7 @@ public class Functions {
         loop(code, start.longValue(), end);
     }
 
-    public static ArrayList<Double> funclist(String code, Long start, Long end) {
+    public static ArrayList<Object> funclist(String code, Long start, Long end) {
         Runner.memory.summation.clear();
 
         if (Runner.memory.summation.running) {
@@ -923,7 +930,7 @@ public class Functions {
         Runner.memory.summation.running = true;
 
         Runner.memory.summation.setItem(1, end.intValue());
-        ArrayList<Double> list = new ArrayList<Double>();
+        ArrayList<Object> list = new ArrayList<Object>();
         for (Runner.memory.summation.setItem(0,
                 start.intValue()); Runner.memory.summation.getItem(0) < Runner.memory.summation
                         .getItem(1); Runner.memory.summation
@@ -931,7 +938,7 @@ public class Functions {
                                         Runner.memory.summation.getItem(0) + 1)) {
             try {
 
-                list.add(Double.valueOf(String.valueOf(Runner.runCommands(code))));
+                list.add(Runner.runCommands(code));
 
             } catch (Exception e) {
                 Error.throwError(6);
@@ -941,15 +948,15 @@ public class Functions {
         return list;
     }
 
-    public static ArrayList<Double> funclist(String code, Long start, Double end) {
+    public static ArrayList<Object> funclist(String code, Long start, Double end) {
         return funclist(code, start, end.longValue());
     }
 
-    public static ArrayList<Double> funclist(String code, Double start, Double end) {
+    public static ArrayList<Object> funclist(String code, Double start, Double end) {
         return funclist(code, start.longValue(), end.longValue());
     }
 
-    public static ArrayList<Double> funclist(String code, Double start, Long end) {
+    public static ArrayList<Object> funclist(String code, Double start, Long end) {
         return funclist(code, start.longValue(), end);
     }
 
@@ -1111,6 +1118,15 @@ public class Functions {
                 }
             }
         }
+    }
+    public static String repeat(String str, Long rep){
+        return str.repeat(rep.intValue());
+    }
+    public static String repeat(String str, Double rep){
+        return str.repeat(rep.intValue());
+    }
+    public static String tochar(Long chr){
+        return String.valueOf((char) chr.intValue());
     }
     public static void endfunc(){
         // nothing;
