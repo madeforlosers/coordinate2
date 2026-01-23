@@ -1,7 +1,7 @@
 # coordtester by madeforlosers 2026
 # tests one-line coordinate2 code to make sure the interpreter works
 # 
-# version 2.0
+# version 2.1
 #
 # TODO: 
 #   - add support for custom result and test folder names
@@ -28,7 +28,7 @@
 #
 # --------------------------------------------------------------------
 
-
+clear
 # clear result page
 echo "- COORDINATE2 COORDTESTER v2.0" > z.test/result.txt
 echo "- made by madeforlosers 2026" >> z.test/result.txt
@@ -47,6 +47,8 @@ touch z.test/res.txt
 # flags to let loop know what to log
 let "expc=0"
 let "done=0"
+
+resulting=""
 
 # counter for output
 let "counter=1"
@@ -81,25 +83,26 @@ while IFS= read -r line; do
             fi
         fi
     else
+        clear
+        echo -e "\e[HTEST $counter $resulting"  
         # run coordinate2 program, log its result
-        java -jar Runner.jar z.test/run.coo > z.test/res.txt
-
+        java -jar Runner.jar z.test/run.coo | tee z.test/res.txt
         # strip unneeded lines
         printf "%s\n" "$(< z.test/res.txt)" > z.test/res.txt
         printf "%s\n" "$(< z.test/exp.txt)" > z.test/exp.txt
-
         # let user know what test we're on
         echo -n "TEST $counter ; " >> z.test/result.txt
 
         # compare the 2 files
         if cmp -s "z.test/res.txt" "z.test/exp.txt"; then
-
-            echo "TEST $counter SUCCESS"
+            
+            resulting+="O"
+            # echo -e "\e[HTEST $counter SUCCESS"
             echo "SUCCESS" >> z.test/result.txt
 
         else
-
-            echo "TEST $counter FAIL"
+            resulting+="X"
+            # echo -e "\e[HTEST $counter FAIL"
             echo "FAIL" >> z.test/result.txt
 
         fi
@@ -118,6 +121,7 @@ while IFS= read -r line; do
         > z.test/res.txt
         > z.test/run.coo
         let "counter+=1"
+        echo -e "\e[HTEST $counter $resulting"
     fi
     
 done < "z.test/tests.txt"

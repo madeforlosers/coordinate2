@@ -5,11 +5,6 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import coordinate.org.nevec.rjm.*;
-
-import java.math.MathContext;
-import java.math.RoundingMode;
-
 /*  
  *  COORDINATE LANGUAGE
  *  by madeforlosers 2026
@@ -107,6 +102,18 @@ public class Functions {
         return number1.compareTo(number2) == 1;
     }
 
+    public static ArrayList<Boolean> more(ArrayList<Double> number1, Double number2) {
+        ArrayList<Boolean> g = new ArrayList<Boolean>();
+        for (double j : number1) {
+            g.add(j > number2.doubleValue());
+        }
+        return g;
+    }
+
+    public static ArrayList<Boolean> more(ArrayList<Double> number1, Long number2) {
+        return more(number1, number2.doubleValue());
+    }
+
     public static boolean more(Long number1, Double number2) {
         // list func here
         return Double.valueOf(number1.doubleValue()).compareTo(number2) == 1;
@@ -142,6 +149,18 @@ public class Functions {
         return number1.compareTo(number2) == -1;
     }
 
+    public static ArrayList<Boolean> less(ArrayList<Double> number1, Double number2) {
+        ArrayList<Boolean> g = new ArrayList<Boolean>();
+        for (double j : number1) {
+            g.add(j < number2.doubleValue());
+        }
+        return g;
+    }
+
+    public static ArrayList<Boolean> less(ArrayList<Double> number1, Long number2) {
+        return less(number1, number2.doubleValue());
+    }
+
     public static boolean moreis(Double number1, Double number2) {
         // list func here
         return number1.compareTo(number2) >= 0;
@@ -160,6 +179,18 @@ public class Functions {
     public static boolean moreis(Long number1, Long number2) {
         // list func here
         return number1.compareTo(number2) >= 0;
+    }
+
+    public static ArrayList<Boolean> moreis(ArrayList<Double> number1, Double number2) {
+        ArrayList<Boolean> g = new ArrayList<Boolean>();
+        for (double j : number1) {
+            g.add(j >= number2.doubleValue());
+        }
+        return g;
+    }
+
+    public static ArrayList<Boolean> moreis(ArrayList<Double> number1, Long number2) {
+        return moreis(number1, number2.doubleValue());
     }
 
     public static boolean lessis(Double number1, Double number2) {
@@ -182,6 +213,18 @@ public class Functions {
         return number1.compareTo(number2) < 1;
     }
 
+    public static ArrayList<Boolean> lessis(ArrayList<Double> number1, Double number2) {
+        ArrayList<Boolean> g = new ArrayList<Boolean>();
+        for (double j : number1) {
+            g.add(j <= number2.doubleValue());
+        }
+        return g;
+    }
+
+    public static ArrayList<Boolean> lessis(ArrayList<Double> number1, Long number2) {
+        return lessis(number1, number2.doubleValue());
+    }
+
     // hasnumber
 
     public static boolean is(Double number1, Double number2) {
@@ -202,6 +245,18 @@ public class Functions {
 
     public static boolean is(String number1, String number2) {
         return number1.equals(number2);
+    }
+
+    public static ArrayList<Boolean> is(ArrayList<Double> number1, Double number2) {
+        ArrayList<Boolean> g = new ArrayList<Boolean>();
+        for (double j : number1) {
+            g.add(j == number2.doubleValue());
+        }
+        return g;
+    }
+
+    public static ArrayList<Boolean> is(ArrayList<Double> number1, Long number2) {
+        return is(number1, number2.doubleValue());
     }
 
     public static String ask(String question) {
@@ -328,12 +383,12 @@ public class Functions {
 
     public static boolean not(Long bool) {
         // list func here
-        return bool.intValue() != 0;
+        return bool.intValue() == 0;
     }
 
     public static boolean not(Double bool) {
         // list func here
-        return bool.doubleValue() != 0;
+        return bool.doubleValue() == 0;
     }
 
     public static Double modulo(Double number1, Double number2) {
@@ -379,6 +434,18 @@ public class Functions {
         return Math.pow(number1, number2);
     }
 
+    public static ArrayList<Double> exp(ArrayList<Double> number1, Double number2) {
+        ArrayList<Double> g = new ArrayList<Double>();
+        for (double j : number1) {
+            g.add(Math.pow(j, number2.doubleValue()));
+        }
+        return g;
+    }
+
+    public static ArrayList<Double> exp(ArrayList<Double> number1, Long number2) {
+        return exp(number1, number2.doubleValue());
+    }
+
     public static Double root(Double number1, Double number2) {
         if (number2.doubleValue() == 0) {
             Error.throwError(3); // Division by zero
@@ -390,9 +457,11 @@ public class Functions {
     public static Double root(Long number1, Double number2) {
         return root(number1.doubleValue(), number2.doubleValue());
     }
+
     public static Double root(Double number1, Long number2) {
         return root(number1.doubleValue(), number2.doubleValue());
     }
+
     public static Double root(Long number1, Long number2) {
         return root(number1.doubleValue(), number2.doubleValue());
     }
@@ -433,8 +502,28 @@ public class Functions {
         }
     }
 
+    public static ArrayList<Double> toint(ArrayList<?> number1) {
+        ArrayList<Double> g = new ArrayList<Double>();
+        try {
+            if (number1.get(0).getClass().getName().equals("java.lang.Double")) {
+                ArrayList<Double> num = (ArrayList<Double>) number1;
+                for (double j : num) {
+                    g.add(Math.floor(j));
+                }
+            } else {
+                ArrayList<String> num = (ArrayList<String>) number1;
+                for (String j : num) {
+                    g.add(Math.floor(Double.valueOf(j)));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return g;
+    }
+
     public static String tostr(Double number) {
-        return number.toString();
+        return number.toString().toString().replaceAll("\\.0(?![0-9])", "");
     }
 
     public static String tostr(Long number) {
@@ -756,9 +845,10 @@ public class Functions {
         Runner.memory.summation.setItem(1, end.intValue());
         Double accumulator = 0d;
         for (Runner.memory.summation.setItem(0,
-                start.intValue()); Runner.memory.summation.getItem(0) < Runner.memory.summation.getItem(1); Runner.memory.summation
-                        .setItem(0,
-                                Runner.memory.summation.getItem(0) + 1)) {
+                start.intValue()); Runner.memory.summation.getItem(0) < Runner.memory.summation
+                        .getItem(1); Runner.memory.summation
+                                .setItem(0,
+                                        Runner.memory.summation.getItem(0) + 1)) {
             try {
                 accumulator = accumulator += Double.valueOf(String.valueOf(Runner.runCommands(code)));
 
@@ -793,9 +883,10 @@ public class Functions {
         Runner.memory.summation.setItem(1, end.intValue());
 
         for (Runner.memory.summation.setItem(0,
-                start.intValue()); Runner.memory.summation.getItem(0) < Runner.memory.summation.getItem(1); Runner.memory.summation
-                        .setItem(0,
-                                Runner.memory.summation.getItem(0) + 1)) {
+                start.intValue()); Runner.memory.summation.getItem(0) < Runner.memory.summation
+                        .getItem(1); Runner.memory.summation
+                                .setItem(0,
+                                        Runner.memory.summation.getItem(0) + 1)) {
             try {
 
                 Runner.runCommands(code);
@@ -831,12 +922,13 @@ public class Functions {
         Runner.memory.summation.setItem(1, end.intValue());
         ArrayList<Double> list = new ArrayList<Double>();
         for (Runner.memory.summation.setItem(0,
-                start.intValue()); Runner.memory.summation.getItem(0) < Runner.memory.summation.getItem(1); Runner.memory.summation
-                        .setItem(0,
-                                Runner.memory.summation.getItem(0) + 1)) {
+                start.intValue()); Runner.memory.summation.getItem(0) < Runner.memory.summation
+                        .getItem(1); Runner.memory.summation
+                                .setItem(0,
+                                        Runner.memory.summation.getItem(0) + 1)) {
             try {
 
-                list.add(new Double(String.valueOf(Runner.runCommands(code))));
+                list.add(Double.valueOf(String.valueOf(Runner.runCommands(code))));
 
             } catch (Exception e) {
                 Error.throwError(6);
@@ -903,48 +995,62 @@ public class Functions {
     }
 
     public static void puts(ArrayList<?> item) {
-        System.out.println(item.toString().replaceAll("\\.0(?![0-9])",""));
+        System.out.println(item.toString().replaceAll("\\.0(?![0-9])", ""));
     }
-    public static String cut(String item, Long start){
+
+    public static String cut(String item, Long start) {
         return item.substring(start.intValue());
     }
-    public static String cut(String item, Long start, Long end){
-        return item.substring(start.intValue(),end.intValue());
+
+    public static String cut(String item, Long start, Long end) {
+        return item.substring(start.intValue(), end.intValue());
     }
-    public static Long find(String item, String find){
+
+    public static Long find(String item, String find) {
         return (long) item.indexOf(find);
     }
-    public static String pad(String item, String chr, Long tolength){
+
+    public static String pad(String item, String chr, Long tolength) {
         return chr.repeat(tolength.intValue() - item.length()) + item;
     }
-    public static String replace(String item, String what, String with){
-        return item.replace(what,with);
+
+    public static String replace(String item, String what, String with) {
+        return item.replace(what, with);
     }
-    public static String insertafter(String item, String find, String insert){
-        return item.replace(find,find+insert);
+
+    public static String insertafter(String item, String find, String insert) {
+        return item.replace(find, find + insert);
     }
-    public static ArrayList<String> split(String item, String spl){
+
+    public static ArrayList<String> split(String item, String spl) {
         return new ArrayList<String>(Arrays.asList(item.split(Pattern.quote(spl))));
     }
-    public static String glue(ArrayList<String> item){
-        return String.join("",item);
+
+    public static String glue(ArrayList<String> item) {
+        return String.join("", item);
     }
-    public static String glue(ArrayList<String> item, String delimiter){
-        return String.join(delimiter,item);
+
+    public static String glue(ArrayList<String> item, String delimiter) {
+        return String.join(delimiter, item);
     }
-    public static ArrayList<String> chararray(String item){
-        return split(item,"");
+
+    public static ArrayList<String> chararray(String item) {
+        return split(item, "");
     }
-    public static String empty(){
+
+    public static String empty() {
         return "";
     }
-    public static String charat(String item, Long index){
+
+    public static String charat(String item, Long index) {
         return String.valueOf(item.charAt(index.intValue()));
     }
-    public static Long length(String item){
+
+    public static Long length(String item) {
         return (long) item.length();
     }
-    public static double random(){
+
+    public static double random() {
         return Math.random();
     }
 }

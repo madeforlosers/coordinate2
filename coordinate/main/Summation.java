@@ -1,6 +1,5 @@
 package coordinate.main;
 
-import java.math.BigInteger;
 
 public class Summation {
     private int[] sumlist = { 0, 0, 0 };

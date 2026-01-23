@@ -36,8 +36,10 @@ public class FunctionHandler {
       Error.throwError(8);
 
     } catch (IllegalAccessException e) {
+      e.printStackTrace();
       Error.throwError(6);
     } catch (InvocationTargetException e) {
+      e.printStackTrace();
       Error.throwError(6);
     }
     return -1;

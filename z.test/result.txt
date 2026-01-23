@@ -225,3 +225,37 @@ expectation:
 test return:
 [hello, world]
 
+TEST 26 ; SUCCESS
+expectation:
+3.141592653589793
+test return:
+3.141592653589793
+
+TEST 27 ; SUCCESS
+expectation:
+12
+18
+20
+24
+30
+36
+40
+42
+48
+test return:
+12
+18
+20
+24
+30
+36
+40
+42
+48
+
+TEST 28 ; SUCCESS
+expectation:
+4902
+test return:
+4902
+

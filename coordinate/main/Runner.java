@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.stream.Collectors;
-import java.math.BigInteger;
 
 /*  
  *  COORDINATE LANGUAGE
