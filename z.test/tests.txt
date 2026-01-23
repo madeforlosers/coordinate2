@@ -122,3 +122,72 @@ endloop()
 23
 29
 ;-end
+;
+push(push(add(push(push(0)),1)))
+loopwhile(less(get(0),10))
+set(1,2)
+loopwhile(less(get(1),get(0)))
+set(2,add(multiply(get(add(subtract(subtract(get(0),1),get(1)),3)),get(add(increment(1),3))),get(2)))
+endloop()
+puts(set(toint(add(get(0),4)),get(2)))
+increment(0)
+endloop()
+;-res
+1
+1
+1
+2
+4
+8
+16
+33
+69
+146
+;-end
+;
+puts(fix(root(todec(3),2),10))
+;-res
+1.7320508075
+;-end
+;
+puts(funclist("subtract(multiply(add(multiply(set(0,floor(root(subtract(sumvar(0),1),2))),add(get(0),1)),1),2),sumvar(0))",2,10))
+;-res
+[4, 3, 2, 9, 8, 7, 6, 5]
+;-end
+;
+puts(divide(add(root(5,2),1),2))
+;-res
+1.6180339887498948482045868343656381177203091798057628621354486227052604628189024497072072041893911375
+;-end
+;
+puts(multiply(2,divide(1,2)))
+;-res
+1
+;-end
+;
+push(1)
+push(10)
+push(" ")
+loopwhile(lessis(increment(0),get(1)))
+loop("putsin(add(tostr(sumvar(0)),get(2)))",1,get(0))
+puts(".")
+endloop()
+;-res
+1 .
+1 2 .
+1 2 3 .
+1 2 3 4 .
+1 2 3 4 5 .
+1 2 3 4 5 6 .
+1 2 3 4 5 6 7 .
+1 2 3 4 5 6 7 8 .
+1 2 3 4 5 6 7 8 9 .
+1 2 3 4 5 6 7 8 9 10 .
+;-end
+;
+loop("is(push(increment(1)),push(decrement(0)))",0,push(subtract(push(5),push(1))))
+puts(piece(3,add(get(2),3)))
+;-res
+[1, 5, 2, 4, 3]
+;-end
+;

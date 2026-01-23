@@ -14,7 +14,7 @@ this means that Coordinate2 code working in one commit will most likely not work
 
 | feature | not started | incomplete, non/semi-functional | incomplete, functional | done maybe |
 |---|---|---|---|---|
-| math |  | | | X |
+| math |  | x | | |
 | output |  |  |  | X |
 | input |  |  | X |  |
 | strings |  |  | | X |

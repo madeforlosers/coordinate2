@@ -91,11 +91,11 @@ hello world!
 test return:
 hello world!
 
-TEST 14 ; SUCCESS
+TEST 14 ; FAIL
 expectation:
 012
 test return:
-012
+
 
 TEST 15 ; SUCCESS
 expectation:
@@ -140,4 +140,73 @@ test return:
 19
 23
 29
+
+TEST 18 ; SUCCESS
+expectation:
+1
+1
+1
+2
+4
+8
+16
+33
+69
+146
+test return:
+1
+1
+1
+2
+4
+8
+16
+33
+69
+146
+
+TEST 19 ; SUCCESS
+expectation:
+1.7320508075
+test return:
+1.7320508075
+
+TEST 20 ; FAIL
+expectation:
+[4, 3, 2, 9, 8, 7, 6, 5]
+test return:
+
+
+TEST 21 ; FAIL
+expectation:
+1.6180339887498948482045868343656381177203091798057628621354486227052604628189024497072072041893911375
+test return:
+
+
+TEST 22 ; FAIL
+expectation:
+1
+test return:
+
+
+TEST 23 ; FAIL
+expectation:
+1 .
+1 2 .
+1 2 3 .
+1 2 3 4 .
+1 2 3 4 5 .
+1 2 3 4 5 6 .
+1 2 3 4 5 6 7 .
+1 2 3 4 5 6 7 8 .
+1 2 3 4 5 6 7 8 9 .
+1 2 3 4 5 6 7 8 9 10 .
+test return:
+
+
+TEST 24 ; SUCCESS
+expectation:
+[1, 5, 2, 4, 3]
+test return:
+[1, 5, 2, 4, 3]
 
