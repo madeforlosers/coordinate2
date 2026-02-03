@@ -1,31 +1,37 @@
 ; coordtester v2.0 by madeforlosers 2026
 ; list file for tests
 ;
+;   TEST 1 - basic output
 puts("hello")
 ;-res
 hello
 ;-end
 ;
-puts(divide(1,2))
+;   TEST 2 - division
+puts(divide(1d,2d))
 ;-res
 0.5
 ;-end
 ;
+;   TEST 3 - list creation & function hard bypass
 puts(aslist(5,6))
 ;-res
 [5, 6]
 ;-end
 ;
-puts(fix(divide(1,3),10))
+;   TEST 4 - decimal fixing
+puts(fix(divide(1d,3d),10))
 ;-res
 0.3333333333
 ;-end
 ;
+;   TEST 5 - "piece-ing"
 puts(piece(add(subtract(push(10),push(10)),push(0)),push(3)))
 ;-res
 [10, 10, 0, 3]
 ;-end
 ;
+;   TEST 6 - division error
 divide(5,0)
 ;-res
 ERROR: 3:Divide by 0
@@ -34,11 +40,13 @@ full line: divide(5,0)
 at command: 0
 ;-end
 ;
+;   TEST 7 - exponents
 puts(add(exp(10,10),1))
 ;-res
-1.0000000001E10
+10000000001
 ;-end
 ;
+;   TEST 8 - mismatched arg types
 puts(is(5,"hi"))
 ;-res
 ERROR: 2:Argument type is invalid
@@ -47,36 +55,43 @@ full line: puts(is(5,"hi"))
 at command: "hi"
 ;-end
 ;
+;   TEST 9 - comparison
 puts(is(5,5))
 ;-res
 true
 ;-end
 ;
+;   TEST 10 - comparison
 puts(is(5,6))
 ;-res
 false
 ;-end
 ;
+;   TEST 11 - nesting
 puts(get(push(0)))
 ;-res
 0
 ;-end
 ;
+;   TEST 12 - nesting 2
 puts(get(set(5,5)))
 ;-res
 5
 ;-end
 ;
+;   TEST 13 - string concatenation
 puts(add("hello ","world!"))
 ;-res
 hello world!
 ;-end
 ;
+;   TEST 14 - inline loops
 loop("putsin(sumvar(0))",0,3)
 ;-res
 012
 ;-end
 ;
+;   TEST 15 - if statements
 check(is(5,5))
 puts("works")
 otherwise()
@@ -86,6 +101,7 @@ endch()
 works
 ;-end
 ;
+;   TEST 16 - loopwhile statements
 push(1)
 loopwhile(less(get(0),11))
 check(is(modulo(get(0),2),0))
@@ -101,6 +117,7 @@ endloop()
 10
 ;-end
 ;
+;   TEST 17 - summations
 push(1)
 push(0)
 loopwhile(less(get(0),30))
@@ -160,7 +177,7 @@ puts(divide(add(root(5,2),1),2))
 1.618033988749895
 ;-end
 ;
-puts(multiply(2,divide(1,2)))
+puts(multiply(2,divide(1d,2d)))
 ;-res
 1
 ;-end
@@ -442,5 +459,125 @@ push("1010101")
 puts(summation("multiply(exp(2,sumvar(0)),toint(charat(get(0),subtract(length(get(0)),add(sumvar(0),1)))))",0,length(get(0))))
 ;-res
 85
+;-end
+;
+push(1)
+loopwhile(less(get(0),30))
+set(3,get(0))
+set(2,add(set(1,1),1))
+loopwhile(lessis(subtract(get(2),1),get(3)))
+check(not(modulo(get(3),get(2))))
+set(1,subtract(0,multiply(get(1),toint(not(not(modulo(set(3,divide(get(3),get(2))),get(2))))))))
+endch()
+increment(2)
+endloop()
+puts(get(1))
+increment(0)
+endloop()
+;-res
+1
+-1
+-1
+0
+-1
+1
+-1
+0
+0
+1
+-1
+0
+-1
+1
+1
+0
+-1
+0
+-1
+0
+1
+1
+-1
+0
+0
+1
+0
+0
+-1
+;-end
+;
+puts(divide(4503599627370496,root(2,2)))
+;-res
+3.184525836262886E15
+;-end
+;
+push(150)
+loopwhile(less(get(0),310))
+check(less(find(tostr(get(0)),"2"),0))
+puts(get(0))
+endch()
+increment(0)
+endloop()
+;-res
+150
+151
+153
+154
+155
+156
+157
+158
+159
+160
+161
+163
+164
+165
+166
+167
+168
+169
+170
+171
+173
+174
+175
+176
+177
+178
+179
+180
+181
+183
+184
+185
+186
+187
+188
+189
+190
+191
+193
+194
+195
+196
+197
+198
+199
+300
+301
+303
+304
+305
+306
+307
+308
+309
+;-end
+;
+;
+puts(funclist("toint(divide(exp(2,sumvar(0)),3))",1,20))
+;-res
+[0, 1, 2, 5, 10, 21, 42, 85, 170, 341, 682, 1365, 2730, 5461, 10922, 21845, 43690, 87381, 174762]
 ;-end
 ;

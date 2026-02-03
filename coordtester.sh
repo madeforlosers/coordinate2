@@ -1,7 +1,7 @@
 # coordtester by madeforlosers 2026
 # tests one-line coordinate2 code to make sure the interpreter works
 # 
-# version 2.1
+# version 2.2
 #
 # TODO: 
 #   - add support for custom result and test folder names
@@ -30,7 +30,7 @@
 
 clear
 # clear result page
-echo "- COORDINATE2 COORDTESTER v2.0" > z.test/result.txt
+echo "- COORDINATE2 COORDTESTER v2.2" > z.test/result.txt
 echo "- made by madeforlosers 2026" >> z.test/result.txt
 echo "- result page for the tests!!" >> z.test/result.txt
 
@@ -104,14 +104,14 @@ while IFS= read -r line; do
             resulting+="X"
             # echo -e "\e[HTEST $counter FAIL"
             echo "FAIL" >> z.test/result.txt
+            echo "expectation:" >> z.test/result.txt
+            cat z.test/exp.txt >> z.test/result.txt
+            echo "test return:" >> z.test/result.txt
+            cat z.test/res.txt >> z.test/result.txt
 
         fi
 
         # update result page
-        echo "expectation:" >> z.test/result.txt
-        cat z.test/exp.txt >> z.test/result.txt
-        echo "test return:" >> z.test/result.txt
-        cat z.test/res.txt >> z.test/result.txt
         echo "" >> z.test/result.txt
 
         # revert everything and increment counter

@@ -342,7 +342,7 @@ public class Functions {
             Error.throwError(3);
         }
         // list func here
-        return number1 / number2;
+        return number1 / number2.doubleValue();
     }
 
     public static Double divide(Long number1, Double number2) {
@@ -350,15 +350,15 @@ public class Functions {
             Error.throwError(3);
         }
         // list func here
-        return number1 / number2;
+        return number1.doubleValue() / number2;
     }
 
-    public static Double divide(Long number1, Long number2) {
+    public static Long divide(Long number1, Long number2) {
         if (number2 == 0) {
             Error.throwError(3);
         }
         // list func here
-        return number1.doubleValue() / number2.doubleValue();
+        return number1 / number2;
     }
 
     public static Long and(Long number1, Long number2) {
@@ -383,12 +383,12 @@ public class Functions {
 
     public static boolean not(Long bool) {
         // list func here
-        return bool.intValue() == 0;
+        return bool.compareTo(0L) == 0;
     }
 
     public static boolean not(Double bool) {
         // list func here
-        return bool.doubleValue() == 0;
+        return bool.compareTo(0d) == 0;
     }
 
     public static Double modulo(Double number1, Double number2) {
@@ -407,11 +407,8 @@ public class Functions {
         return modulo(number1, number2.doubleValue());
     }
 
-    public static Long modulo(Long number1, Long number2) {
-        if (number2 == 0) {
-            Error.throwError(3); // Division by zero
-        }
-        return number1 % number2;
+    public static Double modulo(Long number1, Long number2) {
+        return modulo(number1.doubleValue(), number2.doubleValue());
     }
 
     public static Double exp(Double number1, Double number2) {
@@ -429,9 +426,9 @@ public class Functions {
         return Math.pow(number1, number2);
     }
 
-    public static Double exp(Long number1, Long number2) {
+    public static Long exp(Long number1, Long number2) {
         // list func here
-        return Math.pow(number1, number2);
+        return Utils.powerN(number1, number2);
     }
 
     public static ArrayList<Double> exp(ArrayList<Double> number1, Double number2) {
@@ -521,10 +518,11 @@ public class Functions {
         }
         return g;
     }
-    public static String reverse(String in){
+
+    public static String reverse(String in) {
         String out = "";
-        for(String g : in.split("")){
-            out =  g+out;
+        for (String g : in.split("")) {
+            out = g + out;
         }
         return out;
     }
@@ -726,10 +724,10 @@ public class Functions {
             int e = end.intValue();
             if (s < 0 || e < s || e >= Runner.memory.tape.size()) {
                 System.out.println(e);
-                //System.out.println(Runner.memory.tape.size());
+                // System.out.println(Runner.memory.tape.size());
                 Error.throwError(0);
             }
-            return new ArrayList<>(Runner.memory.tape.subList(s, e+1));
+            return new ArrayList<>(Runner.memory.tape.subList(s, e + 1));
         } catch (ArithmeticException e) {
             e.printStackTrace();
             Error.throwError(0);
@@ -761,12 +759,15 @@ public class Functions {
     public static void check(Boolean item) {
         if (!item) {
             int skip = 0;
-            for (int h = Runner.i + 1; h < Runner.codeSp.length; h++) {
+            int h = Runner.i + 1;
+            for (; h < Runner.codeSp.length; h++) {
                 if (Runner.codeSp[h].split("\\(")[0].equals("check")) {
                     skip++;
+                    continue;
                 }
                 if (Runner.codeSp[h].split("\\(")[0].equals("endch") && skip != 0) {
                     skip--;
+                    continue;
                 }
                 if (Runner.codeSp[h].split("\\(")[0].equals("otherwise") && skip == 0) {
                     Runner.i = h;
@@ -777,23 +778,32 @@ public class Functions {
                     break;
                 }
             }
+            if (Runner.i != h) {
+                Error.throwError(6);
+            }
         }
     }
 
     public static void loopwhile(Boolean condition) { // fix
         if (!condition) {
             int skip = 0;
-            for (int h = Runner.i; h < Runner.codeSp.length; h++) {
+            int h = Runner.i + 1;
+            for (; h < Runner.codeSp.length; h++) {
                 if (Runner.codeSp[h].split("\\(")[0].equals("loopwhile")) {
                     skip++;
+                    continue;
                 }
                 if (Runner.codeSp[h].split("\\(")[0].equals("endloop") && skip != 0) {
                     skip--;
+                    continue;
                 }
                 if (Runner.codeSp[h].split("\\(")[0].equals("endloop") && skip == 0) {
                     Runner.i = h;
                     break;
                 }
+            }
+            if (Runner.i != h) {
+                Error.throwError(6);
             }
         }
     }
@@ -801,12 +811,15 @@ public class Functions {
     public static void endloop() {
 
         int skip = 0;
-        for (int h = Runner.i; h >= 0; h--) {
+        int h = Runner.i - 1;
+        for (; h >= 0; h--) {
             if (Runner.codeSp[h].split("\\(")[0].equals("endloop")) {
                 skip++;
+                continue;
             }
             if (Runner.codeSp[h].split("\\(")[0].equals("loopwhile") && skip != 0) {
                 skip--;
+                continue;
             }
             if (Runner.codeSp[h].split("\\(")[0].equals("loopwhile") && skip == 0) {
                 Runner.i = h - 1;
@@ -814,21 +827,30 @@ public class Functions {
             }
 
         }
+        if (Runner.i != h - 1) {
+            Error.throwError(6);
+        }
     }
 
     public static void otherwise() {
         int skip = 0;
-        for (int h = Runner.i; h < Runner.codeSp.length; h++) {
+        int h = Runner.i + 1;
+        for (; h < Runner.codeSp.length; h++) {
             if (Runner.codeSp[h].split("\\(")[0].equals("check")) {
                 skip++;
+                continue;
             }
             if (Runner.codeSp[h].split("\\(")[0].equals("endch") && skip != 0) {
                 skip--;
+                continue;
             }
             if (Runner.codeSp[h].split("\\(")[0].equals("endch") && skip == 0) {
                 Runner.i = h;
                 break;
             }
+        }
+        if (Runner.i != h) {
+            Error.throwError(6);
         }
     }
 
@@ -970,7 +992,8 @@ public class Functions {
     public static void puts(String item) {
         System.out.println(item);
     }
-    public static void puts(Object item){
+
+    public static void puts(Object item) {
         System.out.println(item);
     }
 
@@ -1062,6 +1085,7 @@ public class Functions {
     public static Long length(String item) {
         return (long) item.length();
     }
+
     public static Long length(ArrayList<?> item) {
         return (long) item.size();
     }
@@ -1069,41 +1093,48 @@ public class Functions {
     public static double random() {
         return Math.random();
     }
-    public static Object send(Object returned){
+
+    public static Object send(Object returned) {
         return returned;
     }
-    public static Object callfunc(Long id, Object arg1, Object arg2, Object arg3, Object arg4){
-        Runner.memory.function.pushA(arg1,arg2,arg3,arg4);
+
+    public static Object callfunc(Long id, Object arg1, Object arg2, Object arg3, Object arg4) {
+        Runner.memory.function.pushA(arg1, arg2, arg3, arg4);
         Runner.memory.function.unshiftC(Runner.i);
         Object lastreturn = new Object();
-        for(Runner.i = (int)Runner.memory.tape.get(id.intValue()); Runner.i < Runner.codeSp.length;Runner.i++){
+        for (Runner.i = (int) Runner.memory.tape.get(id.intValue()); Runner.i < Runner.codeSp.length; Runner.i++) {
             lastreturn = Runner.runCommands(Runner.codeSp[Runner.i].trim());
-            if(Runner.codeSp[Runner.i].split("\\(")[0].equals("send")){
+            if (Runner.codeSp[Runner.i].split("\\(")[0].equals("send")) {
                 break;
             }
         }
         Runner.i = Runner.memory.function.shiftC();
         Runner.memory.function.remArg();
         return lastreturn;
-        
+
     }
-    public static Object callfunc(Long id, Object arg1){
+
+    public static Object callfunc(Long id, Object arg1) {
         Object nn = new Object();
-        return callfunc(id,arg1,nn,nn,nn);
+        return callfunc(id, arg1, nn, nn, nn);
     }
-    public static Object callfunc(Long id, Object arg1, Object arg2){
+
+    public static Object callfunc(Long id, Object arg1, Object arg2) {
         Object nn = new Object();
-        return callfunc(id,arg1,arg2,nn,nn);
+        return callfunc(id, arg1, arg2, nn, nn);
     }
-    public static Object callfunc(Long id, Object arg1, Object arg2, Object arg3){
-        return callfunc(id,arg1,arg2,arg3,new Object());
+
+    public static Object callfunc(Long id, Object arg1, Object arg2, Object arg3) {
+        return callfunc(id, arg1, arg2, arg3, new Object());
     }
-    public static Object getarg(Long id){
+
+    public static Object getarg(Long id) {
         return Runner.memory.function.getA(id.intValue());
     }
-    public static void function(Long id){
-        if(Runner.memory.function.Clength() == 0){
-            Runner.memory.tape.set(id.intValue(),Runner.i);
+
+    public static void function(Long id) {
+        if (Runner.memory.function.Clength() == 0) {
+            Runner.memory.tape.set(id.intValue(), Runner.i);
             int skip = 0;
             for (int h = Runner.i + 1; h < Runner.codeSp.length; h++) {
                 if (Runner.codeSp[h].split("\\(")[0].equals("function")) {
@@ -1119,16 +1150,20 @@ public class Functions {
             }
         }
     }
-    public static String repeat(String str, Long rep){
+
+    public static String repeat(String str, Long rep) {
         return str.repeat(rep.intValue());
     }
-    public static String repeat(String str, Double rep){
+
+    public static String repeat(String str, Double rep) {
         return str.repeat(rep.intValue());
     }
-    public static String tochar(Long chr){
+
+    public static String tochar(Long chr) {
         return String.valueOf((char) chr.intValue());
     }
-    public static void endfunc(){
+
+    public static void endfunc() {
         // nothing;
     }
 }

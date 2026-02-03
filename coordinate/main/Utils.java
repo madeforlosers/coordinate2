@@ -53,4 +53,17 @@ public class Utils {
         }
         return new String(result).split("\n");
     }
+
+    public static long powerN(long base, long power) {
+        long res = 1;
+        long sq = base;
+        while (power > 0) {
+            if (power % 2 == 1) {
+                res *= sq;
+            }
+            sq *= sq;
+            power /= 2;
+        }
+        return res;
+    }
 }

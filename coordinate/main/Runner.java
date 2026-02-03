@@ -20,7 +20,6 @@ class Runner {
     public static int i = 0; // current instruction index
     public static String[] codeSp; // split code lines
 
-
     // unused at the moment, i gotta add the functionality soon
     public static String curFunc = "";
     public static String fullLine = "";
@@ -30,12 +29,11 @@ class Runner {
     // static int[] summation = { 0, 0, 0 };
     // static boolean summationRunning = false;
 
-
     // run funcs
     public static Object runFunc(String input) {
         curFunc = input;
         String getFunc = input.split("\\(")[0];
-       
+
         // get args
         String fah = input.split("^\\w+\\(")[1];
 
@@ -44,8 +42,8 @@ class Runner {
                 .filter(arg -> !arg.equals("") && !arg.equals(","))
                 .map(Runner::runCommands)
                 .collect(Collectors.toList()).toArray(new Object[0]);
-        
-         if (!FunctionHandler.testFunc(getFunc,getArg)) {
+
+        if (!FunctionHandler.testFunc(getFunc, getArg)) {
             Error.throwError(8);
         }
         // run initial function
@@ -57,13 +55,14 @@ class Runner {
         try {
             if (input.matches("^\"[^\"]+\"$")) { // string
                 return input.replaceAll("\"", "");
-            }else 
-            if (input.matches("^\\w+\\(.*\\)$")) { // function
+            } else if (input.matches("^\\w+\\(.*\\)$")) { // function
                 return runFunc(input);
-            }else 
-            if (input.matches("^[0-9]+$")) { // number
+            } else if (input.matches("^[0-9]+d?$")) { // number
+                if (input.contains("d")) {
+                    return Double.valueOf(input);
+                }
                 return Long.valueOf(input);
-            }else{
+            } else {
                 Error.throwError(6);
             }
         } catch (Exception e) {

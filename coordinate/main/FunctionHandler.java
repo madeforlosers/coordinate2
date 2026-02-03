@@ -41,7 +41,7 @@ public class FunctionHandler {
         return method.invoke(classobj, args);
       } else if (name.equals("empty")) {
         return Functions.empty();
-      }else{
+      } else {
         Class<?>[] parameterTypes = new Class<?>[args.length];
         int inc = 0;
         for (Object t : args) {
