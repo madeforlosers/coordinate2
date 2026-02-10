@@ -1,1 +1,1 @@
-puts(funclist("toint(divide(exp(2,sumvar(0)),3))",1,20))
+puts(single(split("light dark"," "),modulo(sum(edit(edit(push(chararray("d4")),0,tostr(find("abcdefgh",single(get(0),0)))),1,multiply(7,toint(single(get(0),1))))),2)))

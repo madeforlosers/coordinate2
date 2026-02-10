@@ -56,6 +56,15 @@ public class Functions {
         return item;
     }
 
+    public static Object set(Long index, ArrayList<?> item) {
+        try {
+            Runner.memory.tape.set(index.intValue(), item);
+        } catch (ArithmeticException e) {
+            Error.throwError(2);
+        }
+        return item;
+    }
+
     public static Long set(Long index, Long item) {
         try {
             Runner.memory.tape.set(index.intValue(), item);
@@ -557,6 +566,7 @@ public class Functions {
 
     public static Long toint(Long number) {
         return number.longValue();
+
     }
 
     public static Double log(Double number, Double base) {
@@ -638,10 +648,10 @@ public class Functions {
         return 0d;
     }
 
-    public static Double sum(ArrayList<Double> list) {
+    public static Double sum(ArrayList<?> list) {
         double sum = 0;
-        for (double i : list) {
-            sum += i;
+        for (Object i : list) {
+            sum += Double.valueOf(String.valueOf(i));
         }
         return sum;
     }
@@ -989,6 +999,13 @@ public class Functions {
         return (long) Runner.memory.summation.getItem(item.intValue());
     }
 
+    public static Long sumvar(Double item) {
+        if (!Runner.memory.summation.running) {
+            Error.throwError(6);
+        }
+        return (long) Runner.memory.summation.getItem(item.intValue());
+    }
+
     public static void puts(String item) {
         System.out.println(item);
     }
@@ -1096,6 +1113,58 @@ public class Functions {
 
     public static Object send(Object returned) {
         return returned;
+    }
+
+    public static String edit(String str, Long id, String text) {
+        String build = "";
+        for (int n = 0; n < str.length(); n++) {
+            if (n == id) {
+                build += text;
+            } else {
+                build += str.charAt(n);
+            }
+        }
+        return build;
+    }
+
+    public static String edit(String str, Double id, String text) {
+        return edit(str, id.longValue(), text);
+    }
+
+    public static String edit(String str, Double id, Long text) {
+        return edit(str, id.longValue(), text.toString());
+    }
+
+    public static String edit(String str, Double id, Double text) {
+        return edit(str, id.longValue(), text.toString());
+    }
+
+    public static Object edit(ArrayList<?> str, Long id, String text) {
+        ArrayList<Object> build = new ArrayList<>();
+        for (int n = 0; n < str.size(); n++) {
+            if (n == id) {
+                build.add(text);
+            } else {
+                build.add(str.get(n));
+            }
+        }
+        return build;
+    }
+
+    public static Object edit(ArrayList<?> str, Long id, Double text) {
+        return edit(str, id.longValue(), text.toString());
+    }
+
+    public static Object edit(ArrayList<?> str, Double id, Double text) {
+        return edit(str, id.longValue(), text.toString());
+    }
+
+    public static Object edit(ArrayList<?> str, Double id, Long text) {
+        return edit(str, id.longValue(), text.toString());
+    }
+
+    public static Object edit(ArrayList<?> str, Long id, Long text) {
+        return edit(str, id.longValue(), text.toString());
     }
 
     public static Object callfunc(Long id, Object arg1, Object arg2, Object arg3, Object arg4) {

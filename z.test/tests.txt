@@ -1,4 +1,4 @@
-; coordtester v2.0 by madeforlosers 2026
+; coordtester v2.2 by madeforlosers 2026
 ; list file for tests
 ;
 ;   TEST 1 - basic output
@@ -579,5 +579,101 @@ endloop()
 puts(funclist("toint(divide(exp(2,sumvar(0)),3))",1,20))
 ;-res
 [0, 1, 2, 5, 10, 21, 42, 85, 170, 341, 682, 1365, 2730, 5461, 10922, 21845, 43690, 87381, 174762]
+;-end
+;
+push(10000d)
+loopwhile(less(get(0),10500))
+check(tobool(min(funclist("multiply(toint(tobool(fpart(divide(get(0),sumvar(0))))),toint(tobool(fpart(divide(add(get(0),6d),sumvar(0))))))",2d,add(2,toint(root(get(0),2d)))))))
+puts(aslist(get(0),add(get(0),6)))
+endch()
+increment(0)
+endloop()
+;-res
+[10061, 10067]
+[10093, 10099]
+[10133, 10139]
+[10163, 10169]
+[10247, 10253]
+[10253, 10259]
+[10267, 10273]
+[10331, 10337]
+[10337, 10343]
+[10427, 10433]
+[10453, 10459]
+[10457, 10463]
+;-end
+;
+push(1)
+loopwhile(not(modulo(7560,get(0))))
+increment(0)
+endloop()
+puts(get(0))
+;-res
+11
+;-end
+;
+push(1000d)
+push(2000d)
+set(2,0)
+loopwhile(lessis(get(0),get(1)))
+set(3,0d)
+set(2,add(get(2),summation("toint(modulo(divide(get(0),exp(2d,subtract(sumvar(0),1))),2))",1,add(toint(log(2,get(0))),2))))
+check(is(0,modulo(get(0),100)))
+puts(get(2))
+endch()
+increment(0)
+endloop()
+;-res
+6
+492
+992
+1552
+2118
+2739
+3327
+3909
+4580
+5219
+5938
+;-end
+;
+push(add("The definition of insanity is quoting the same phrase again and again and not expect despair.",tochar(0)))
+loopwhile(more(length(get(0)),1))
+puts(add(add(replace(set(1,charat(get(0),0))," ","space")," : "),tostr(subtract(length(set(2,split(get(0),get(1)))),1))))
+set(0,glue(get(2)))
+endloop()
+;-res
+T : 1
+h : 3
+e : 8
+space : 15
+d : 4
+f : 2
+i : 10
+n : 10
+t : 6
+o : 4
+s : 5
+a : 10
+y : 1
+q : 1
+u : 1
+g : 3
+m : 1
+p : 3
+r : 2
+x : 1
+c : 1
+. : 1
+;-end
+;
+puts(multiply(toint(push(659)),toint(reverse(tostr(get(0))))))
+;-res
+630004
+;-end
+;
+puts(single(split("light dark"," "),modulo(sum(edit(edit(push(chararray("d4")),0,tostr(find("abcdefgh",single(get(0),0)))),1,multiply(7,toint(single(get(0),1))))),2)))
+;-res
+dark
 ;-end
 ;
