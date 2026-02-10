@@ -1,4 +1,4 @@
-; coordtester v2.2 by madeforlosers 2026
+; coordtester v3.0 by madeforlosers 2026
 ; list file for tests
 ;
 ;   TEST 1 - basic output
@@ -675,5 +675,47 @@ puts(multiply(toint(push(659)),toint(reverse(tostr(get(0))))))
 puts(single(split("light dark"," "),modulo(sum(edit(edit(push(chararray("d4")),0,tostr(find("abcdefgh",single(get(0),0)))),1,multiply(7,toint(single(get(0),1))))),2)))
 ;-res
 dark
+;-end
+;
+push(toint(910))
+puts(reverse(glue(funclist("tostr(multiply(modulo(get(0),2),toint(moreis(set(0,toint(divide(get(0),2))),0))))",0,add(1,toint(log(2,get(0))))))))
+;-res
+1110001110
+;-end
+;
+push(push(0))
+loopwhile(less(get(1),50))
+set(0,get(1))
+check(not(modulo(summation("multiply(modulo(get(0),2),toint(moreis(set(0,toint(divide(get(0),2))),0)))",0,add(1,toint(log(2,get(0))))),2)))
+puts(get(1))
+endch()
+increment(1)
+endloop()
+;-res
+0
+3
+5
+6
+9
+10
+12
+15
+17
+18
+20
+23
+24
+27
+29
+30
+33
+34
+36
+39
+40
+43
+45
+46
+48
 ;-end
 ;

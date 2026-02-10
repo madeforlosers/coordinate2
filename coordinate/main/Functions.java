@@ -877,11 +877,11 @@ public class Functions {
     }
 
     public static Double summation(String code, Long start, Long end) {
-        Runner.memory.summation.clear();
 
         if (Runner.memory.summation.running) {
             Error.throwError(5);
         }
+         Runner.memory.summation.clear();
         Runner.memory.summation.running = true;
 
         Runner.memory.summation.setItem(1, end.intValue());

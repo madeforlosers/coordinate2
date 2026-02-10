@@ -80,6 +80,7 @@ public class FunctionHandler {
       Method[] methods = coordinate.main.Functions.class.getMethods();
       for (Method m : methods) {
         if (m.getName().equals(name)) {
+          e.printStackTrace();
           Error.throwError(2); // this means the function exists, its just wrong args
           return false;
         }

@@ -20,6 +20,7 @@ public class Summation {
     }
 
     public void clear() {
+        this.running = false;
         this.sumlist[0] = 0;
         this.sumlist[1] = 0;
         this.sumlist[2] = 0;

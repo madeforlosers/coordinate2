@@ -1,48 +1,104 @@
 # coordtester by madeforlosers 2026
 # tests one-line coordinate2 code to make sure the interpreter works
 # 
-# version 2.2
+# version 3.0
 #
-# TODO: 
-#   - add support for custom result and test folder names
 #
 # --------------------------------------------------------------------
 #
-# folder for in/out is "z.test/" for now
+  FOLDER_NAME="z.test"
+#   default folder name
 #
-# result.txt:
+  RESULT_NAME="result.txt"
 #   result page for tests, shows expected and actual result
 #
-# tests.txt:
+  TESTS_NAME="tests.txt"
 #   list of tests to be ran
 #
-# run.coo:
+  RUN_NAME="run.coo"
 #   temporary file used to run the test code
 #  
-# exp.txt:
+  EXP_NAME="exp.txt"
 #   temporary, for specific test, the expected result when ran
 #
-# res.txt:
+  RES_NAME="res.txt"
 #   temporary, for specific test, the actual result when ran
 #
+  EXPECTEDFILENAMES="expected.txt"
+#   expected file names for program, name cannot be changed sadly
 #
 # --------------------------------------------------------------------
+
+# parse flags
+while getopts "n:v" OPTION; do
+  case "$OPTION" in
+    f)
+      # custom folder flag!!
+      FOLDER_NAME="$OPTARG"
+      ;;
+    ?)
+      # Handle invalid options or missing arguments
+      echo "Usage: $(basename $0) [-f customfolder]" >&2
+      exit 1
+      ;;
+  esac
+done
+
+# make sure folder actually exists
+if [ ! -d "$FOLDER_NAME" ]; then
+    echo "[!] [NOTICE] test folder \"$FOLDER_NAME\" does not exist."
+    echo "to change from the default folder name z.test, use flag [-f foldername]."
+    exit 1
+fi
+
+
+# make sure expected.txt exists
+if [ -f "$FOLDER_NAME/expected.txt" ]; then
+
+    # loop through expected.txt and overwrite vars
+    while IFS= read -r line; do
+
+        # split var name with var item
+        split=($(echo "$line" | tr "=" "\n"))
+
+        # redeclare the var
+        declare "${split[0]}"="${split[1]}"
+
+    done < "$FOLDER_NAME/expected.txt"
+fi
+
+# see if tests file is there. this is needed for the program to run
+if [ ! -f "$FOLDER_NAME/$TESTS_NAME" ]; then
+    echo "[!] [NOTICE] file $FOLDER_NAME/$TESTS_NAME does not exist! this is needed!"
+    echo "please check $FOLDER_NAME/expected.txt to see if the name is correct!"
+    exit 1
+fi
+
+
+
 
 clear
 # clear result page
-echo "- COORDINATE2 COORDTESTER v2.2" > z.test/result.txt
-echo "- made by madeforlosers 2026" >> z.test/result.txt
-echo "- result page for the tests!!" >> z.test/result.txt
+echo "- COORDINATE2 COORDTESTER v3.0" > $FOLDER_NAME/$RESULT_NAME
+echo "- made by madeforlosers 2026" >> $FOLDER_NAME/$RESULT_NAME
+echo "- result page for the tests!!" >> $FOLDER_NAME/$RESULT_NAME
 
 
-# create temporary file run.coo to run test code
-touch z.test/run.coo
-touch z.test/exp.txt
-touch z.test/res.txt
+# create temporary files to run test code
+touch $FOLDER_NAME/$RUN_NAME
+touch $FOLDER_NAME/$EXP_NAME
+touch $FOLDER_NAME/$RES_NAME
+
+
+# create temporary running file for compilation
+echo "puts(\"worked!\")" > COORDTESTER_TEST_RUN_FILE.coo
 
 # compile file using ./runjar.sh, put out to /dev/null
 # do this so it doesn't have to compile for every test (very slow)
-./runjar.sh -silent input.coo > /dev/null
+./runjar.sh -silent COORDTESTER_TEST_RUN_FILE.coo > /dev/null
+
+# remove 
+rm COORDTESTER_TEST_RUN_FILE.coo
 
 # flags to let loop know what to log
 let "expc=0"
@@ -53,82 +109,87 @@ resulting=""
 # counter for output
 let "counter=1"
 
-# increment through lines of testsML.txt
+# increment through lines of TESTS_NAME
 while IFS= read -r line; do
-    # $line is the text of the current line we're on in testsML.txt
+    # $line is the text of the current line we're on in TESTS_NAME
     
     # if it's on this, the input has ended and is ready to be tested
-    if [[ "${line:0:5}" == ";-end" ]]; then
-        let "done=1"
-    fi
+    [[ "${line:0:5}" == ";-end" ]] && let "done=1"
 
     # if it's not done, 
     if [ $done -eq 0 ]; then
 
         # if it's on this, that means the code part of input is done
         # and it should switch to logging the expected result
-        if [[ "${line:0:5}" == ";-res" ]]; then
-            let "expc=1"
-        fi
+        [[ "${line:0:5}" == ";-res" ]] && let "expc=1"
         
         # make sure we ignore all comment lines
         if [[ "${line:0:1}" != ";" ]]; then
             # make sure we're logging the right thing
-            if [ $expc -eq 0 ]; then
-                # append line of code to run file
-                echo $line >> z.test/run.coo
-            else
-                # append line of expected result to result file for comparison
-                echo $line >> z.test/exp.txt
-            fi
+
+            # append line of code to run file
+            [ $expc -eq 0 ] && echo $line >> $FOLDER_NAME/$RUN_NAME
+
+            # append line of expected result to result file for comparison
+            [ $expc -eq 0 ] || echo $line >> $FOLDER_NAME/$EXP_NAME
         fi
+
     else
+
         clear
         echo -e "\e[HTEST $counter $resulting"  
+
+        START_TIME=$(date +%s.%N)
+
         # run coordinate2 program, log its result
-        java -jar Runner.jar z.test/run.coo | tee z.test/res.txt
+        java -jar Runner.jar $FOLDER_NAME/$RUN_NAME | tee $FOLDER_NAME/$RES_NAME
+
+        END_TIME=$(date +%s.%N)
+        ELAPSED=$( printf "%.3f\n" $(bc <<<"$END_TIME - $START_TIME") )
+
         # strip unneeded lines
-        printf "%s\n" "$(< z.test/res.txt)" > z.test/res.txt
-        printf "%s\n" "$(< z.test/exp.txt)" > z.test/exp.txt
+        printf "%s\n" "$(< $FOLDER_NAME/$RES_NAME)" > $FOLDER_NAME/$RES_NAME
+        printf "%s\n" "$(< $FOLDER_NAME/$EXP_NAME)" > $FOLDER_NAME/$EXP_NAME
+
         # let user know what test we're on
-        echo -n "TEST $counter ; " >> z.test/result.txt
+        echo -n "TEST $counter (${ELAPSED}sec) ; " >> $FOLDER_NAME/$RESULT_NAME
 
         # compare the 2 files
-        if cmp -s "z.test/res.txt" "z.test/exp.txt"; then
+        if cmp -s "$FOLDER_NAME/$RES_NAME" "$FOLDER_NAME/$EXP_NAME"; then
             
             resulting+="O"
-            # echo -e "\e[HTEST $counter SUCCESS"
-            echo "SUCCESS" >> z.test/result.txt
+            echo "SUCCESS" >> $FOLDER_NAME/$RESULT_NAME
 
         else
+
             resulting+="X"
-            # echo -e "\e[HTEST $counter FAIL"
-            echo "FAIL" >> z.test/result.txt
-            echo "expectation:" >> z.test/result.txt
-            cat z.test/exp.txt >> z.test/result.txt
-            echo "test return:" >> z.test/result.txt
-            cat z.test/res.txt >> z.test/result.txt
+            echo "FAIL" >> $FOLDER_NAME/$RESULT_NAME
+            echo "expectation:" >> $FOLDER_NAME/$RESULT_NAME
+            cat $FOLDER_NAME/$EXP_NAME >> $FOLDER_NAME/$RESULT_NAME
+            echo "test return:" >> $FOLDER_NAME/$RESULT_NAME
+            cat $FOLDER_NAME/$RES_NAME >> $FOLDER_NAME/$RESULT_NAME
 
         fi
 
         # update result page
-        echo "" >> z.test/result.txt
+        echo "" >> $FOLDER_NAME/$RESULT_NAME
 
         # revert everything and increment counter
         let "expc=0"
         let "done=0"
-        > z.test/exp.txt
-        > z.test/res.txt
-        > z.test/run.coo
+        > $FOLDER_NAME/$EXP_NAME
+        > $FOLDER_NAME/$RES_NAME
+        > $FOLDER_NAME/$RUN_NAME
         let "counter+=1"
         echo -e "\e[HTEST $counter $resulting"
+
     fi
     
-done < "z.test/tests.txt"
+done < "$FOLDER_NAME/$TESTS_NAME"
 
 # remove temp files
-rm z.test/run.coo
-rm z.test/res.txt
-rm z.test/exp.txt
+rm $FOLDER_NAME/$RUN_NAME
+rm $FOLDER_NAME/$RES_NAME
+rm $FOLDER_NAME/$EXP_NAME
 
-echo "TESTS DONE! check z.test/result.txt to see results"
+echo "TESTS DONE! check $FOLDER_NAME/$RESULT_NAME to see results"

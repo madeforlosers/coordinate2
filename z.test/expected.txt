@@ -1,0 +1,5 @@
+RESULT_NAME=result.txt
+TESTS_NAME=tests.txt
+RUN_NAME=run.coo
+EXP_NAME=exp.txt
+RES_NAME=res.txt
