@@ -45,13 +45,14 @@ public class Utils {
     }
 
     public static String[] splitCom(String s, char item) {
-        char[] result = s.toCharArray();
+        char[] result = s.replaceAll(",(?!(?:[^\"]*\"[^\"]*\")*[^\"]*$)", "\u0005").toCharArray();
+
         int a = 0;
         for (int i = 0; i < s.length(); i++) {
-            a += ("{[()]}".indexOf(result[i]) + 4) % 7 - 3;
+            a += ("\0\0()\0\0".indexOf(result[i]) + 4) % 7 - 3;
             result[i] = result[i] == item && a == 0 ? '\n' : result[i];
         }
-        return new String(result).split("\n");
+        return new String(result).replaceAll("\u0005", ",").split("\n");
     }
 
     public static long powerN(long base, long power) {

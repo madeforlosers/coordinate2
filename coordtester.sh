@@ -1,7 +1,7 @@
 # coordtester by madeforlosers 2026
 # tests one-line coordinate2 code to make sure the interpreter works
 # 
-# version 3.0
+  VERSION="3.1"
 #
 #
 # --------------------------------------------------------------------
@@ -79,7 +79,7 @@ fi
 
 clear
 # clear result page
-echo "- COORDINATE2 COORDTESTER v3.0" > $FOLDER_NAME/$RESULT_NAME
+echo "- COORDINATE2 COORDTESTER v$VERSION" > $FOLDER_NAME/$RESULT_NAME
 echo "- made by madeforlosers 2026" >> $FOLDER_NAME/$RESULT_NAME
 echo "- result page for the tests!!" >> $FOLDER_NAME/$RESULT_NAME
 
@@ -128,10 +128,8 @@ while IFS= read -r line; do
             # make sure we're logging the right thing
 
             # append line of code to run file
-            [ $expc -eq 0 ] && echo $line >> $FOLDER_NAME/$RUN_NAME
+            [ $expc -eq 0 ] && echo $line >> $FOLDER_NAME/$RUN_NAME || echo $line >> $FOLDER_NAME/$EXP_NAME
 
-            # append line of expected result to result file for comparison
-            [ $expc -eq 0 ] || echo $line >> $FOLDER_NAME/$EXP_NAME
         fi
 
     else

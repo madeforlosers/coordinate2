@@ -375,14 +375,29 @@ public class Functions {
         return number1 & number2;
     }
 
+    public static Boolean and(Boolean number1, Boolean number2) {
+        // list func here
+        return number1 && number2;
+    }
+
     public static Long or(Long number1, Long number2) {
         // list func here
         return number1 | number2;
     }
 
+    public static Boolean or(Boolean number1, Boolean number2) {
+        // list func here
+        return number1 || number2;
+    }
+
     public static Long xor(Long number1, Long number2) {
         // list func here
         return number1 ^ number2;
+    }
+
+    public static Boolean xor(Boolean number1, Boolean number2) {
+        // list func here
+        return (number1 || number2) && !(number1 && number2);
     }
 
     public static boolean not(Boolean bool) {
@@ -794,6 +809,76 @@ public class Functions {
         }
     }
 
+    public static void incloop(Long id, Double start, Double end, Double increment) {
+        try {
+            Runner.memory.incloop.get(id.intValue());
+        } catch (Exception e) {
+            Runner.memory.incloop.set(id.intValue(), start - increment);
+        }
+        Runner.memory.incloop.crement(id.intValue(), increment);
+        if (Runner.memory.incloop.get(id.intValue()) > end) {
+            Runner.memory.incloop.remove(id.intValue());
+            int skip = 0;
+            int h = Runner.i + 1;
+            for (; h < Runner.codeSp.length; h++) {
+                if (Runner.codeSp[h].split("\\(")[0].equals("incloop")) {
+                    skip++;
+                    continue;
+                }
+                if (Runner.codeSp[h].split("\\(")[0].equals("next") && skip != 0) {
+                    skip--;
+                    continue;
+                }
+                if (Runner.codeSp[h].split("\\(")[0].equals("next") && skip == 0) {
+                    Runner.i = h;
+                    break;
+                }
+            }
+            if (Runner.i != h) {
+                Error.throwError(6);
+            }
+        }
+        return;
+    }
+
+    public static Double incvar(Long id) {
+        return Runner.memory.incloop.get(id.intValue());
+    }
+
+    public static Double incset(Long id, Double thing) {
+        Runner.memory.incloop.set(id.intValue(), thing);
+        return incvar(id);
+    }
+
+    public static Double incset(Long id, Long thing) {
+        Runner.memory.incloop.set(id.intValue(), thing.doubleValue());
+        return incvar(id);
+    }
+
+    public static void next() {
+        int skip = 0;
+        int h = Runner.i - 1;
+        for (; h >= 0; h--) {
+            if (Runner.codeSp[h].split("\\(")[0].equals("next")) {
+                skip++;
+                continue;
+            }
+            if (Runner.codeSp[h].split("\\(")[0].equals("incloop") && skip != 0) {
+                skip--;
+                continue;
+            }
+            if (Runner.codeSp[h].split("\\(")[0].equals("incloop") && skip == 0) {
+                Runner.i = h - 1;
+                break;
+            }
+
+        }
+        if (Runner.i != h - 1) {
+            Error.throwError(6);
+        }
+
+    }
+
     public static void loopwhile(Boolean condition) { // fix
         if (!condition) {
             int skip = 0;
@@ -881,7 +966,7 @@ public class Functions {
         if (Runner.memory.summation.running) {
             Error.throwError(5);
         }
-         Runner.memory.summation.clear();
+        Runner.memory.summation.clear();
         Runner.memory.summation.running = true;
 
         Runner.memory.summation.setItem(1, end.intValue());
@@ -1099,8 +1184,30 @@ public class Functions {
         return String.valueOf(item.charAt(index.intValue()));
     }
 
+    public static String charat(String item, Double index) {
+        return String.valueOf(item.charAt(index.intValue()));
+    }
+
     public static Long length(String item) {
         return (long) item.length();
+    }
+
+    public static Object recruit(ArrayList<?> list, Long item) {
+        ArrayList<Object> nlist = new ArrayList<>(list);
+        nlist.add(item);
+        return nlist;
+    }
+
+    public static Object recruit(ArrayList<?> list, Double item) {
+        ArrayList<Object> nlist = new ArrayList<>(list);
+        nlist.add(item);
+        return nlist;
+    }
+
+    public static Object recruit(ArrayList<?> list, String item) {
+        ArrayList<Object> nlist = new ArrayList<>(list);
+        nlist.add(item);
+        return nlist;
     }
 
     public static Long length(ArrayList<?> item) {
@@ -1230,6 +1337,10 @@ public class Functions {
 
     public static String tochar(Long chr) {
         return String.valueOf((char) chr.intValue());
+    }
+
+    public static String charcode(String chr) {
+        return String.valueOf(chr.codePointAt(0));
     }
 
     public static void endfunc() {

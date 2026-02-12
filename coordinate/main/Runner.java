@@ -57,13 +57,14 @@ class Runner {
                 return input.replaceAll("\"", "");
             } else if (input.matches("^\\w+\\(.*\\)$")) { // function
                 return runFunc(input);
-            } else if (input.matches("^[0-9]+d?$")) { // number
+            } else if (input.matches("^-?[0-9]+d?$")) { // number
                 if (input.contains("d")) {
                     return Double.valueOf(input);
                 }
                 return Long.valueOf(input);
             } else {
-                Error.throwError(6);
+                System.out.println(input);
+                Error.throwError(7);
             }
         } catch (Exception e) {
             System.err.println("erm " + input);
@@ -88,6 +89,9 @@ class Runner {
         try {
             for (i = 0; i < codeSp.length; i++) {
                 fullLine = codeSp[i].trim();
+                if (fullLine.equals("")) {
+                    continue;
+                }
                 runCommands(codeSp[i].trim()); // run all the commands!!
             }
         } finally {
