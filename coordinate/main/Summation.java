@@ -1,8 +1,7 @@
 package coordinate.main;
 
-
 public class Summation {
-    private int[] sumlist = { 0, 0, 0 };
+    private double[] sumlist = { 0, 0, 0 };
     public boolean running = false;
 
     public Summation() {
@@ -15,7 +14,11 @@ public class Summation {
         this.sumlist[index] = item;
     }
 
-    public int getItem(int index) {
+    public void setItem(int index, double item) {
+        this.sumlist[index] = item;
+    }
+
+    public double getItem(int index) {
         return this.sumlist[index];
     }
 

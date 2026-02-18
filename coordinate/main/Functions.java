@@ -1025,7 +1025,7 @@ public class Functions {
         return num != 0;
     }
 
-    public static Double summation(String code, Long start, Long end) {
+    public static Double summation(String code, Long start, Long end, Double increment) {
 
         if (Runner.memory.summation.running) {
             Error.throwError(5);
@@ -1052,22 +1052,30 @@ public class Functions {
     }
 
     public static Double summation(String code, Long start, Double end) {
-        return summation(code, start, end.longValue());
+        return summation(code, start, end.longValue(), 1d);
+    }
+
+    public static Double summation(String code, Long start, Long end) {
+        return summation(code, start, end.longValue(), 1d);
     }
 
     public static Double summation(String code, Double start, Double end) {
-        return summation(code, start.longValue(), end.longValue());
+        return summation(code, start.longValue(), end.longValue(), 1d);
     }
 
     public static Double summation(String code, Double start, Long end) {
-        return summation(code, start.longValue(), end);
+        return summation(code, start.longValue(), end.longValue(), 1d);
+    }
+
+    public static Double summation(String code, Double start, Double end, Double increment) {
+        return summation(code, start.longValue(), end.longValue(), increment);
     }
 
     public static Double pi() {
         return Math.PI;
     }
 
-    public static void loop(String code, Long start, Long end) {
+    public static void loop(String code, Long start, Long end, Double increment) {
         Runner.memory.summation.clear();
 
         if (Runner.memory.summation.running) {
@@ -1081,7 +1089,7 @@ public class Functions {
                 start.intValue()); Runner.memory.summation.getItem(0) < Runner.memory.summation
                         .getItem(1); Runner.memory.summation
                                 .setItem(0,
-                                        Runner.memory.summation.getItem(0) + 1)) {
+                                        Runner.memory.summation.getItem(0) + increment)) {
             try {
 
                 Runner.runCommands(code);
@@ -1094,16 +1102,20 @@ public class Functions {
         return;
     }
 
+    public static void loop(String code, Long start, Long end) {
+        loop(code, start, end.longValue(), 1d);
+    }
+
     public static void loop(String code, Long start, Double end) {
-        loop(code, start, end.longValue());
+        loop(code, start, end.longValue(), 1d);
     }
 
     public static void loop(String code, Double start, Double end) {
-        loop(code, start.longValue(), end.longValue());
+        loop(code, start.longValue(), end.longValue(), 1d);
     }
 
     public static void loop(String code, Double start, Long end) {
-        loop(code, start.longValue(), end);
+        loop(code, start.longValue(), end, 1d);
     }
 
     public static ArrayList<Object> funclist(String code, Long start, Long end) {
@@ -1145,18 +1157,18 @@ public class Functions {
         return funclist(code, start.longValue(), end);
     }
 
-    public static Long sumvar(Long item) {
+    public static Double sumvar(Long item) {
         if (!Runner.memory.summation.running) {
             Error.throwError(6);
         }
-        return (long) Runner.memory.summation.getItem(item.intValue());
+        return (double) Runner.memory.summation.getItem(item.intValue());
     }
 
-    public static Long sumvar(Double item) {
+    public static Double sumvar(Double item) {
         if (!Runner.memory.summation.running) {
             Error.throwError(6);
         }
-        return (long) Runner.memory.summation.getItem(item.intValue());
+        return (double) Runner.memory.summation.getItem(item.intValue());
     }
 
     public static void puts(String item) {
