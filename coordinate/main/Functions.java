@@ -18,6 +18,14 @@ import java.util.regex.Pattern;
 */
 
 public class Functions {
+    public static void wait(Long milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
     public static Object push(Long item) {
         Runner.memory.tape.push(item);
         return item;
@@ -809,6 +817,62 @@ public class Functions {
         }
     }
 
+    public static Long factorial(Long number) {
+        long num = 1;
+        for (long i = 1; i <= number; i++) {
+            num *= i;
+        }
+        return num;
+    }
+
+    public static Double factorial(Double number) {
+        double num = 1;
+        for (double i = 1; i <= number; i++) {
+            num *= i;
+        }
+        return num;
+    }
+
+    public static Double sin(Long num) {
+        return sin(num.doubleValue());
+    }
+
+    public static Double sin(Double num) {
+        return Math.sin(num.doubleValue());
+    }
+
+    public static Double cos(Double num) {
+        return Math.cos(num.doubleValue());
+    }
+
+    public static Double tan(Double num) {
+        return Math.tan(num.doubleValue());
+    }
+
+    public static Double cos(Long num) {
+        return cos(num.doubleValue());
+    }
+
+    public static Double tan(Long num) {
+        return tan(num.doubleValue());
+    }
+
+    public static Double radtodeg(Double rad) {
+        return Math.toDegrees(rad);
+    }
+
+    public static Double radtodeg(Long rad) {
+        return radtodeg(rad.doubleValue());
+    }
+
+    public static Double degtorad(Double deg) {
+        return Math.toRadians(deg);
+    }
+
+    public static Double degtorad(Long deg) {
+        return degtorad(deg.doubleValue());
+    }
+
     public static void incloop(Long id, Double start, Double end, Double increment) {
         try {
             Runner.memory.incloop.get(id.intValue());
@@ -997,6 +1061,10 @@ public class Functions {
 
     public static Double summation(String code, Double start, Long end) {
         return summation(code, start.longValue(), end);
+    }
+
+    public static Double pi() {
+        return Math.PI;
     }
 
     public static void loop(String code, Long start, Long end) {
