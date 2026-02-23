@@ -800,3 +800,59 @@ puts(charcode("𝣋"))
 121035
 ;-end
 ;
+incloop(0,0d,49d,set(4,exp(2d,0)))
+puts(glue(funclist("tochar(subtract(charcode(charat(get(2),sumvar(0))),multiply(32,toint(or(is(add(get(4),sumvar(0)),get(3)),is(charat(get(2),subtract(sumvar(0),get(4))),tochar(32)))))))",get(4),set(3,length(set(2,add(" ",single(split(replace("baton rouge&la.indianapolis&in.columbus&oh.montgomery&al.helena&mt.denver&co.boise&id.austin&tx.boston&ma.albany&ny.tallahassee&fl.santa fe&nm.nashville&tn.trenton&nj.jefferson&mo.richmond&va.pierre&sd.harrisburg&pa.augusta&me.providence&ri.dover&de.concord&nh.montpelier&vt.hartford&ct.topeka&ks.saint paul&mn.juneau&ak.lincoln&ne.raleigh&nc.madison&wi.olympia&wa.phoenix&az.lansing&mi.honolulu&hi.jackson&ms.springfield&il.columbia&sc.annapolis&md.cheyenne&wy.salt lake city&ut.atlanta&ga.bismarck&nd.frankfort&ky.salem&or.little rock&ar.des moines&ia.sacramento&ca.oklahoma city&ok.charleston&wv.carson city&nv","&",", "),"."),incvar(0)))))))))
+next()
+;-res
+Baton Rouge, LA
+Indianapolis, IN
+Columbus, OH
+Montgomery, AL
+Helena, MT
+Denver, CO
+Boise, ID
+Austin, TX
+Boston, MA
+Albany, NY
+Tallahassee, FL
+Santa Fe, NM
+Nashville, TN
+Trenton, NJ
+Jefferson, MO
+Richmond, VA
+Pierre, SD
+Harrisburg, PA
+Augusta, ME
+Providence, RI
+Dover, DE
+Concord, NH
+Montpelier, VT
+Hartford, CT
+Topeka, KS
+Saint Paul, MN
+Juneau, AK
+Lincoln, NE
+Raleigh, NC
+Madison, WI
+Olympia, WA
+Phoenix, AZ
+Lansing, MI
+Honolulu, HI
+Jackson, MS
+Springfield, IL
+Columbia, SC
+Annapolis, MD
+Cheyenne, WY
+Salt Lake City, UT
+Atlanta, GA
+Bismarck, ND
+Frankfort, KY
+Salem, OR
+Little Rock, AR
+Des Moines, IA
+Sacramento, CA
+Oklahoma City, OK
+Charleston, WV
+Carson City, NV
+;-end
+;
