@@ -63,6 +63,14 @@ public class Functions {
         }
         return item;
     }
+    public static Boolean set(Long index, Boolean item) {
+        try {
+            Runner.memory.tape.set(index.intValue(), item);
+        } catch (ArithmeticException e) {
+            Error.throwError(2);
+        }
+        return item;
+    }
 
     public static Object set(Long index, ArrayList<?> item) {
         try {
@@ -1419,8 +1427,8 @@ public class Functions {
         return String.valueOf((char) chr.intValue());
     }
 
-    public static String charcode(String chr) {
-        return String.valueOf(chr.codePointAt(0));
+    public static Long charcode(String chr) {
+        return (long) chr.codePointAt(0);
     }
 
     public static void endfunc() {

@@ -1,0 +1,6 @@
+; problem 126086 on CGSE
+push(push(push(push(0))))
+loopwhile(not(get(3)))
+set(3,is(summation("ceil(multiply(6,random()))",0,set(0,add(get(0),2))),multiply(get(0),todec("3.5"))))
+puts(get(0))
+endloop()
