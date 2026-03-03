@@ -294,6 +294,22 @@ public class Functions {
         // list func here
         return number1 - number2;
     }
+    public static ArrayList<Double> subtract(ArrayList<?> number1, Double number2) {
+        ArrayList<Double> ne = new ArrayList<Double>();
+        for(int i = 0; i < number1.size(); i++){
+            ne.set(i, Double.valueOf(String.valueOf(number1.get(i))) - number2);
+        }
+        // list func here
+        return ne;
+    }
+    public static ArrayList<Double> subtract(ArrayList<?> number1, Long number2) {
+        ArrayList<Double> ne = new ArrayList<Double>();
+        for(int i = 0; i < number1.size(); i++){
+            ne.set(i, Double.valueOf(String.valueOf(number1.get(i))) - number2);
+        }
+        // list func here
+        return ne;
+    }
 
     public static Double subtract(Double number1, Long number2) {
         // list func here
@@ -308,6 +324,22 @@ public class Functions {
     public static Long subtract(Long number1, Long number2) {
         // list func here
         return number1 - number2;
+    }
+    public static ArrayList<Double> add(ArrayList<?> number1, Long number2) {
+        ArrayList<Double> ne = new ArrayList<Double>();
+        for(int i = 0; i < number1.size(); i++){
+            ne.set(i, Double.valueOf(String.valueOf(number1.get(i))) + number2);
+        }
+        // list func here
+        return ne;
+    }
+    public static ArrayList<Double> add(ArrayList<?> number1, Double number2) {
+        ArrayList<Double> ne = new ArrayList<Double>();
+        for(int i = 0; i < number1.size(); i++){
+            ne.set(i, Double.valueOf(String.valueOf(number1.get(i))) + number2);
+        }
+        // list func here
+        return ne;
     }
 
     public static Double add(Double number1, Double number2) {
@@ -538,6 +570,9 @@ public class Functions {
             return 67L;
         }
     }
+    public static Long toint(Object number){
+        return toint(String.valueOf(number));
+    }
 
     public static ArrayList<Double> toint(ArrayList<?> number1) {
         ArrayList<Double> g = new ArrayList<Double>();
@@ -548,9 +583,9 @@ public class Functions {
                     g.add(Math.floor(j));
                 }
             } else {
-                ArrayList<String> num = (ArrayList<String>) number1;
-                for (String j : num) {
-                    g.add(Math.floor(Double.valueOf(j)));
+                //ArrayList<String> num = (ArrayList<String>) number1;
+                for (Object j : number1) {
+                    g.add(Math.floor(Double.valueOf(String.valueOf(j))));
                 }
             }
         } catch (Exception e) {
