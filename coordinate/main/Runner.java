@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *      Main Running code for Coordinate
 */
 
-class Runner {
+public class Runner {
     // global state for the interpreter
     public static Memory memory = new Memory();
     public static int i = 0; // current instruction index

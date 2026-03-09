@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.regex.Pattern;
-
 /*  
  *  COORDINATE LANGUAGE
  *  by madeforlosers 2026
  *  
- *  Functions.java
+ *  FunctionRedirect.java
  *      All of the coordinate functions
  * 
  *  TODO:
@@ -17,123 +16,61 @@ import java.util.regex.Pattern;
  *      comment code more
 */
 
-public class Functions {
+public class FunctionRedirect {
     public static void wait(Long milliseconds) {
-        try {
-            Thread.sleep(milliseconds);
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
+        coordinate.main.Functions.Program.Timing.wait(milliseconds);
     }
 
     public static Object push(Long item) {
-        Runner.memory.tape.push(item);
-        return item;
+        return coordinate.main.Functions.Tape.Setting.push(item);
     }
 
     public static Object push(Double item) {
-        Runner.memory.tape.push(item);
-        return item;
+        return coordinate.main.Functions.Tape.Setting.push(item);
     }
 
     public static Object push(String item) {
-        Runner.memory.tape.push(item);
-        return item;
+        return coordinate.main.Functions.Tape.Setting.push(item);
     }
 
     public static Object push(ArrayList<?> item) {
-        Runner.memory.tape.push(item);
-        return item;
+        return coordinate.main.Functions.Tape.Setting.push(item);
     }
 
     public static String set(Long index, String item) {
-        try {
-            Runner.memory.tape.set(index.intValue(), item);
-        } catch (ArithmeticException e) {
-            Error.throwError(2);
-        }
-        return item;
+        return coordinate.main.Functions.Tape.Setting.set(index, item);
     }
 
     public static Object set(Long index, Double item) {
-        try {
-            Runner.memory.tape.set(index.intValue(), item);
-        } catch (ArithmeticException e) {
-            Error.throwError(2);
-        }
-        return item;
+        return coordinate.main.Functions.Tape.Setting.set(index, item);
     }
 
     public static Boolean set(Long index, Boolean item) {
-        try {
-            Runner.memory.tape.set(index.intValue(), item);
-        } catch (ArithmeticException e) {
-            Error.throwError(2);
-        }
-        return item;
+        return coordinate.main.Functions.Tape.Setting.set(index, item);
     }
 
     public static Object set(Long index, ArrayList<?> item) {
-        try {
-            Runner.memory.tape.set(index.intValue(), item);
-        } catch (ArithmeticException e) {
-            Error.throwError(2);
-        }
-        return item;
+        return coordinate.main.Functions.Tape.Setting.set(index, item);
     }
 
     public static Long set(Long index, Long item) {
-        try {
-            Runner.memory.tape.set(index.intValue(), item);
-        } catch (ArithmeticException e) {
-            Error.throwError(2);
-        }
-        return item;
+        return coordinate.main.Functions.Tape.Setting.set(index, item);
     }
 
     public static Double increment(Long index) {
-        try {
-            Object value = Runner.memory.tape.get(index.intValue());
-            if (value == null || !(value instanceof Number)) {
-                Error.throwError(2);
-            }
-            Double current = Double.valueOf(value.toString());
-            Double newValue = current + 1;
-            Runner.memory.tape.set(index.intValue(), newValue);
-            return current;
-        } catch (ArithmeticException e) {
-            Error.throwError(2);
-        }
-        return null;
+        return coordinate.main.Functions.Tape.Setting.increment(index);
     }
 
     public static Double decrement(Long index) {
-        try {
-            Object value = Runner.memory.tape.get(index.intValue());
-            if (value == null || !(value instanceof Number)) {
-                Error.throwError(2);
-            }
-            Double current = Double.valueOf(value.toString());
-            Double newValue = current - 1;
-            Runner.memory.tape.set(index.intValue(), newValue);
-            return current;
-        } catch (ArithmeticException e) {
-            Error.throwError(2);
-        }
-        return null;
+        return coordinate.main.Functions.Tape.Setting.decrement(index);
     }
 
     public static boolean more(Double number1, Double number2) {
-        // list func here
-        return number1.compareTo(number2) == 1;
+        return coordinate.main.Functions.Number.Comparison.more(number1, number2);
     }
 
     public static ArrayList<Boolean> more(ArrayList<Double> number1, Double number2) {
-        ArrayList<Boolean> g = new ArrayList<Boolean>();
-        for (double j : number1) {
-            g.add(j > number2.doubleValue());
-        }
-        return g;
+        return coordinate.main.Functions.List.Comparison.more(number1, number2);
     }
 
     public static ArrayList<Boolean> more(ArrayList<Double> number1, Long number2) {
@@ -141,46 +78,35 @@ public class Functions {
     }
 
     public static boolean more(Long number1, Double number2) {
-        // list func here
-        return Double.valueOf(number1.doubleValue()).compareTo(number2) == 1;
+        return coordinate.main.Functions.Number.Comparison.more(number1, number2);
     }
 
     public static boolean more(Double number1, Long number2) {
-        // list func here
-        return number1.compareTo(number2.doubleValue()) == 1;
+        return coordinate.main.Functions.Number.Comparison.more(number1, number2);
     }
 
     public static boolean more(Long number1, Long number2) {
-        // list func here
-        return number1.compareTo(number2) == 1;
+        return coordinate.main.Functions.Number.Comparison.more(number1, number2);
     }
 
     public static boolean less(Double number1, Double number2) {
-        // list func here
-        return number1.compareTo(number2) == -1;
+        return coordinate.main.Functions.Number.Comparison.less(number1, number2);
     }
 
     public static boolean less(Long number1, Double number2) {
-        // list func here
-        return Double.valueOf(number1.doubleValue()).compareTo(number2) == -1;
+        return coordinate.main.Functions.Number.Comparison.less(number1, number2);
     }
 
     public static boolean less(Double number1, Long number2) {
-        // list func here
-        return number1.compareTo(number2.doubleValue()) == -1;
+        return coordinate.main.Functions.Number.Comparison.less(number1, number2);
     }
 
     public static boolean less(Long number1, Long number2) {
-        // list func here
-        return number1.compareTo(number2) == -1;
+        return coordinate.main.Functions.Number.Comparison.less(number1, number2);
     }
 
     public static ArrayList<Boolean> less(ArrayList<Double> number1, Double number2) {
-        ArrayList<Boolean> g = new ArrayList<Boolean>();
-        for (double j : number1) {
-            g.add(j < number2.doubleValue());
-        }
-        return g;
+        return coordinate.main.Functions.List.Comparison.less(number1, number2);
     }
 
     public static ArrayList<Boolean> less(ArrayList<Double> number1, Long number2) {
@@ -188,31 +114,23 @@ public class Functions {
     }
 
     public static boolean moreis(Double number1, Double number2) {
-        // list func here
-        return number1.compareTo(number2) >= 0;
+        return coordinate.main.Functions.Number.Comparison.moreis(number1, number2);
     }
 
     public static boolean moreis(Long number1, Double number2) {
-        // list func here
-        return Double.valueOf(number1.doubleValue()).compareTo(number2) >= 0;
+        return coordinate.main.Functions.Number.Comparison.moreis(number1, number2);
     }
 
     public static boolean moreis(Double number1, Long number2) {
-        // list func here
-        return number1.compareTo(number2.doubleValue()) >= 0;
+        return coordinate.main.Functions.Number.Comparison.moreis(number1, number2);
     }
 
     public static boolean moreis(Long number1, Long number2) {
-        // list func here
-        return number1.compareTo(number2) >= 0;
+        return coordinate.main.Functions.Number.Comparison.moreis(number1, number2);
     }
 
     public static ArrayList<Boolean> moreis(ArrayList<Double> number1, Double number2) {
-        ArrayList<Boolean> g = new ArrayList<Boolean>();
-        for (double j : number1) {
-            g.add(j >= number2.doubleValue());
-        }
-        return g;
+        return coordinate.main.Functions.List.Comparison.moreis(number1, number2);
     }
 
     public static ArrayList<Boolean> moreis(ArrayList<Double> number1, Long number2) {
@@ -220,31 +138,23 @@ public class Functions {
     }
 
     public static boolean lessis(Double number1, Double number2) {
-        // list func here
-        return number1.compareTo(number2) < 1;
+        return coordinate.main.Functions.Number.Comparison.lessis(number1, number2);
     }
 
     public static boolean lessis(Long number1, Double number2) {
-        // list func here
-        return Double.valueOf(number1.doubleValue()).compareTo(number2) < 1;
+        return coordinate.main.Functions.Number.Comparison.lessis(number1, number2);
     }
 
     public static boolean lessis(Double number1, Long number2) {
-        // list func here
-        return number1.compareTo(Double.valueOf(number2.doubleValue())) < 1;
+        return coordinate.main.Functions.Number.Comparison.lessis(number1, number2);
     }
 
     public static boolean lessis(Long number1, Long number2) {
-        // list func here
-        return number1.compareTo(number2) < 1;
+        return coordinate.main.Functions.Number.Comparison.lessis(number1, number2);
     }
 
     public static ArrayList<Boolean> lessis(ArrayList<Double> number1, Double number2) {
-        ArrayList<Boolean> g = new ArrayList<Boolean>();
-        for (double j : number1) {
-            g.add(j <= number2.doubleValue());
-        }
-        return g;
+        return coordinate.main.Functions.List.Comparison.lessis(number1, number2);
     }
 
     public static ArrayList<Boolean> lessis(ArrayList<Double> number1, Long number2) {
@@ -254,31 +164,27 @@ public class Functions {
     // hasnumber
 
     public static boolean is(Double number1, Double number2) {
-        return number1.compareTo(number2) == 0;
+        return coordinate.main.Functions.Number.Comparison.is(number1, number2);
     }
 
     public static boolean is(Double number1, Long number2) {
-        return number1.compareTo(Double.valueOf(number2.doubleValue())) == 0;
+        return coordinate.main.Functions.Number.Comparison.is(number1, number2);
     }
 
     public static boolean is(Long number1, Double number2) {
-        return Double.valueOf(number1.doubleValue()).compareTo(number2) == 0;
+        return coordinate.main.Functions.Number.Comparison.is(number1, number2);
     }
 
     public static boolean is(Long number1, Long number2) {
-        return number1.compareTo(number2) == 0;
+        return coordinate.main.Functions.Number.Comparison.is(number1, number2);
     }
 
     public static boolean is(String number1, String number2) {
-        return number1.equals(number2);
+        return coordinate.main.Functions.String.Comparison.is(number1, number2);
     }
 
     public static ArrayList<Boolean> is(ArrayList<?> number1, Double number2) {
-        ArrayList<Boolean> g = new ArrayList<Boolean>();
-        for (Object j : number1) {
-            g.add(Double.valueOf(String.valueOf(j)) == number2.doubleValue());
-        }
-        return g;
+        return coordinate.main.Functions.List.Comparison.is(number1, number2);
     }
 
     public static ArrayList<Boolean> is(ArrayList<?> number1, Long number2) {
@@ -286,47 +192,31 @@ public class Functions {
     }
 
     public static String ask(String question) {
-        System.out.print(question);
-        String answer = Runner.memory.input.nextLine();
-        return answer;
+        return coordinate.main.Functions.IO.Input.ask(question);
     }
 
     public static Double subtract(Double number1, Double number2) {
-        // list func here
-        return number1 - number2;
+        return coordinate.main.Functions.Number.Math.Arithmetic.subtract(number1, number2);
     }
 
     public static ArrayList<Double> subtract(ArrayList<?> number1, Double number2) {
-        ArrayList<Double> ne = new ArrayList<Double>();
-        for (int i = 0; i < number1.size(); i++) {
-            ne.set(i, Double.valueOf(String.valueOf(number1.get(i))) - number2);
-        }
-        // list func here
-        return ne;
+        return coordinate.main.Functions.List.Math.Arithmetic.subtract(number1, number2);
     }
 
     public static ArrayList<Double> subtract(ArrayList<?> number1, Long number2) {
-        ArrayList<Double> ne = new ArrayList<Double>();
-        for (int i = 0; i < number1.size(); i++) {
-            ne.set(i, Double.valueOf(String.valueOf(number1.get(i))) - number2);
-        }
-        // list func here
-        return ne;
+        return coordinate.main.Functions.List.Math.Arithmetic.subtract(number1, number2);
     }
 
     public static Double subtract(Double number1, Long number2) {
-        // list func here
-        return number1 - number2;
+        return coordinate.main.Functions.Number.Math.Arithmetic.subtract(number1, number2);
     }
 
     public static Double subtract(Long number1, Double number2) {
-        // list func here
-        return number1 - number2;
+        return coordinate.main.Functions.Number.Math.Arithmetic.subtract(number1, number2);
     }
 
     public static Long subtract(Long number1, Long number2) {
-        // list func here
-        return number1 - number2;
+        return coordinate.main.Functions.Number.Math.Arithmetic.subtract(number1, number2);
     }
 
     public static ArrayList<Double> add(ArrayList<?> number1, Long number2) {

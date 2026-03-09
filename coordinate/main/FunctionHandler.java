@@ -20,7 +20,7 @@ public class FunctionHandler {
 
   public static Object runFunc(String name, Object[] args) {
     try {
-      Class<?> classobj = coordinate.main.Functions.class;
+      Class<?> classobj = coordinate.main.FunctionRedirect.class;
       Method method;
       int inc;
       switch (name) {
@@ -50,7 +50,7 @@ public class FunctionHandler {
           return method.invoke(classobj, args);
 
         case "empty":
-          return Functions.empty();
+          return FunctionRedirect.empty();
 
         default:
           Class<?>[] parameterTypes = new Class<?>[args.length];
@@ -61,7 +61,7 @@ public class FunctionHandler {
           }
 
           method = classobj.getDeclaredMethod(name, parameterTypes);
-          return method.invoke(coordinate.main.Functions.class, args);
+          return method.invoke(coordinate.main.FunctionRedirect.class, args);
 
       }
 
@@ -89,10 +89,10 @@ public class FunctionHandler {
       for (Object t : args) {
         parameterTypes[inc++] = t.getClass();
       }
-      coordinate.main.Functions.class.getMethod(name, parameterTypes);
+      coordinate.main.FunctionRedirect.class.getMethod(name, parameterTypes);
       return true;
     } catch (Exception e) {
-      Method[] methods = coordinate.main.Functions.class.getMethods();
+      Method[] methods = coordinate.main.FunctionRedirect.class.getMethods();
       for (Method m : methods) {
         if (m.getName().equals(name)) {
           // e.printStackTrace();
