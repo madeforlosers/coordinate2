@@ -1,4 +1,4 @@
-package coordinate.main.Functions.IO;
+package coordinate.main.Functions.Program.IO;
 
 import coordinate.main.Runner;
 

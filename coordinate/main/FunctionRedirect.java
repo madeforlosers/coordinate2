@@ -22,47 +22,47 @@ public class FunctionRedirect {
     }
 
     public static Object push(Long item) {
-        return coordinate.main.Functions.Tape.Setting.push(item);
+        return coordinate.main.Functions.Program.Tape.Setting.push(item);
     }
 
     public static Object push(Double item) {
-        return coordinate.main.Functions.Tape.Setting.push(item);
+        return coordinate.main.Functions.Program.Tape.Setting.push(item);
     }
 
     public static Object push(String item) {
-        return coordinate.main.Functions.Tape.Setting.push(item);
+        return coordinate.main.Functions.Program.Tape.Setting.push(item);
     }
 
     public static Object push(ArrayList<?> item) {
-        return coordinate.main.Functions.Tape.Setting.push(item);
+        return coordinate.main.Functions.Program.Tape.Setting.push(item);
     }
 
     public static String set(Long index, String item) {
-        return coordinate.main.Functions.Tape.Setting.set(index, item);
+        return coordinate.main.Functions.Program.Tape.Setting.set(index, item);
     }
 
     public static Object set(Long index, Double item) {
-        return coordinate.main.Functions.Tape.Setting.set(index, item);
+        return coordinate.main.Functions.Program.Tape.Setting.set(index, item);
     }
 
     public static Boolean set(Long index, Boolean item) {
-        return coordinate.main.Functions.Tape.Setting.set(index, item);
+        return coordinate.main.Functions.Program.Tape.Setting.set(index, item);
     }
 
     public static Object set(Long index, ArrayList<?> item) {
-        return coordinate.main.Functions.Tape.Setting.set(index, item);
+        return coordinate.main.Functions.Program.Tape.Setting.set(index, item);
     }
 
     public static Long set(Long index, Long item) {
-        return coordinate.main.Functions.Tape.Setting.set(index, item);
+        return coordinate.main.Functions.Program.Tape.Setting.set(index, item);
     }
 
     public static Double increment(Long index) {
-        return coordinate.main.Functions.Tape.Setting.increment(index);
+        return coordinate.main.Functions.Program.Tape.Setting.increment(index);
     }
 
     public static Double decrement(Long index) {
-        return coordinate.main.Functions.Tape.Setting.decrement(index);
+        return coordinate.main.Functions.Program.Tape.Setting.decrement(index);
     }
 
     public static boolean more(Double number1, Double number2) {
@@ -192,7 +192,7 @@ public class FunctionRedirect {
     }
 
     public static String ask(String question) {
-        return coordinate.main.Functions.IO.Input.ask(question);
+        return coordinate.main.Functions.Program.IO.Input.ask(question);
     }
 
     public static Double subtract(Double number1, Double number2) {
@@ -220,150 +220,103 @@ public class FunctionRedirect {
     }
 
     public static ArrayList<Double> add(ArrayList<?> number1, Long number2) {
-        ArrayList<Double> ne = new ArrayList<Double>();
-        for (int i = 0; i < number1.size(); i++) {
-            ne.set(i, Double.valueOf(String.valueOf(number1.get(i))) + number2);
-        }
-        // list func here
-        return ne;
+        return coordinate.main.Functions.List.Math.Arithmetic.add(number1,number2);
     }
 
     public static ArrayList<Double> add(ArrayList<?> number1, Double number2) {
-        ArrayList<Double> ne = new ArrayList<Double>();
-        for (int i = 0; i < number1.size(); i++) {
-            ne.set(i, Double.valueOf(String.valueOf(number1.get(i))) + number2);
-        }
-        // list func here
-        return ne;
+        return coordinate.main.Functions.List.Math.Arithmetic.add(number1,number2);
     }
 
     public static Double add(Double number1, Double number2) {
-        // list func here
-        return number1 + number2;
+        return coordinate.main.Functions.Number.Math.Arithmetic.add(number1,number2);
     }
 
     public static Long add(Long number1, Long number2) {
-        // list func here
-        return number1 + number2;
+        return coordinate.main.Functions.Number.Math.Arithmetic.add(number1,number2);
     }
 
     public static Double add(Double number1, Long number2) {
-        // list func here
-        return number1 + number2;
+        return coordinate.main.Functions.Number.Math.Arithmetic.add(number1,number2);
     }
 
     public static Double add(Long number1, Double number2) {
-        // list func here
-        return number1 + number2;
+        return coordinate.main.Functions.Number.Math.Arithmetic.add(number1,number2);
     }
 
     public static String add(String one, String two) {
-        return one + two;
+        return coordinate.main.Functions.String.Manipulation.add(one,two);
     }
 
     public static Double multiply(Double number1, Double number2) {
-        // list func here
-        return number1 * number2;
+        return coordinate.main.Functions.Number.Math.Arithmetic.multiply(number1,number2);
     }
 
     public static Double multiply(Long number1, Double number2) {
-        // list func here
-        return number1 * number2;
+        return coordinate.main.Functions.Number.Math.Arithmetic.multiply(number1,number2);
     }
 
     public static Double multiply(Double number1, Long number2) {
-        // list func here
-        return number1 * number2;
+        return coordinate.main.Functions.Number.Math.Arithmetic.multiply(number1,number2);
     }
 
     public static Long multiply(Long number1, Long number2) {
-        // list func here
-        return number1 * number2;
+        return coordinate.main.Functions.Number.Math.Arithmetic.multiply(number1,number2);
     }
 
     public static Double divide(Double number1, Double number2) {
-        if (number2 == 0) {
-            Error.throwError(3);
-        }
-        // list func here
-        return number1 / number2;
+        return coordinate.main.Functions.Number.Math.Arithmetic.divide(number1,number2);
     }
 
     public static Double divide(Double number1, Long number2) {
-        if (number2 == 0) {
-            Error.throwError(3);
-        }
-        // list func here
-        return number1 / number2.doubleValue();
+        return coordinate.main.Functions.Number.Math.Arithmetic.divide(number1,number2);
     }
 
     public static Double divide(Long number1, Double number2) {
-        if (number2 == 0) {
-            Error.throwError(3);
-        }
-        // list func here
-        return number1.doubleValue() / number2;
+        return coordinate.main.Functions.Number.Math.Arithmetic.divide(number1,number2);
     }
 
     public static Long divide(Long number1, Long number2) {
-        if (number2 == 0) {
-            Error.throwError(3);
-        }
-        // list func here
-        return number1 / number2;
+        return coordinate.main.Functions.Number.Math.Arithmetic.divide(number1,number2);
     }
 
     public static Long and(Long number1, Long number2) {
-        // list func here
-        return number1 & number2;
+        return coordinate.main.Functions.Number.Math.Bitwise.and(number1,number2);
     }
 
     public static Boolean and(Boolean number1, Boolean number2) {
-        // list func here
-        return number1 && number2;
+        return coordinate.main.Functions.Boolean.Comparison.and(number1,number2);
     }
 
     public static Long or(Long number1, Long number2) {
-        // list func here
-        return number1 | number2;
+        return coordinate.main.Functions.Number.Math.Bitwise.or(number1,number2);
     }
 
     public static Boolean or(Boolean number1, Boolean number2) {
-        // list func here
-        return number1 || number2;
+        return coordinate.main.Functions.Boolean.Comparison.or(number1,number2);
     }
 
     public static Long xor(Long number1, Long number2) {
-        // list func here
-        return number1 ^ number2;
+        return coordinate.main.Functions.Number.Math.Bitwise.xor(number1,number2);
     }
 
     public static Boolean xor(Boolean number1, Boolean number2) {
-        // list func here
-        return (number1 || number2) && !(number1 && number2);
+        return coordinate.main.Functions.Boolean.Comparison.xor(number1,number2);
     }
 
     public static boolean not(Boolean bool) {
-        // list func here
-        return !bool;
+        return coordinate.main.Functions.Boolean.Operations.not(bool);
     }
 
     public static boolean not(Long bool) {
-        // list func here
-        return bool.compareTo(0L) == 0;
+        return coordinate.main.Functions.Boolean.Operations.not(bool);
     }
 
     public static boolean not(Double bool) {
-        // list func here
-        return bool.compareTo(0d) == 0;
+        return coordinate.main.Functions.Boolean.Operations.not(bool);
     }
 
     public static Double modulo(Double number1, Double number2) {
-        // list func here
-        if (number2 == 0) {
-            Error.throwError(3); // Division by zero
-        }
-        return number1 % number2;
+        return coordinate.main.Functions.Number.Math.Arithmetic.modulo(number1,number2);
     }
 
     public static Double modulo(Long number1, Double number2) {
@@ -379,31 +332,23 @@ public class FunctionRedirect {
     }
 
     public static Double exp(Double number1, Double number2) {
-        // list func here
-        return Math.pow(number1, number2);
+        return coordinate.main.Functions.Number.Math.Complex.exp(number1,number2);
     }
 
     public static Double exp(Long number1, Double number2) {
-        // list func here
-        return Math.pow(number1, number2);
+        return coordinate.main.Functions.Number.Math.Complex.exp(number1,number2);
     }
 
     public static Double exp(Double number1, Long number2) {
-        // list func here
-        return Math.pow(number1, number2);
+        return coordinate.main.Functions.Number.Math.Complex.exp(number1,number2);
     }
 
     public static Long exp(Long number1, Long number2) {
-        // list func here
-        return Utils.powerN(number1, number2);
+        return coordinate.main.Functions.Number.Math.Complex.exp(number1,number2);
     }
 
     public static ArrayList<Double> exp(ArrayList<Double> number1, Double number2) {
-        ArrayList<Double> g = new ArrayList<Double>();
-        for (double j : number1) {
-            g.add(Math.pow(j, number2.doubleValue()));
-        }
-        return g;
+        return coordinate.main.Functions.List.Math.Complex.exp(number1,number2);
     }
 
     public static ArrayList<Double> exp(ArrayList<Double> number1, Long number2) {
@@ -411,11 +356,7 @@ public class FunctionRedirect {
     }
 
     public static Double root(Double number1, Double number2) {
-        if (number2.doubleValue() == 0) {
-            Error.throwError(3); // Division by zero
-        }
-        // list func here
-        return Math.pow(number1, 1 / number2);
+        return coordinate.main.Functions.Number.Math.Complex.root(number1,number2);
     }
 
     public static Double root(Long number1, Double number2) {
@@ -431,103 +372,63 @@ public class FunctionRedirect {
     }
 
     public static Object get(Long index) {
-        try {
-            return Runner.memory.tape.get(index.intValue());
-        } catch (ArithmeticException e) {
-            Error.throwError(2);
-        }
-        return null;
+        return coordinate.main.Functions.Program.Tape.Getting.get(index);
     }
 
     public static Object get(Double index) {
-        try {
-            return Runner.memory.tape.get(index.intValue());
-        } catch (ArithmeticException e) {
-            Error.throwError(2);
-        }
-        return null;
+        return coordinate.main.Functions.Program.Tape.Getting.get(index);
     }
 
     public static Long toint(Boolean number) {
-        try {
-            return number ? 1L : 0L;
-        } catch (NumberFormatException e) {
-            Error.throwError(2);
-            return 67L;
-        }
+        return coordinate.main.Functions.Boolean.Operations.toint(number);
     }
 
     public static Long toint(String number) {
-        try {
-            return Long.valueOf(number);
-        } catch (NumberFormatException e) {
-            Error.throwError(2);
-            return 67L;
-        }
+        return coordinate.main.Functions.String.Manipulation.toint(number);
     }
 
     public static Long toint(Object number) {
-        return toint(String.valueOf(number));
+        return coordinate.main.Functions.Number.Operations.toint(number);
     }
 
     public static ArrayList<Double> toint(ArrayList<?> number1) {
-        ArrayList<Double> g = new ArrayList<Double>();
-        try {
-            if (number1.get(0).getClass().getName().equals("java.lang.Double")) {
-                ArrayList<Double> num = (ArrayList<Double>) number1;
-                for (double j : num) {
-                    g.add(Math.floor(j));
-                }
-            } else {
-                // ArrayList<String> num = (ArrayList<String>) number1;
-                for (Object j : number1) {
-                    g.add(Math.floor(Double.valueOf(String.valueOf(j))));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return g;
+        return coordinate.main.Functions.List.Manipulation.toint(number1);
     }
 
     public static String reverse(String in) {
-        String out = "";
-        for (String g : in.split("")) {
-            out = g + out;
-        }
-        return out;
+        return coordinate.main.Functions.String.Manipulation.reverse(in);
     }
 
     public static String tostr(Double number) {
-        return number.toString().toString().replaceAll("\\.0(?![0-9])", "");
+        return coordinate.main.Functions.Number.Operations.tostr(number);
     }
 
     public static String tostr(Long number) {
-        return number.toString();
+        return coordinate.main.Functions.Number.Operations.tostr(number);
     }
 
     public static String tostr(boolean number) {
-        return number ? "true" : "false";
+        return coordinate.main.Functions.Boolean.Operations.tostr(number);
     }
 
     public static String tostr(String number) {
-        return number;
+        return coordinate.main.Functions.String.Manipulation.tostr(number);
     }
 
     public static String tostr(ArrayList<?> numbers) {
-        return numbers.toString();
+        return coordinate.main.Functions.List.Manipulation.tostr(numbers);
     }
 
     public static Long toint(Double number) {
-        return number.longValue();
+        return coordinate.main.Functions.Number.Operations.toint(number);
     }
 
     public static Double floor(Double number) {
-        return Math.floor(number);
+        return coordinate.main.Functions.Number.Operations.floor(number);
     }
 
     public static Long toint(Long number) {
-        return number.longValue();
+        return coordinate.main.Functions.Number.Operations.toint(number);
 
     }
 
