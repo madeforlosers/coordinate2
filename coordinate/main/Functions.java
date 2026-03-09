@@ -63,6 +63,7 @@ public class Functions {
         }
         return item;
     }
+
     public static Boolean set(Long index, Boolean item) {
         try {
             Runner.memory.tape.set(index.intValue(), item);
@@ -294,17 +295,19 @@ public class Functions {
         // list func here
         return number1 - number2;
     }
+
     public static ArrayList<Double> subtract(ArrayList<?> number1, Double number2) {
         ArrayList<Double> ne = new ArrayList<Double>();
-        for(int i = 0; i < number1.size(); i++){
+        for (int i = 0; i < number1.size(); i++) {
             ne.set(i, Double.valueOf(String.valueOf(number1.get(i))) - number2);
         }
         // list func here
         return ne;
     }
+
     public static ArrayList<Double> subtract(ArrayList<?> number1, Long number2) {
         ArrayList<Double> ne = new ArrayList<Double>();
-        for(int i = 0; i < number1.size(); i++){
+        for (int i = 0; i < number1.size(); i++) {
             ne.set(i, Double.valueOf(String.valueOf(number1.get(i))) - number2);
         }
         // list func here
@@ -325,17 +328,19 @@ public class Functions {
         // list func here
         return number1 - number2;
     }
+
     public static ArrayList<Double> add(ArrayList<?> number1, Long number2) {
         ArrayList<Double> ne = new ArrayList<Double>();
-        for(int i = 0; i < number1.size(); i++){
+        for (int i = 0; i < number1.size(); i++) {
             ne.set(i, Double.valueOf(String.valueOf(number1.get(i))) + number2);
         }
         // list func here
         return ne;
     }
+
     public static ArrayList<Double> add(ArrayList<?> number1, Double number2) {
         ArrayList<Double> ne = new ArrayList<Double>();
-        for(int i = 0; i < number1.size(); i++){
+        for (int i = 0; i < number1.size(); i++) {
             ne.set(i, Double.valueOf(String.valueOf(number1.get(i))) + number2);
         }
         // list func here
@@ -570,7 +575,8 @@ public class Functions {
             return 67L;
         }
     }
-    public static Long toint(Object number){
+
+    public static Long toint(Object number) {
         return toint(String.valueOf(number));
     }
 
@@ -583,7 +589,7 @@ public class Functions {
                     g.add(Math.floor(j));
                 }
             } else {
-                //ArrayList<String> num = (ArrayList<String>) number1;
+                // ArrayList<String> num = (ArrayList<String>) number1;
                 for (Object j : number1) {
                     g.add(Math.floor(Double.valueOf(String.valueOf(j))));
                 }

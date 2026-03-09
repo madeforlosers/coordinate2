@@ -1,5 +1,16 @@
 package coordinate.main;
 
+/*  
+ *  COORDINATE LANGUAGE
+ *  by madeforlosers 2026
+ *  
+ *  Summation.java
+ *      Summation, funclist, and loop handler
+ * 
+ *  TODO:
+ *      comment code more
+*/
+
 public class Summation {
     private double[] sumlist = { 0, 0, 0 };
     public boolean running = false;

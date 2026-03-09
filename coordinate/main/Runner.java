@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import java.util.List;
+import java.util.ArrayList;
 
 /*  
  *  COORDINATE LANGUAGE
@@ -24,6 +26,7 @@ class Runner {
     public static String curFunc = "";
     public static String fullLine = "";
     public static String curCom = "";
+    public static List<String> stackTrace = new ArrayList<>();
     // static int[] functionC = {};
     // static Object[] funcargs = {};
     // static int[] summation = { 0, 0, 0 };
@@ -33,6 +36,8 @@ class Runner {
     public static Object runFunc(String input) {
         curFunc = input;
         String getFunc = input.split("\\(")[0];
+
+        stackTrace.addFirst(getFunc);
 
         // get args
         String fah = input.split("^\\w+\\(")[1];
@@ -46,8 +51,11 @@ class Runner {
         if (!FunctionHandler.testFunc(getFunc, getArg)) {
             Error.throwError(8);
         }
+
         // run initial function
-        return FunctionHandler.runFunc(getFunc, getArg);
+        Object toReturn = FunctionHandler.runFunc(getFunc, getArg);
+        stackTrace.remove(0);
+        return toReturn;
     }
 
     public static Object runCommands(String input) {
@@ -58,7 +66,7 @@ class Runner {
             } else if (input.matches("^\\w+\\(.*\\)$")) { // function
                 return runFunc(input);
             } else if (input.matches("^-?[0-9]+d?$")) { // number
-                if (input.contains("d")) {
+                if (input.contains("d")) { // check if number is marked as a double
                     return Double.valueOf(input);
                 }
                 return Long.valueOf(input);
@@ -93,6 +101,7 @@ class Runner {
                     continue;
                 }
                 runCommands(codeSp[i].trim()); // run all the commands!!
+
             }
         } finally {
             memory.input.close(); // ensure input is closed

@@ -908,3 +908,7 @@ next()
 4128
 4608
 ;-end
+puts(max(funclist("multiply(set(1,single(get(0),sumvar(0))),toint(is(toint(log(10,get(1))),toint(log(10,min(get(0)))))))",0,length(push(toint(split("3451,29820,2983,1223,1337",",")))))))
+;-res
+3451
+;-end

@@ -1,5 +1,7 @@
 package coordinate.main;
 
+import java.util.Collections;
+
 /*  
  *  COORDINATE LANGUAGE
  *  by madeforlosers 2026
@@ -23,14 +25,13 @@ public class Error {
                 "Item turned NaN", // 4
                 "Nested summation", // 5
                 "Ambiguous error :(", // 6
-                "Item is undefined, maybe invalid char in string?", // 7
+                "Invalid char in string OR bad syntax", // 7
                 "Unknown command", // 8
         };
 
         System.out.println("ERROR: " + errornum + ":" + errors[errornum]);
-        System.out.println("AT: "+Runner.curFunc);
-        System.out.println("full line: "+Runner.fullLine);
-        System.out.println("at command: "+Runner.curCom);
+        Collections.reverse(Runner.stackTrace);
+        System.out.println("COMMAND TRACE: " + String.join(" -> ", Runner.stackTrace));
         Runner.memory.input.close();
         System.exit(0);
 

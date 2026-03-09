@@ -2,6 +2,17 @@ package coordinate.main;
 
 import java.util.ArrayList;
 
+/*  
+ *  COORDINATE LANGUAGE
+ *  by madeforlosers 2026
+ *  
+ *  IncLoop.java
+ *      For loop handler
+ * 
+ *  TODO:
+ *      comment code more
+*/
+
 public class IncLoop {
     private ArrayList<Double> loops;
 

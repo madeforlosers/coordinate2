@@ -21,43 +21,58 @@ public class FunctionHandler {
   public static Object runFunc(String name, Object[] args) {
     try {
       Class<?> classobj = coordinate.main.Functions.class;
-      if (name.equals("aslist")) { // this is stupid!!!!!
-        Method method = classobj.getMethod("aslist", Object[].class);
-        return method.invoke(classobj, (Object) args);
-      } else if (name.equals("callfunc")) {
-        Method method = classobj.getMethod("callfunc", Long.class, Object.class, Object.class, Object.class,
-            Object.class);
-        Object[] h = Arrays.copyOf(args, 5);
-        int inc = 0;
-        for (Object g : h) {
-          if (inc >= args.length) {
-            h[inc] = new Object();
+      Method method;
+      int inc;
+      switch (name) {
+
+        case "aslist":
+          method = classobj.getMethod("aslist", Object[].class);
+          return method.invoke(classobj, (Object) args);
+
+        case "callfunc":
+          method = classobj.getMethod("callfunc", Long.class, Object.class, Object.class, Object.class,
+              Object.class);
+          Object[] h = Arrays.copyOf(args, 5);
+
+          inc = 0;
+
+          for (Object g : h) {
+            if (inc >= args.length) {
+              h[inc] = new Object();
+            }
+            inc++;
           }
-          inc++;
-        }
-        return method.invoke(classobj, h);
-      } else if (name.equals("send")) {
-        Method method = classobj.getMethod("send", Object.class);
-        return method.invoke(classobj, args);
-      } else if (name.equals("empty")) {
-        return Functions.empty();
-      } else {
-        Class<?>[] parameterTypes = new Class<?>[args.length];
-        int inc = 0;
-        for (Object t : args) {
-          parameterTypes[inc++] = t.getClass();
-        }
-        Method method = classobj.getDeclaredMethod(name, parameterTypes);
-        return method.invoke(coordinate.main.Functions.class, args);
+
+          return method.invoke(classobj, h);
+
+        case "send":
+          method = classobj.getMethod("send", Object.class);
+          return method.invoke(classobj, args);
+
+        case "empty":
+          return Functions.empty();
+
+        default:
+          Class<?>[] parameterTypes = new Class<?>[args.length];
+
+          inc = 0;
+          for (Object t : args) {
+            parameterTypes[inc++] = t.getClass();
+          }
+
+          method = classobj.getDeclaredMethod(name, parameterTypes);
+          return method.invoke(coordinate.main.Functions.class, args);
+
       }
+
     } catch (NoSuchMethodException e) {
       Error.throwError(8);
 
     } catch (IllegalAccessException e) {
-      e.printStackTrace();
+      // e.printStackTrace();
       Error.throwError(6);
     } catch (InvocationTargetException e) {
-      e.printStackTrace();
+      // e.printStackTrace();
       Error.throwError(6);
     }
     return -1;
@@ -80,7 +95,7 @@ public class FunctionHandler {
       Method[] methods = coordinate.main.Functions.class.getMethods();
       for (Method m : methods) {
         if (m.getName().equals(name)) {
-          e.printStackTrace();
+          // e.printStackTrace();
           Error.throwError(2); // this means the function exists, its just wrong args
           return false;
         }
