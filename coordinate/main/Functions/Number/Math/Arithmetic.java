@@ -3,6 +3,7 @@ package coordinate.main.Functions.Number.Math;
 import coordinate.main.Error;
 
 public class Arithmetic {
+
     public static Double subtract(Double number1, Double number2) {
         // list func here
         return number1 - number2;

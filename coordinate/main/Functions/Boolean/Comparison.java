@@ -1,6 +1,7 @@
 package coordinate.main.Functions.Boolean;
 
 public class Comparison {
+    
     public static Boolean and(Boolean number1, Boolean number2) {
         // list func here
         return number1 && number2;

@@ -1,6 +1,7 @@
 package coordinate.main.Functions.Number;
 
 public class Comparison {
+    
     public static boolean more(Double number1, Double number2) {
         // list func here
         return number1.compareTo(number2) == 1;

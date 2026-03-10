@@ -1,7 +1,6 @@
 package coordinate.main.Functions.Program.Tape;
 
 import java.util.ArrayList;
-
 import coordinate.main.Runner;
 import coordinate.main.Error;
 
