@@ -42,6 +42,9 @@ public class Summation {
         if (!Runner.memory.summation.running) {
             Error.throwError(6);
         }
+        if(item % 1 != 0){
+            Error.throwError(9);
+        }
         return (double) Runner.memory.summation.getItem(item.intValue());
     }
 }

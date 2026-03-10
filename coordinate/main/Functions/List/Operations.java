@@ -79,6 +79,9 @@ public class Operations {
 
     public static Object single(ArrayList<?> list, Double index) {
         try {
+            if(index % 1 != 0){
+                Error.throwError(9);
+            }
             return list.get(index.intValue());
         } catch (ArithmeticException | IndexOutOfBoundsException e) {
             Error.throwError(0);

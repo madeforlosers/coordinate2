@@ -17,6 +17,9 @@ public class Getting {
 
     public static Object get(Double index) {
         try {
+            if(index % 1 != 0){
+                Error.throwError(9);
+            }
             return Runner.memory.tape.get(index.intValue());
         } catch (ArithmeticException e) {
             Error.throwError(2);

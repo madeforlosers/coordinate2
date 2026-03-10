@@ -1,1 +1,2 @@
-puts(add(1,sum(subtract(toint(split(ask(">")," ")),1))))
+set(0,aslist("hello","hi"))
+puts(funclist("chararray(single(get(0),sumvar(0)))",0,length(get(0))))

@@ -27,6 +27,7 @@ public class Error {
                 "Ambiguous error :(", // 6
                 "Invalid char in string OR bad syntax", // 7
                 "Unknown command", // 8
+                "Invalid number", // 9
         };
 
         System.out.println("ERROR: " + errornum + ":" + errors[errornum]);
