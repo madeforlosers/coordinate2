@@ -1,1 +1,1 @@
-puts(replace(glue(funclist("charat(add(tochar(32),charat(get(3),sumvar(0))),toint(charat(get(2),sumvar(0))))",0,length(set(3,cut(repeat(tostr(set(9,toint(ask(">")))),length(set(2,reverse(glue(funclist("tostr(multiply(modulo(get(0),2),toint(more(set(0,toint(divide(get(0),2))),-1))))",0,add(toint(log(2,set(0,get(9)))),1))))))),0,length(get(2)))))))," ",empty()))
+puts(add(1,sum(subtract(toint(split(ask(">")," ")),1))))

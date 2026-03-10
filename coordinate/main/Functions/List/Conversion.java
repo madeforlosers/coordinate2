@@ -13,7 +13,6 @@ public class Conversion {
                     g.add(Math.floor(j));
                 }
             } else {
-                // ArrayList<String> num = (ArrayList<String>) number1;
                 for (Object j : number1) {
                     g.add(Math.floor(Double.valueOf(String.valueOf(j))));
                 }
