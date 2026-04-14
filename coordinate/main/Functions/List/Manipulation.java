@@ -30,11 +30,23 @@ public class Manipulation {
         return nlist;
     }
 
-    public static Object edit(ArrayList<?> str, Long id, String text) {
+    public static Object edit(ArrayList<?> str, Long id, Object text) {
         ArrayList<Object> build = new ArrayList<>();
         for (int n = 0; n < str.size(); n++) {
             if (n == id) {
                 build.add(text);
+            } else {
+                build.add(str.get(n));
+            }
+        }
+        return build;
+    }
+
+    public static Object edit(ArrayList<?> str, Long id, ArrayList<?> text) {
+        ArrayList<Object> build = new ArrayList<>();
+        for (int n = 0; n < str.size(); n++) {
+            if (n == id) {
+                build.add(text.get(n));
             } else {
                 build.add(str.get(n));
             }

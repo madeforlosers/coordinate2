@@ -843,7 +843,15 @@ public class FunctionRedirect {
         return edit(str, id.longValue(), text.toString());
     }
 
+    public static Object edit(ArrayList<?> str, Long id, Object text) {
+        return coordinate.main.Functions.List.Manipulation.edit(str, id, text);
+    }
+
     public static Object edit(ArrayList<?> str, Long id, String text) {
+        return coordinate.main.Functions.List.Manipulation.edit(str, id, text);
+    }
+
+    public static Object edit(ArrayList<?> str, Long id, ArrayList<?> text) {
         return coordinate.main.Functions.List.Manipulation.edit(str, id, text);
     }
 

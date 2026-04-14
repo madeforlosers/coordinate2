@@ -82,7 +82,7 @@ hello world!
 ;-end
 ;
 ;   TEST 14 - inline loops
-loop("putsin(sumvar(0))",0,3)
+loop("putsin(toint(sumvar(0)))",0,3)
 ;-res
 012
 ;-end
