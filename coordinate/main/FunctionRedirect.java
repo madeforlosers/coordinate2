@@ -618,6 +618,9 @@ public class FunctionRedirect {
     public static void endloop() {
         coordinate.main.Functions.Program.Flow.Looping.Outline.endloop();
     }
+    public static ArrayList<Long> reducefrac(Long num, Long den){
+        return coordinate.main.Functions.Number.Math.Complex.reducefrac(num,den);
+    }
 
     public static void otherwise() {
         coordinate.main.Functions.Program.Flow.Check.otherwise();
@@ -629,6 +632,12 @@ public class FunctionRedirect {
 
     public static Boolean tobool(Double num) {
         return coordinate.main.Functions.Number.Operations.tobool(num);
+    }
+    public static Long leftshift(Long num1, Long num2){
+        return coordinate.main.Functions.Number.Math.Bitwise.leftshift(num1,num2);
+    }
+    public static Long rightshift(Long num1, Long num2){
+        return coordinate.main.Functions.Number.Math.Bitwise.rightshift(num1,num2);
     }
 
     public static Boolean tobool(Long num) {
@@ -912,6 +921,9 @@ public class FunctionRedirect {
 
     public static Long charcode(String chr) {
         return coordinate.main.Functions.String.Conversion.charcode(chr);
+    }
+    public static Long digitsum(Long number){
+        return coordinate.main.Functions.Number.Operations.digitsum(number);
     }
 
     public static void endfunc() {

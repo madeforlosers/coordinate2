@@ -1,6 +1,10 @@
 package coordinate.main.Functions.Number.Math;
 
 import coordinate.main.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import coordinate.main.Error;
 
 public class Complex {
@@ -123,6 +127,18 @@ public class Complex {
 
     public static Double degtorad(Long deg) {
         return degtorad(deg.doubleValue());
+    }
+
+    public static ArrayList<Long> reducefrac(Long num, Long den) {
+        long a = num;
+        long b = den;
+        while (b != 0) {
+            long temp = b;
+            b = a % b;
+            a = temp;
+        }
+
+        return new ArrayList<Long>(List.of(num / a,den / a));
     }
 
 }

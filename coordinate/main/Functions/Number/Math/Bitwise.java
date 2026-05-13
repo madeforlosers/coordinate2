@@ -16,4 +16,12 @@ public class Bitwise {
         // list func here
         return number1 ^ number2;
     }
+    public static Long rightshift(Long number1, Long number2) {
+        // list func here
+        return number1 >> number2;
+    }
+    public static Long leftshift(Long number1, Long number2) {
+        // list func here
+        return number1 << number2;
+    }
 }

@@ -51,6 +51,16 @@ public class Operations {
         return 0d;
     }
 
+    public static Long digitsum(Long number) {
+        long num = number;
+        long sum = 0;
+        while (num != 0) {
+            sum += num % 10;
+            num /= 10;
+        }
+        return sum;
+    }
+
     public static Boolean tobool(Double num) {
         return num != 0d;
     }
