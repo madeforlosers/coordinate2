@@ -4,11 +4,15 @@
 
 If you see me doing ANYTHING wrong in my code (bad practices, memory leaks, overall stupidity), PLEASE TELL ME!!!! I AM STILL LEARNING JAVA!!!! I'M BEGGING!!!
 
+# ANOTHER NOTICE
+
+I've kinda moved on from this language, I might still work on it or use it but I'm not going to be updating it as often.
+
 
 
 # STATE OF LANGUAGE
 
-The state of the language as a whole is deemed **MAJORLY INCOMPLETE**
+The state of the language as a whole is deemed **SOMEWHAT INCOMPLETE**
 
 this means that Coordinate2 code working in one commit will most likely not work in the next. it is highly recommended to not code in it right now.
 
@@ -16,7 +20,7 @@ this means that Coordinate2 code working in one commit will most likely not work
 |---|---|---|---|---|
 | math |  | | | X |
 | output |  |  |  | X |
-| input |  |  | X |  |
+| input |  |  | | X |
 | strings |  |  | | X |
 | string manipulation | |  | X |  |
 | lists |  | X |  |  |

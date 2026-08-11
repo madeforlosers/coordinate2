@@ -37,7 +37,7 @@ public class Runner {
         curFunc = input;
         String getFunc = input.split("\\(")[0];
 
-        stackTrace.addFirst(getFunc);
+        stackTrace.add(0,getFunc);
 
         // get args
         String fah = input.split("^\\w+\\(")[1];

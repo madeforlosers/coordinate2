@@ -11,7 +11,7 @@ if [[ $1 != "-silent" ]]; then
     javac $(find . -name "*.java")
 
 else
-
+    
     # make sure we supress warnings because its silent!!
     javac -XDsuppressNotes $(find . -name "*.java")
 
